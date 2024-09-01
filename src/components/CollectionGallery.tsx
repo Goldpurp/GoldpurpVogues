@@ -1,8 +1,8 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import ShoeImg from "/Products/2.png";
-import BagImg from "/Products/2.png";
-import HatImg from "/Products/2.png";
-import ShadeImg from "/Products/2.png";
+import ShoeImg from "/Products/shoe.jpeg";
+import BagImg from "/Products/bag.jpg";
+import HatImg from "/Products/hat.jpeg";
+import ShadeImg from "/Products/shade.jpg";
 
 export default function ProductGallery() {
   return (
@@ -20,14 +20,13 @@ export default function ProductGallery() {
 function ProductItem({ src, alt, label }: { src: string; alt: string; label: string }) {
   return (
     <Flex
-      flex="1 50%"
+      flex={{base: "50%", lg: 1}}
       maxW="50%"
       align="center"
       direction="column"
       justify="center"
       p="2px 5px 8px 5px"
       transition="transform 0.5s ease"
-      boxSizing="border-box"
       _hover={{ transform: "scale(1.05)" }}
       _focus={{ transform: "scale(1.05)" }}
       cursor="pointer"

@@ -1,16 +1,30 @@
-import {Button, FormControl, FormLabel, Input, Text, Link, VStack, Flex } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  Link,
+  VStack,
+  Flex,
+} from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export default function SignUp() {
   return (
     <Flex
-    align="center"
-    justify="center"
-    direction="column"
-    py={{ base: "120px", md: "70px" }}
-    fontFamily="'Poppins', sans-serif"
-  >
-      <Text fontSize="24px" fontWeight="800" padding="0 10px 10px 10px" fontFamily="Montserrat, sans-serif">
+      align="center"
+      justify="center"
+      direction="column"
+      py={{ base: "120px", md: "70px" }}
+      fontFamily="'Poppins', sans-serif"
+    >
+      <Text
+        fontSize="24px"
+        fontWeight="800"
+        padding="0 10px 10px 10px"
+        fontFamily="Montserrat, sans-serif"
+      >
         REGISTER ACCOUNT
       </Text>
 
@@ -21,30 +35,67 @@ export default function SignUp() {
         </Link>
       </Text>
 
-      <VStack as="form" spacing={4} width="85vw" alignItems="center">
-        <FormControl>
-          <FormLabel marginLeft="10px" fontSize="13px" fontWeight="500">
-            Email
-          </FormLabel>
-          <Input type="email" placeholder="email address" />
-        </FormControl>
+      <VStack
+          as="form"
+          w="85vw"
+          spacing="20px"
+          align="center"
+          justify="center"
+        >
+    <FormControl id="email" w={{ base: "full", md: "500px" }}>
+            <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+              Email
+            </FormLabel>
+            <Input
+              type="email"
+              placeholder="email address"
+              h="45px"
+              fontSize="14px"
+              borderRadius="10px"
+              bg="#fff"
+              p="7px 45px 7px 12px"
+              borderColor="#000"
+            />
+          </FormControl>
 
-        <FormControl>
-          <FormLabel marginLeft="10px" fontSize="13px" fontWeight="500">
-            Password
-          </FormLabel>
-          <Input type="password" placeholder="password" />
-        </FormControl>
+       
+        <FormControl id="password" w={{ base: "full", md: "500px" }}>
+            <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+              Password
+            </FormLabel>
+            <Input
+              type="password"
+              placeholder="password"
+              fontSize="14px"
+              borderRadius="10px"
+              bg="#fff"
+              h="45px"
+              p="7px 45px 7px 12px"
+              borderColor="#000"
+            />
+          </FormControl>
 
-        <FormControl>
+          <FormControl id="mobileNumber" w={{ base: "full", md: "500px" }}>
+
           <FormLabel marginLeft="10px" fontSize="13px" fontWeight="500">
             Phone
           </FormLabel>
-          <Input type="text" placeholder="mobile number" />
+          <Input
+              type="text"
+             placeholder="mobile number"
+              h="45px"
+              fontSize="14px"
+              borderRadius="10px"
+              bg="#fff"
+              p="7px 45px 7px 12px"
+              borderColor="#000"
+            />
         </FormControl>
 
         <Button
-          width={{ base: "300px", md: "350px" }}
+            mt={6}
+
+            w={{ base: "full", md: "500px" }}
           colorScheme="gray"
           fontSize="15px"
           fontWeight="700"
@@ -56,7 +107,12 @@ export default function SignUp() {
         </Button>
       </VStack>
 
-      <Text fontSize="10px" marginTop="60px" maxWidth="300px" textAlign="center">
+      <Text
+        fontSize="10px"
+        marginTop="60px"
+        maxWidth="300px"
+        textAlign="center"
+      >
         By selecting Create Account you agree to our{" "}
         <Link textDecoration="underline" _hover={{ color: "#9f9aa4" }}>
           Privacy Policy

@@ -66,7 +66,7 @@ export default function ProductGrid() {
             <Box
               key={itemIndex}
               bg="#e3e7eb"
-              p={0}
+              p={2}
               border="1px solid #e2e6e9"
               cursor="pointer"
             >

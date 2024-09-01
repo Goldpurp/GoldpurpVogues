@@ -36,14 +36,14 @@ import {
           align="center"
           justify="center"
         >
-          <FormControl id="email" w={{ base: "300px", sm: "350px", md: "400px" }}>
+          <FormControl id="email" w={{ base: "full", md: "500px" }}>
             <FormLabel fontSize="13px" fontWeight="500" ml="10px">
               Email
             </FormLabel>
             <Input
               type="email"
               placeholder="email address"
-              h="50px"
+              h="45px"
               fontSize="14px"
               borderRadius="10px"
               bg="#fff"
@@ -52,24 +52,24 @@ import {
             />
           </FormControl>
   
-          <FormControl id="password" w={{ base: "300px", sm: "350px", md: "400px" }}>
+          <FormControl id="password" w={{ base: "full", md: "500px" }}>
             <FormLabel fontSize="13px" fontWeight="500" ml="10px">
               Password
             </FormLabel>
             <Input
               type="password"
               placeholder="password"
-              h="50px"
               fontSize="14px"
               borderRadius="10px"
               bg="#fff"
+              h="45px"
               p="7px 45px 7px 12px"
               borderColor="#000"
             />
           </FormControl>
   
           <Button
-            w={{ base: "300px", sm: "350px", md: "400px" }}
+            w={{ base: "full", md: "500px" }}
             fontSize="15px"
             fontWeight="700"
             p="12px 18px"
@@ -80,6 +80,7 @@ import {
             color="black"
             bg="transparent"
             border="0.6px solid"
+            mt={6}
           >
             Access
           </Button>
