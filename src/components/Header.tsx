@@ -31,6 +31,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { VscClose } from "react-icons/vsc";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import ImgIcon from "/Images/profile.jpeg";
+import Logo from "/icon/gpLogo1.png";
+import NavLinks from "./NavLinks";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,21 +44,71 @@ const Header = () => {
   return (
     <Flex direction="column">
       <Flex
-        position={"absolute"}
         w="100%"
-        h="80px"
+        h={{ base: "80px", lg: "100px" }}
         px={{ base: "20px", lg: "35px", "2xl": "40px" }}
         align="center"
         justify="space-between"
         bg="transparent"
-        top={"0"}
-        right={"0"}
-        left={"0"}
-        zIndex={90}
-      // color={"#fff"}
-
+        position={"fixed"}
+        top={0}
+        left={0}
+        right={0}
+        zIndex={1000}
       >
-        <Flex align="center">
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          w={{ base: "130px", md: "150px", lg: "180px" }}
+          h={"90px"}
+        >
+          <Image
+            src={Logo}
+            alt="logo"
+            cursor="pointer"
+            w="100%"
+            h="100%"
+            objectFit="contain"
+            boxSize={"90%"}
+          />
+        </Flex>
+
+        <Box display={{ base: "none", lg: "flex" }} width="400px">
+          <NavLinks />
+        </Box>
+
+        <Flex gap={{ base: "13px", md: "15px" }} align="center">
+          <Icon
+          p={0}
+          m={0}
+            fontSize={"24px"}
+            as={IoSearchOutline}
+            cursor="pointer"
+            onClick={() => setIsModalOpen(true)}
+          />
+          <ChakraLink>
+            <Icon
+              fontSize={"24px"}
+              as={IoHeartOutline}
+              cursor="pointer"
+            />
+          </ChakraLink>
+          <ChakraLink>
+            <Icon
+              fontSize={"20px"}
+              as={BsHandbag}
+              cursor="pointer"
+            />
+          </ChakraLink>
+
+          <Image
+            src={ImgIcon}
+            alt="Icon"
+            boxSize={{ base: "24px", md: "20px" }}
+            borderRadius="50%"
+            cursor="pointer"
+            onClick={toggleDrawer}
+          />
           <IconButton
             aria-label="Toggle Menu"
             icon={
@@ -66,79 +118,33 @@ const Header = () => {
                 <RxHamburgerMenu size="25px" />
               )
             }
-            display={{ base: "flex", md: "none" }}
+            display={{ base: "flex", lg: "none" }}
             variant="ghost"
             onClick={isOpen ? onClose : onOpen}
             zIndex="2"
           />
-          <Image
-            src="/icon/logoIcon.svg"
-            alt="logo"
-            cursor="pointer"
-            boxSize={{
-              base: "170px",
-              sm: "180px",
-              md: "220px",
-              lg: "230px",
-              "2xl": "240px",
-            }}
-            h={"50px"}
-          />
-        </Flex>
-
-        <Box display={{ base: "none", md: "flex" }} width="400px">
-          <LargeScreenNav />
-        </Box>
-
-        <Flex gap={{ base: "13px", md: "15px" }} align="center">
-          <Icon
-            as={IoSearchOutline}
-            boxSize={{ base: "22px", md: "30px" }}
-            cursor="pointer"
-            onClick={() => setIsModalOpen(true)}
-          />
-          <ChakraLink>
-            <Icon
-              as={IoHeartOutline}
-              boxSize={{ base: "23px", md: "30px" }}
-              cursor="pointer"
-            />
-          </ChakraLink>
-          <ChakraLink>
-            <Icon
-              as={BsHandbag}
-              boxSize={{ base: "20px", md: "26px" }}
-              cursor="pointer"
-            />
-          </ChakraLink>
-          <Image
-            src={ImgIcon}
-            alt="Icon"
-            boxSize={{ base: "28px", md: "33px" }}
-            borderRadius="50%"
-            cursor="pointer"
-            onClick={toggleDrawer}
-          />
         </Flex>
       </Flex>
 
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton size={"lg"} mt={1}/>
           <DrawerHeader>
-            <Flex justify="space-between" align="center">
+            <Flex
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              w={{ base: "130px", md: "150px" }}
+              h={"70px"}
+            >
               <Image
-                src="/icon/logoIcon.svg"
+                src={Logo}
                 alt="logo"
                 cursor="pointer"
-                boxSize={{
-                  base: "170px",
-                  sm: "180px",
-                  md: "220px",
-                  lg: "230px",
-                  "2xl": "240px",
-                }}
+                w="100%"
+                h="100%"
+                objectFit="contain"
+                boxSize={"80%"}
               />
             </Flex>
           </DrawerHeader>
@@ -164,7 +170,7 @@ const SearchModal = ({
     <ModalOverlay />
     <ModalContent
       maxW={{ base: "80%", lg: "50%" }}
-      top="180px"
+      top="-200px"
       p={5}
       onClick={onClose}
       bg="transparent"
@@ -172,7 +178,9 @@ const SearchModal = ({
     >
       <Box
         as="form"
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+          e.stopPropagation()
+        }
         w="full"
       >
         <InputGroup>
@@ -182,13 +190,14 @@ const SearchModal = ({
           <Input
             type="search"
             placeholder="Enter search"
-            bg="gray.300"
-            borderColor="black"
+            bg="#dee2e6"
+            outline={"none"}
+            borderColor="#000"
             borderRadius="10px"
             fontSize={{ base: "15px", lg: "17px" }}
             py={{ base: "10px", lg: "15px" }}
             pl="40px"
-            _placeholder={{ color: "gray.500" }}
+            _placeholder={{ color: "#000" }}
           />
         </InputGroup>
       </Box>
@@ -347,7 +356,7 @@ const Section = ({
   onToggle: () => void;
   children: React.ReactNode;
 }) => (
-  <VStack align="start" spacing={2} px={4}>
+  <VStack align="start" spacing={2}>
     <Flex w="full" justify="space-between" align="center">
       <Heading
         fontSize="md"
@@ -386,15 +395,6 @@ const SpecialMenuItem = ({ children }: { children: React.ReactNode }) => (
   >
     {children}
   </Text>
-);
-
-const LargeScreenNav = () => (
-  <Flex gap={{ base: "20px", lg: "40px" }} align="center">
-    <ChakraLink href="#">Home</ChakraLink>
-    <ChakraLink href="#">Shop</ChakraLink>
-    <ChakraLink href="#">Collections</ChakraLink>
-    <ChakraLink href="#">Brands</ChakraLink>
-  </Flex>
 );
 
 export default Header;

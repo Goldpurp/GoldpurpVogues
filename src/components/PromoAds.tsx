@@ -19,6 +19,8 @@ export default function PromoAds() {
       alignItems="center"
       justifyContent="center"
       bg="#BAB597"
+      pb={2}
+      mb={1}
       fontFamily="Arial, sans-serif"
     >
       <Text

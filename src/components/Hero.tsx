@@ -8,8 +8,8 @@ import {
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import HeroImg from "/Images/hero3.png";
-import HeroImgMini from "/Images/heroMini3.png";
+import HeroImg from "../../public/Images/heroImg1.png";
+import HeroImgMini from "../../public/Images/heroImg1mini.png";
 
 const fadeIn = keyframes`
     from {
@@ -31,8 +31,8 @@ const Hero: React.FC = () => {
     <Flex
       w="100vw"
       h="100%"
-      p="0 10px"
-      bg="#3b5d50a8"
+      pt={"80px"}
+      bg="#D8DAD3"
       justifyContent="space-evenly"
       position="relative"
       mb={1}
