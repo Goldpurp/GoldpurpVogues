@@ -78,7 +78,7 @@ const Header = () => {
           <Icon
           p={0}
           m={0}
-            fontSize={"22px"}
+            fontSize={"21px"}
             as={IoSearch}
             cursor="pointer"
             onClick={() => setIsModalOpen(true)}
