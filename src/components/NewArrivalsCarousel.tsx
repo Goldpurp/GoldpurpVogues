@@ -83,13 +83,47 @@ export default function NewArrivalsCarousel() {
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
+    {
+      src: Img6,
+      title: "Breathable Shirt",
+      description: "Ethel Textured Knit Johnny Collar Shirt - white",
+      price: "16,499.99",
+    },
+    {
+      src: Img6,
+      title: "Breathable Shirt",
+      description: "Ethel Textured Knit Johnny Collar Shirt - white",
+      price: "16,499.99",
+    },
+    {
+      src: Img6,
+      title: "Breathable Shirt",
+      description: "Ethel Textured Knit Johnny Collar Shirt - white",
+      price: "16,499.99",
+    },
+    {
+      src: Img6,
+      title: "Breathable Shirt",
+      description: "Ethel Textured Knit Johnny Collar Shirt - white",
+      price: "16,499.99",
+    },
+    {
+      src: Img6,
+      title: "Breathable Shirt",
+      description: "Ethel Textured Knit Johnny Collar Shirt - white",
+      price: "16,499.99",
+    },
   ];
 
-  const [likedItem, setLikedItem] = useState(false)
-  
-  const handleLikeToggle =()=>{
-      setLikedItem((prevState) => !prevState)
-  }
+  const [likedItems, setLikedItems] = useState<boolean[]>(new Array(newArrivalItems.length).fill(false));
+
+  const handleLikeToggle = (index: number) => {
+    setLikedItems((prevState) => {
+      const updatedLikes = [...prevState];
+      updatedLikes[index] = !updatedLikes[index];
+      return updatedLikes;
+    });
+  };
 
   return (
     <>
@@ -164,10 +198,14 @@ export default function NewArrivalsCarousel() {
                       w={"10px"}
                       h={"20px"}
                       aria-label="Like Item"
-                      icon={likedItem ? <MdOutlineFavorite size="100%" /> : 
-                        <MdOutlineFavoriteBorder size="100%" />
+                      icon={
+                        likedItems[index] ? (
+                          <MdOutlineFavorite size="100%" />
+                        ) : (
+                          <MdOutlineFavoriteBorder size="100%" />
+                        )
                       }
-                      onClick={() => handleLikeToggle()}
+                      onClick={() => handleLikeToggle(index)}
                       variant="ghost"
                       colorScheme="teal"
                       _hover={{ color: "#2f3e46" }}

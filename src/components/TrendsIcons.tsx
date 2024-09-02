@@ -8,6 +8,7 @@ export default function TrendsIcons() {
           as="h3"
           fontSize={{ base: "35px", md: "45px", lg: "52px" }}
           ml="20px"
+          mt={"10px"}
           fontWeight="lighter"
           fontFamily="'Jomhuria', sans-serif"
         >
@@ -20,7 +21,7 @@ export default function TrendsIcons() {
           textAlign="start"
           flexWrap="nowrap"
           justifyContent="flex-start"
-          m="20px 20px 30px 20px"
+          m="10px 20px 20px 20px"
           css={{
             "&::-webkit-scrollbar": {
               display: "none",
@@ -29,29 +30,33 @@ export default function TrendsIcons() {
         >
           <Button
             variant="outline"
+            borderRadius={"20px"}
             fontSize={{ base: "10px", md: "13px" }}
             p={{ base: "5px 15px", md: "12px 18px" }}
           >
             Best Sellers
           </Button>
           <Button
-            variant="outline"
-            fontSize={{ base: "10px", md: "13px" }}
-            p={{ base: "5px 15px", md: "12px 18px" }}
+             variant="outline"
+             borderRadius={"20px"}
+             fontSize={{ base: "10px", md: "13px" }}
+             p={{ base: "5px 15px", md: "12px 18px" }}
           >
             Sale
           </Button>
           <Button
-            variant="outline"
-            fontSize={{ base: "10px", md: "13px" }}
-            p={{ base: "5px 15px", md: "12px 18px" }}
+             variant="outline"
+             borderRadius={"20px"}
+             fontSize={{ base: "10px", md: "13px" }}
+             p={{ base: "5px 15px", md: "12px 18px" }}
           >
             Graphics
           </Button>
           <Button
-            variant="outline"
-            fontSize={{ base: "10px", md: "13px" }}
-            p={{ base: "5px 15px", md: "12px 18px" }}
+          variant="outline"
+          borderRadius={"20px"}
+          fontSize={{ base: "10px", md: "13px" }}
+          p={{ base: "5px 15px", md: "12px 18px" }}
           >
             Jeans
           </Button>

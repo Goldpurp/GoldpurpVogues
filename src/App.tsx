@@ -11,7 +11,7 @@ import Header from "./components/Header"
 function App() {
 
   return (
-    <Flex flexDirection={"column"} px={1} gap={6}>
+    <Flex flexDirection={"column"}>
       <Header/>
       <Hero/>
       <ShowCaseAds/>

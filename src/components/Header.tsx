@@ -42,12 +42,19 @@ const Header = () => {
   return (
     <Flex direction="column">
       <Flex
+        position={"absolute"}
         w="100%"
-        h="60px"
+        h="80px"
         px={{ base: "20px", lg: "35px", "2xl": "40px" }}
         align="center"
         justify="space-between"
-        bg="#fff"
+        bg="transparent"
+        top={"0"}
+        right={"0"}
+        left={"0"}
+        zIndex={90}
+      // color={"#fff"}
+
       >
         <Flex align="center">
           <IconButton
@@ -75,6 +82,7 @@ const Header = () => {
               lg: "230px",
               "2xl": "240px",
             }}
+            h={"50px"}
           />
         </Flex>
 
@@ -162,7 +170,11 @@ const SearchModal = ({
       bg="transparent"
       boxShadow="none"
     >
-      <Box as="form" onClick={(e) => e.stopPropagation()} w="full">
+      <Box
+        as="form"
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
+        w="full"
+      >
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <IoSearchOutline size={"22px"} />
@@ -380,8 +392,8 @@ const LargeScreenNav = () => (
   <Flex gap={{ base: "20px", lg: "40px" }} align="center">
     <ChakraLink href="#">Home</ChakraLink>
     <ChakraLink href="#">Shop</ChakraLink>
-    <ChakraLink href="#">About</ChakraLink>
-    <ChakraLink href="#">Contact</ChakraLink>
+    <ChakraLink href="#">Collections</ChakraLink>
+    <ChakraLink href="#">Brands</ChakraLink>
   </Flex>
 );
 

@@ -66,17 +66,17 @@ export default function ProductGrid() {
             <Box
               key={itemIndex}
               bg="#e3e7eb"
-              p={2}
               border="1px solid #e2e6e9"
               cursor="pointer"
+              position={"relative"}
             >
               <Link as={RouterLink} to="product">
                 <Image src={item.src} alt="image" objectFit="cover" />
               </Link>
               <Flex
                 position="absolute"
-                right={5}
-                bottom={7}
+                right={2}
+                top={3}
                 bg="white"
                 p={1}
                 borderRadius="full"
@@ -87,7 +87,7 @@ export default function ProductGrid() {
                   h={{ base: 5, lg: 6 }}
                 />
               </Flex>
-              <Box p={2}>
+              <Box p={2} w={"full"} bg={"#fff"}>
                 <Text
                   noOfLines={1}
                   fontSize={{ base: "12px", md: "15px", lg: "17px" }}
