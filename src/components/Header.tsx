@@ -25,21 +25,17 @@ import {
   Divider,
   Heading,
 } from "@chakra-ui/react";
-import { BsHandbag } from "react-icons/bs";
-import { IoHeartOutline, IoSearchOutline } from "react-icons/io5";
+import { BsFillBagCheckFill } from "react-icons/bs";
+import { IoSearch, IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { VscClose } from "react-icons/vsc";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import ImgIcon from "/Images/profile.jpeg";
 import Logo from "/icon/gpLogo1.png";
 import NavLinks from "./NavLinks";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
   return (
     <Flex direction="column">
@@ -55,6 +51,7 @@ const Header = () => {
         left={0}
         right={0}
         zIndex={1000}
+        border={"none"}
       >
         <Flex
           justifyContent={"center"}
@@ -81,34 +78,20 @@ const Header = () => {
           <Icon
           p={0}
           m={0}
-            fontSize={"24px"}
-            as={IoSearchOutline}
+            fontSize={"22px"}
+            as={IoSearch}
             cursor="pointer"
             onClick={() => setIsModalOpen(true)}
           />
+
           <ChakraLink>
             <Icon
-              fontSize={"24px"}
-              as={IoHeartOutline}
-              cursor="pointer"
-            />
-          </ChakraLink>
-          <ChakraLink>
-            <Icon
-              fontSize={"20px"}
-              as={BsHandbag}
+              fontSize={"19px"}
+              as={BsFillBagCheckFill}
               cursor="pointer"
             />
           </ChakraLink>
 
-          <Image
-            src={ImgIcon}
-            alt="Icon"
-            boxSize={{ base: "24px", md: "20px" }}
-            borderRadius="50%"
-            cursor="pointer"
-            onClick={toggleDrawer}
-          />
           <IconButton
             aria-label="Toggle Menu"
             icon={
@@ -119,7 +102,7 @@ const Header = () => {
               )
             }
             display={{ base: "flex", lg: "none" }}
-            variant="ghost"
+            variant="transparent"
             onClick={isOpen ? onClose : onOpen}
             zIndex="2"
           />

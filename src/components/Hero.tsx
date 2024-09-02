@@ -36,7 +36,6 @@ const Hero: React.FC = () => {
       justifyContent="space-evenly"
       position="relative"
       mb={1}
-      // color={"#fff"}
     >
       <Flex
         direction="column"
