@@ -12,7 +12,6 @@ import {
   DrawerBody,
   DrawerHeader,
   useDisclosure,
-  Icon,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -25,7 +24,6 @@ import {
   Divider,
   Heading,
 } from "@chakra-ui/react";
-import { IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { VscClose } from "react-icons/vsc";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
