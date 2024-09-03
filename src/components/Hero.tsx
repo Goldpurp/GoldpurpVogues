@@ -5,6 +5,7 @@ import {
   Button as ChakraButton,
   keyframes,
   useBreakpointValue,
+  Box,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
@@ -113,6 +114,16 @@ const Hero: React.FC = () => {
           md: "220px",
           lg: "320px",
         }}
+      />
+
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        width="100%"
+        height="100%"
+        bg="rgba(0, 0, 0, 0.1)"
+        zIndex="0"
       />
     </Flex>
   );
