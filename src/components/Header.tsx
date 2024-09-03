@@ -25,8 +25,7 @@ import {
   Divider,
   Heading,
 } from "@chakra-ui/react";
-import { BsFillBagCheckFill } from "react-icons/bs";
-import { IoSearch, IoSearchOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { VscClose } from "react-icons/vsc";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
@@ -75,21 +74,42 @@ const Header = () => {
         </Box>
 
         <Flex gap={{ base: "13px", md: "15px" }} align="center">
-          <Icon
-          p={0}
-          m={0}
-            fontSize={"21px"}
-            as={IoSearch}
-            cursor="pointer"
-            onClick={() => setIsModalOpen(true)}
-          />
 
           <ChakraLink>
-            <Icon
-              fontSize={"19px"}
-              as={BsFillBagCheckFill}
-              cursor="pointer"
-            />
+            <Box w={"23px"} cursor="pointer" onClick={() => setIsModalOpen(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </Box>
+          </ChakraLink>
+
+          <ChakraLink>
+            <Box w={"23px"} cursor="pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+            </Box>
           </ChakraLink>
 
           <IconButton
@@ -107,12 +127,13 @@ const Header = () => {
             zIndex="2"
           />
         </Flex>
+        
       </Flex>
 
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton size={"lg"} mt={1}/>
+          <DrawerCloseButton size={"lg"} mt={1} />
           <DrawerHeader>
             <Flex
               justifyContent={"space-between"}
@@ -168,7 +189,23 @@ const SearchModal = ({
       >
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <IoSearchOutline size={"22px"} />
+          <ChakraLink>
+            <Box w={"22px"} >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </Box>
+          </ChakraLink>
           </InputLeftElement>
           <Input
             type="search"
