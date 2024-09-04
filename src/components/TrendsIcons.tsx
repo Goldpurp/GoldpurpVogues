@@ -2,7 +2,7 @@ import { Box, Button, Heading, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function TrendsIcons() {
-  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState<string | null>("Best Sellers");
 
   const handleButtonClick = (label: string) => {
     setActiveButton(label);
@@ -13,7 +13,7 @@ export default function TrendsIcons() {
     background: "#e7ecef5f",
     fontSize: { base: "10px", md: "13px" },
     padding: { base: "0px 15px", md: "7px 18px" },
-    border: activeButton === label ? "3px solid #000" : "1px solid #7d7b7b",
+    border: activeButton === label ? "2px solid #000" : "1px solid #7d7b7b",
   });
 
   return (

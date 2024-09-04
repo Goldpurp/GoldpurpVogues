@@ -21,11 +21,8 @@ import {
   VStack,
   Collapse,
   Text,
-  Divider,
-  Heading,
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { VscClose } from "react-icons/vsc";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Logo from "/icon/gpLogo1.png";
 import NavLinks from "./NavLinks";
@@ -55,7 +52,7 @@ const Header = () => {
       <Flex
         w="100%"
         h={{ base: "80px", lg: "100px" }}
-        px={{ base: "20px", lg: "35px", "2xl": "40px" }}
+        px={{ base: "10px", lg: "35px", "2xl": "40px" }}
         align="center"
         justify="space-between"
         bg="transparent"
@@ -128,16 +125,9 @@ const Header = () => {
               </svg>
             </Box>
           </ChakraLink>
-
           <IconButton
             aria-label="Toggle Menu"
-            icon={
-              isOpen ? (
-                <VscClose size="25px" />
-              ) : (
-                <RxHamburgerMenu size="25px" />
-              )
-            }
+            icon={isOpen ? <></> : <RxHamburgerMenu size="25px" />}
             display={{ base: "flex", lg: "none" }}
             variant="transparent"
             onClick={isOpen ? onClose : onOpen}
@@ -146,7 +136,7 @@ const Header = () => {
         </Flex>
       </Flex>
 
-      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton size={"lg"} mt={1} />
@@ -262,14 +252,20 @@ const SidebarMenu = () => {
 
   return (
     <VStack
+      h={"100%"}
       textAlign="left"
       overflowY="scroll"
       spacing={2}
       align="stretch"
+      fontFamily={"Inter, sans-serif"}
+      position={"relative"}
       css={{ "&::-webkit-scrollbar": { display: "none" } }}
     >
+      <Box>
+        <Text>NEW ARRIVALS</Text>
+      </Box>
       <Section
-        title="Accessories"
+        title="ACCESSORIES"
         isOpen={isOpenItem.Accessories}
         onToggle={() => toggleItemSection("Accessories")}
       >
@@ -291,7 +287,7 @@ const SidebarMenu = () => {
       </Section>
 
       <Section
-        title="Clothing"
+        title="CLOTHING"
         isOpen={isOpenItem.Clothing}
         onToggle={() => toggleItemSection("Clothing")}
       >
@@ -311,17 +307,7 @@ const SidebarMenu = () => {
       </Section>
 
       <Section
-        title="Undergarments"
-        isOpen={isOpenItem.Undergarments}
-        onToggle={() => toggleItemSection("Undergarments")}
-      >
-        {["Bras", "Underwear", "Lingerie", "Socks", "Hosiery"].map((item) => (
-          <MenuItem key={item}>{item}</MenuItem>
-        ))}
-      </Section>
-
-      <Section
-        title="Footwear"
+        title="FOOTWEAR"
         isOpen={isOpenItem.Footwear}
         onToggle={() => toggleItemSection("Footwear")}
       >
@@ -333,7 +319,7 @@ const SidebarMenu = () => {
       </Section>
 
       <Section
-        title="Swimwear"
+        title="SWIMWEAR"
         isOpen={isOpenItem.Swimwear}
         onToggle={() => toggleItemSection("Swimwear")}
       >
@@ -345,7 +331,7 @@ const SidebarMenu = () => {
       </Section>
 
       <Section
-        title="Sleepwear"
+        title="SLEEPWEAR"
         isOpen={isOpenItem.Sleepwear}
         onToggle={() => toggleItemSection("Sleepwear")}
       >
@@ -355,7 +341,7 @@ const SidebarMenu = () => {
       </Section>
 
       <Section
-        title="Activewear"
+        title="ACTIVEWEAR"
         isOpen={isOpenItem.Activewear}
         onToggle={() => toggleItemSection("Activewear")}
       >
@@ -364,19 +350,28 @@ const SidebarMenu = () => {
         ))}
       </Section>
 
-      <VStack align="start" spacing={2}>
+      <VStack align="start" spacing={5}>
         <SpecialMenuItem>Wishlist</SpecialMenuItem>
-        <SpecialMenuItem>Login</SpecialMenuItem>
-      </VStack>
-
-      <VStack align="start" spacing={2}>
-        <SpecialMenuItem>About</SpecialMenuItem>
-        <SpecialMenuItem>Our Store</SpecialMenuItem>
-        <SpecialMenuItem>Customer Care</SpecialMenuItem>
+        <SpecialMenuItem>Media</SpecialMenuItem>
+        <SpecialMenuItem>Blog</SpecialMenuItem>
+        <SpecialMenuItem>Reviews</SpecialMenuItem>
+        <SpecialMenuItem>Store</SpecialMenuItem>
+        <SpecialMenuItem>Login/SignUp</SpecialMenuItem>
         <SpecialMenuItem>Contact Us</SpecialMenuItem>
+        <SpecialMenuItem>About</SpecialMenuItem>
       </VStack>
 
-      <Divider borderColor="gray.300" />
+      <Flex
+        w={"70%"}
+        position={"fixed"}
+        bottom={0}
+        zIndex={10}
+        bg={"#fff"}
+        py={2}
+        borderTop={"1px solid #878484a9"}
+      >
+        <Text>NG | 434,000.99</Text>
+      </Flex>
     </VStack>
   );
 };
@@ -392,16 +387,17 @@ const Section = ({
   onToggle: () => void;
   children: React.ReactNode;
 }) => (
-  <VStack align="start" spacing={2}>
-    <Flex w="full" justify="space-between" align="center">
-      <Heading
-        fontSize="md"
+  <VStack align="start" spacing={2} fontFamily={"Inter, sans-serif"}>
+    <Flex w="full" justify="space-between" align="center" py={"5px"}>
+      <Text
+        fontFamily={"Inter, sans-serif"}
+        fontWeight={"500"}
         onClick={onToggle}
         cursor="pointer"
         _hover={{ color: "blue.500" }}
       >
         {title}
-      </Heading>
+      </Text>
       {isOpen ? (
         <ChevronUpIcon boxSize="24px" onClick={onToggle} />
       ) : (
@@ -409,7 +405,7 @@ const Section = ({
       )}
     </Flex>
     <Collapse in={isOpen}>
-      <VStack align="start" spacing={1} pl={4}>
+      <VStack align="start" spacing={2} fontWeight={"400"} opacity={"0.8"}>
         {children}
       </VStack>
     </Collapse>
@@ -424,8 +420,8 @@ const MenuItem = ({ children }: { children: React.ReactNode }) => (
 
 const SpecialMenuItem = ({ children }: { children: React.ReactNode }) => (
   <Text
+    fontWeight={600}
     fontSize="sm"
-    fontWeight="bold"
     cursor="pointer"
     _hover={{ color: "blue.500" }}
   >
