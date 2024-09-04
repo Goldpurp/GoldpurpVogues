@@ -17,12 +17,12 @@ const NavLinks = () => {
         <ChakraLink
           key={link}
           href={`#${link.toLowerCase()}`}
-          color={activeLink === link ? "#588157" : "inherit"}
-          borderBottom={activeLink === link ? "2px solid #588157" : "none"}
+          color={activeLink === link ? "#008000" : "inherit"}
+          borderBottom={activeLink === link ? "4px solid #008000" : "none"}
           _hover={{
-            color: "#588157",
+            color: "#008000",
             textDecoration: "none",
-            textDecorationColor: "#588157",
+            textDecorationColor: "#008000",
           }}
           onClick={() => setActiveLink(link)}
         >

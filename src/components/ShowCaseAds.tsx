@@ -40,14 +40,14 @@ const ShowcaseItem = ({
       >
         <Box>
           <Text
-            fontSize={{ base: "15px", md: "20px", xl: "26px" }}
+            fontSize={{ base: "17px", md: "20px", xl: "26px" }}
             fontWeight="600"
             fontFamily="Concert One, sans-serif"
           >
             {title}
           </Text>
           <Heading
-            fontSize={{ base: "12px", md: "15px", xl: "22px" }}
+            fontSize={{ base: "14px", md: "15px", xl: "22px" }}
             fontWeight="400"
             fontFamily="Julee, cursive"
           >

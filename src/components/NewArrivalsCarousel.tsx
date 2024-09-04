@@ -9,104 +9,74 @@ import {
   HStack,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import Img6 from "/NewArrivals/6.png";
+// import { Link as RouterLink } from "react-router-dom";
+import Img2 from "/NewArrivals/2.png";
 import DecorativeText from "./DecorativeText";
 
 export default function NewArrivalsCarousel() {
   const newArrivalItems = [
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
     },
     {
-      src: Img6,
-      title: "Breathable Shirt",
-      description: "Ethel Textured Knit Johnny Collar Shirt - white",
-      price: "16,499.99",
-    },
-    {
-      src: Img6,
-      title: "Breathable Shirt",
-      description: "Ethel Textured Knit Johnny Collar Shirt - white",
-      price: "16,499.99",
-    },
-    {
-      src: Img6,
-      title: "Breathable Shirt",
-      description: "Ethel Textured Knit Johnny Collar Shirt - white",
-      price: "16,499.99",
-    },
-    {
-      src: Img6,
-      title: "Breathable Shirt",
-      description: "Ethel Textured Knit Johnny Collar Shirt - white",
-      price: "16,499.99",
-    },
-    {
-      src: Img6,
-      title: "Breathable Shirt",
-      description: "Ethel Textured Knit Johnny Collar Shirt - white",
-      price: "16,499.99",
-    },
-    {
-      src: Img6,
+      src: Img2,
       title: "Breathable Shirt",
       description: "Ethel Textured Knit Johnny Collar Shirt - white",
       price: "16,499.99",
@@ -142,7 +112,9 @@ export default function NewArrivalsCarousel() {
               mr={2}
               position="relative"
             >
-              <ChakraLink as={RouterLink} to={"product"}>
+              <ChakraLink
+              //  as={RouterLink} to={"product"}
+              >
                 <Image
                   src={item.src}
                   alt={item.title}
@@ -158,7 +130,6 @@ export default function NewArrivalsCarousel() {
                 <Text
                   fontSize={{
                     base: "13px",
-                    sm: "18px",
                     md: "20px",
                     lg: "22px",
                   }}
@@ -169,8 +140,7 @@ export default function NewArrivalsCarousel() {
                 </Text>
                 <Text
                   fontSize={{
-                    base: "11px",
-                    sm: "14px",
+                    base: "12px",
                     md: "15px",
                     lg: "16px",
                   }}
@@ -200,7 +170,10 @@ export default function NewArrivalsCarousel() {
                       aria-label="Like Item"
                       icon={
                         likedItems[index] ? (
-                          <Box w={"20px"} cursor="pointer">
+                          <Box
+                            boxSize={{ base: "19px", md: "21px", lg: "24px" }}
+                            cursor="pointer"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -210,7 +183,10 @@ export default function NewArrivalsCarousel() {
                             </svg>
                           </Box>
                         ) : (
-                          <Box w={"20px"} cursor="pointer">
+                          <Box
+                            boxSize={{ base: "19px", md: "21px", lg: "24px" }}
+                            cursor="pointer"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -237,10 +213,10 @@ export default function NewArrivalsCarousel() {
                     <IconButton
                       w={"10px"}
                       h={"20px"}
-                      ml={"-15px"}
+                      ml={{ base: "-15px", lg: "-1" }}
                       aria-label="Add to Cart"
                       icon={
-                        <Box boxSize={{ base: "19px", md: "21px" }}>
+                        <Box boxSize={{ base: "19px", md: "21px", lg: "24px" }}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

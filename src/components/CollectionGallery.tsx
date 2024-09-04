@@ -1,8 +1,8 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import ShoeImg from "/Products/shoe.jpeg";
-import BagImg from "/Products/bag.jpg";
-import HatImg from "/Products/hat.jpeg";
-import ShadeImg from "/Products/shade.jpg";
+import ShoeImg from "/Products/shoe.jpg";
+import BagImg from "/Products/backPack.jpg";
+import HatImg from "/Products/faceCap.jpg";
+import ShadeImg from "/Products/spec.jpg";
 
 export default function ProductGallery() {
   return (

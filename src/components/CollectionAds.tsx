@@ -1,6 +1,6 @@
 import { Box, Text, Image, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Banner from "/Images/col.jpg";
+import Banner from "/Images/collection.jpg";
 import ShopNowBtn from "./ShowNowBtn";
 
 const MotionBox = motion(Box);
@@ -24,6 +24,7 @@ export default function CollectionsAds() {
         width="100%"
         height="100%"
         spacing={4}
+      fontFamily={"DM Mono"}
         marginY={{ base: 1, lg: 2.5 }}
         alignItems="center"
         justifyContent="center"
@@ -61,7 +62,7 @@ export default function CollectionsAds() {
         left="0"
         width="100%"
         height="100%"
-        bg="rgba(0, 0, 0, 0.4)"
+        bg="rgba(0, 0, 0, 0.1)"
         zIndex="0"
       />
     </MotionBox>

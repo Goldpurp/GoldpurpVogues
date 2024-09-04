@@ -37,6 +37,7 @@ const Hero: React.FC = () => {
         zIndex="1"
         textAlign="center"
         color="#fff"
+        opacity={"0.7"}
         px={9}
       >
         <Heading fontSize={"22px"} mb="4">

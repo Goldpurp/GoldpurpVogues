@@ -1,4 +1,3 @@
-import Img4 from "/Products/1.png";
 import {
   Box,
   Image,
@@ -9,6 +8,7 @@ import {
   Link,
   SimpleGrid,
 } from "@chakra-ui/react";
+import Img4 from "/Products/4.png";
 import { PiHandbagThin } from "react-icons/pi";
 import { Link as RouterLink } from "react-router-dom";
 import TrendsIcons from "../components/TrendsIcons";
@@ -115,6 +115,7 @@ export default function ProductGrid() {
                 <Text
                   color="#9d2226"
                   fontSize={{ base: "9px", md: "13px", lg: "15px" }}
+                  mt={"5px"}
                 >
                   {item.bonus}
                 </Text>

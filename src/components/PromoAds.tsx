@@ -18,7 +18,7 @@ export default function PromoAds() {
       position="relative"
       alignItems="center"
       justifyContent="center"
-      bg="#BAB597"
+      bg="#292828a4"
       pb={2}
       mb={1}
       fontFamily="Arial, sans-serif"
@@ -42,7 +42,7 @@ export default function PromoAds() {
           fontSize={{ base: "40px", md: "60px", lg: "90px", xl: "100px" }}
           fontWeight="100"
         >
-          SUMMER SALE.
+          SUMMER SALE
         </Text>
         <ShopNowBtn />
       </VStack>

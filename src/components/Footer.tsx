@@ -1,5 +1,16 @@
 import { useState } from "react";
-import { Box, Flex, Text, Input, Button, Icon, Link, VStack, HStack, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Input,
+  Button,
+  Icon,
+  Link,
+  VStack,
+  HStack,
+  Heading,
+} from "@chakra-ui/react";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaPinterest, FaSnapchatGhost, FaFacebook } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
@@ -26,7 +37,6 @@ export default function Footer() {
       [section]: !prevState[section],
     }));
   };
-
 
   return (
     <Box as="footer" color="white" p="10px 20px" bg="#0b090a">
@@ -64,7 +74,7 @@ export default function Footer() {
             bg="#c4c5c1"
             borderRadius="full"
           >
-            <Icon as={IoIosDoneAll} fontSize={"30px"}/>
+            <Icon as={IoIosDoneAll} fontSize={"30px"} />
           </Button>
         </Flex>
 
@@ -78,10 +88,11 @@ export default function Footer() {
             Privacy Policy
           </Link>
           . By submitting your email address, you agree to receive recurring
-          automated promotional and personalized marketing text messages (e.g. cart
-          reminders) from Goldpurp's Vogue at the email address used when signing up.
-          Consent is not a condition of any purchase. Reply HELP for help and STOP to
-          cancel. Mail frequency varies. Msg & data rates may apply. View{" "}
+          automated promotional and personalized marketing text messages (e.g.
+          cart reminders) from Goldpurp's Vogue at the email address used when
+          signing up. Consent is not a condition of any purchase. Reply HELP for
+          help and STOP to cancel. Mail frequency varies. Msg & data rates may
+          apply. View{" "}
           <Link href="#" textDecoration="underline" color={"#dee2e6"}>
             Terms
           </Link>{" "}
@@ -92,7 +103,7 @@ export default function Footer() {
         </Text>
       </VStack>
 
-      <VStack spacing="10px" py="40px 0 30px 0" mb={5}>
+      <VStack spacing="10px" py="40px 0 30px 0" mt={3}>
         <Section
           title="GET HELP"
           isOpen={isOpen.help}
@@ -100,9 +111,7 @@ export default function Footer() {
         >
           <Link color={"#dee2e6"}>Help Center</Link>
           <Link color={"#dee2e6"}>Track Order</Link>
-          <Link color={"#dee2e6"}>
-            Shipping Information
-          </Link>
+          <Link color={"#dee2e6"}>Shipping Information</Link>
         </Section>
 
         <Section
@@ -122,13 +131,11 @@ export default function Footer() {
         >
           <Link color={"#dee2e6"}>Privacy Policy</Link>
           <Link color={"#dee2e6"}> Terms of Service</Link>
-          <Link color={"#dee2e6"}>
-            Return and Refund Policy
-          </Link>
+          <Link color={"#dee2e6"}>Return and Refund Policy</Link>
         </Section>
       </VStack>
 
-      <CopyRight/>
+      <CopyRight />
     </Box>
   );
 }
@@ -157,7 +164,13 @@ const Section = ({ title, isOpen, children, onToggle }: SectionProps) => (
       </Text>
     </Flex>
     {isOpen && (
-      <VStack align="start" fontSize="12px" mt="10px" color="gray.400" animation="fadeIn 2s ease-out">
+      <VStack
+        align="start"
+        fontSize="12px"
+        mt="10px"
+        color="gray.400"
+        animation="fadeIn 2s ease-out"
+      >
         {children}
       </VStack>
     )}
