@@ -125,7 +125,7 @@ const Hero: React.FC = () => {
         left="0"
         width="100%"
         height="100%"
-        bg="rgba(0, 0, 0, 0.3)"
+        bg="rgba(0, 0, 0, 0.1)"
         zIndex="0"
       />
     </Flex>

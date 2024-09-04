@@ -8,7 +8,7 @@ import ShowCaseAds from "./components/ShowCaseAds"
 import Hero from "./components/Hero"
 import Header from "./components/Header"
 import HeroVideo from "./components/HeroVideo"
-// import Hero2 from "./components/Hero2"
+// import WhyChooseUs from "./components/WhyChooseUs"
 
 function App() {
 
@@ -16,7 +16,6 @@ function App() {
     <Flex flexDirection={"column"}>
       <Header/>
       <Hero/>
-      {/* <Hero2/> */}
       <HeroVideo/>
       <ShowCaseAds/>
       <NewArrivalsCarousel/>
@@ -24,6 +23,7 @@ function App() {
       <CollectionsAds/>
       <ProductGallery/>
       <ProductGrid/>
+      {/* <WhyChooseUs/> */}
     </Flex>
   )
 }

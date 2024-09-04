@@ -1,6 +1,21 @@
 import { Box, Button, Heading, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function TrendsIcons() {
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+
+  const handleButtonClick = (label: string) => {
+    setActiveButton(label);
+  };
+
+  const buttonStyles = (label: string) => ({
+    borderRadius: "0px",
+    background: "#e7ecef5f",
+    fontSize: { base: "10px", md: "13px" },
+    padding: { base: "0px 15px", md: "7px 18px" },
+    border: activeButton === label ? "3px solid #000" : "1px solid #7d7b7b",
+  });
+
   return (
     <>
       <Box display="flex" flexDirection="column" justifyContent="flex-start">
@@ -8,7 +23,7 @@ export default function TrendsIcons() {
           as="h3"
           fontSize={{ base: "35px", md: "45px", lg: "52px" }}
           ml="20px"
-          mt={"10px"}
+          mt="10px"
           fontWeight="lighter"
           fontFamily="'Jomhuria', sans-serif"
         >
@@ -28,38 +43,16 @@ export default function TrendsIcons() {
             },
           }}
         >
-          <Button
-            variant="outline"
-            borderRadius={"20px"}
-            fontSize={{ base: "10px", md: "13px" }}
-            p={{ base: "5px 15px", md: "12px 18px" }}
-          >
-            Best Sellers
-          </Button>
-          <Button
-             variant="outline"
-             borderRadius={"20px"}
-             fontSize={{ base: "10px", md: "13px" }}
-             p={{ base: "5px 15px", md: "12px 18px" }}
-          >
-            Sale
-          </Button>
-          <Button
-             variant="outline"
-             borderRadius={"20px"}
-             fontSize={{ base: "10px", md: "13px" }}
-             p={{ base: "5px 15px", md: "12px 18px" }}
-          >
-            Graphics
-          </Button>
-          <Button
-          variant="outline"
-          borderRadius={"20px"}
-          fontSize={{ base: "10px", md: "13px" }}
-          p={{ base: "5px 15px", md: "12px 18px" }}
-          >
-            Jeans
-          </Button>
+          {["Best Sellers", "Sale", "Graphics", "Jeans"].map((label) => (
+            <Button
+              key={label}
+              variant="outline"
+              {...buttonStyles(label)}
+              onClick={() => handleButtonClick(label)}
+            >
+              {label}
+            </Button>
+          ))}
         </Stack>
       </Box>
     </>
