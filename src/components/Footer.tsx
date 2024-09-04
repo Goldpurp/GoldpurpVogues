@@ -5,8 +5,7 @@ import { FaPinterest, FaSnapchatGhost, FaFacebook } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosDoneAll } from "react-icons/io";
-// import CopyRight from "../CopyRight/CopyRight";
-
+import CopyRight from "./CopyRight";
 
 export default function Footer() {
   type OpenState = {
@@ -32,15 +31,15 @@ export default function Footer() {
   return (
     <Box as="footer" color="white" p="10px 20px" bg="#0b090a">
       <HStack justify="center" spacing="15px" py="10px">
-        <Icon as={FaPinterest} boxSize="40px" cursor="pointer" />
-        <Icon as={IoLogoYoutube} boxSize="40px" cursor="pointer" />
-        <Icon as={FaSnapchatGhost} boxSize="40px" cursor="pointer" />
-        <Icon as={RiInstagramFill} boxSize="40px" cursor="pointer" />
-        <Icon as={FaFacebook} boxSize="40px" cursor="pointer" />
-        <Icon as={FaXTwitter} boxSize="40px" cursor="pointer" />
+        <Icon as={FaPinterest} boxSize="22px" cursor="pointer" />
+        <Icon as={IoLogoYoutube} boxSize="22px" cursor="pointer" />
+        <Icon as={FaSnapchatGhost} boxSize="22px" cursor="pointer" />
+        <Icon as={RiInstagramFill} boxSize="22px" cursor="pointer" />
+        <Icon as={FaFacebook} boxSize="22px" cursor="pointer" />
+        <Icon as={FaXTwitter} boxSize="22px" cursor="pointer" />
       </HStack>
 
-      <VStack spacing="10px" pt="10px">
+      <VStack spacing="10px" py="10px">
         <Heading as="h4" size="sm">
           Newsletter + Updates
         </Heading>
@@ -62,20 +61,20 @@ export default function Footer() {
             right="8px"
             w="30px"
             h="30px"
-            bg="#8b8c89"
+            bg="#c4c5c1"
             borderRadius="full"
           >
-            <Icon as={IoIosDoneAll} boxSize="100%" />
+            <Icon as={IoIosDoneAll} fontSize={"30px"}/>
           </Button>
         </Flex>
 
-        <Text fontSize="xs" color="gray.400" textAlign="center">
+        <Text fontSize="xs" color="#fff" textAlign="center" px={2}>
           By signing up for email, you agree to Goldpurp's Vogue{" "}
-          <Link href="#" textDecoration="underline">
+          <Link href="#" textDecoration="underline" color={"#dee2e6"}>
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link href="#" textDecoration="underline">
+          <Link href="#" textDecoration="underline" color={"#dee2e6"}>
             Privacy Policy
           </Link>
           . By submitting your email address, you agree to receive recurring
@@ -83,25 +82,25 @@ export default function Footer() {
           reminders) from Goldpurp's Vogue at the email address used when signing up.
           Consent is not a condition of any purchase. Reply HELP for help and STOP to
           cancel. Mail frequency varies. Msg & data rates may apply. View{" "}
-          <Link href="#" textDecoration="underline">
+          <Link href="#" textDecoration="underline" color={"#dee2e6"}>
             Terms
           </Link>{" "}
           &{" "}
-          <Link href="#" textDecoration="underline">
+          <Link href="#" textDecoration="underline" color={"#dee2e6"}>
             Privacy
           </Link>
         </Text>
       </VStack>
 
-      <VStack spacing="10px" py="40px 0 30px 0">
+      <VStack spacing="10px" py="40px 0 30px 0" mb={5}>
         <Section
           title="GET HELP"
           isOpen={isOpen.help}
           onToggle={() => toggleSection("help")}
         >
-          <Link>Help Center</Link>
-          <Link >Track Order</Link>
-          <Link>
+          <Link color={"#dee2e6"}>Help Center</Link>
+          <Link color={"#dee2e6"}>Track Order</Link>
+          <Link color={"#dee2e6"}>
             Shipping Information
           </Link>
         </Section>
@@ -111,9 +110,9 @@ export default function Footer() {
           isOpen={isOpen.company}
           onToggle={() => toggleSection("company")}
         >
-          <Link >About Us</Link>
-          <Link>Contact Us</Link>
-          <Link>FAQs</Link>
+          <Link color={"#dee2e6"}>About Us</Link>
+          <Link color={"#dee2e6"}>Contact Us</Link>
+          <Link color={"#dee2e6"}>FAQs</Link>
         </Section>
 
         <Section
@@ -121,15 +120,15 @@ export default function Footer() {
           isOpen={isOpen.legal}
           onToggle={() => toggleSection("legal")}
         >
-          <Link >Privacy Policy</Link>
-          <Link>Terms of Service</Link>
-          <Link >
+          <Link color={"#dee2e6"}>Privacy Policy</Link>
+          <Link color={"#dee2e6"}> Terms of Service</Link>
+          <Link color={"#dee2e6"}>
             Return and Refund Policy
           </Link>
         </Section>
       </VStack>
 
-      {/* <CopyRight /> */}
+      <CopyRight/>
     </Box>
   );
 }

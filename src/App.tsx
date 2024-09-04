@@ -7,7 +7,7 @@ import NewArrivalsCarousel from "./components/NewArrivalsCarousel"
 import ShowCaseAds from "./components/ShowCaseAds"
 import Hero from "./components/Hero"
 import Header from "./components/Header"
-// import HeroVideo from "./components/HeroVideo"
+import HeroVideo from "./components/HeroVideo"
 // import Hero2 from "./components/Hero2"
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
     <Flex flexDirection={"column"}>
       <Header/>
       <Hero/>
-      {/* <Hero2/>
-      <HeroVideo/> */}
+      {/* <Hero2/> */}
+      <HeroVideo/>
       <ShowCaseAds/>
       <NewArrivalsCarousel/>
       <PromoAds/>

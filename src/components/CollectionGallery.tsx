@@ -27,8 +27,8 @@ function ProductItem({ src, alt, label }: { src: string; alt: string; label: str
       justify="center"
       p="2px 5px 8px 5px"
       transition="transform 0.5s ease"
-      _hover={{ transform: "scale(1.05)" }}
-      _focus={{ transform: "scale(1.05)" }}
+      _hover={{ transform: "scale(1.07)" }}
+      _focus={{ transform: "scale(1.15)" }}
       cursor="pointer"
       borderWidth="1px"
       borderColor="#e2e6e9"

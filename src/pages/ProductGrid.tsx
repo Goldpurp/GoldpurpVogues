@@ -1,4 +1,4 @@
-import Img4 from "/Products/2.png";
+import Img4 from "/Products/1.png";
 import {
   Box,
   Image,

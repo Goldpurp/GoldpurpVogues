@@ -36,10 +36,7 @@ export default function CollectionsAds() {
 
       <MotionBox
         position="absolute"
-        bottom="25%"
-        padding="7px"
         textAlign="center"
-        background="linear-gradient(160deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0) 100%)"
         display="flex"
         alignItems="center"
         flexDirection="column"
@@ -47,6 +44,7 @@ export default function CollectionsAds() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3 }}
+        zIndex={1}
       >
         <Text color="white" fontSize={{ base: "20px", sm: "24px", md: "27px", lg: "35px", xl: "42px" }} fontWeight="600">
           Explore Our
@@ -56,6 +54,16 @@ export default function CollectionsAds() {
         </Text>
         <ShopNowBtn />
       </MotionBox>
+
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        width="100%"
+        height="100%"
+        bg="rgba(0, 0, 0, 0.4)"
+        zIndex="0"
+      />
     </MotionBox>
   );
 }

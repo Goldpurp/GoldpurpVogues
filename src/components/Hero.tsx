@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import HeroImg from "../../public/Images/heroImg1.png";
-import HeroImgMini from "../../public/Images/heroImg1mini.png";
+import HeroImg from "/Images/heroImg1.png";
+import HeroImgMini from "/Images/heroImg1mini.png";
 
 const fadeIn = keyframes`
     from {
@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
       bg="#D8DAD3"
       justifyContent="space-evenly"
       position="relative"
-      mb={1}
+      color={"#fff"}
     >
       <Flex
         direction="column"
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
         <Text
           fontSize={{ base: "15px", md: "25px", lg: "35px" }}
           fontWeight="600"
-          fontFamily="Inter, sans-serif"
+          fontFamily={"Inter, sans-serif"}
         >
           SUMMER SALE IS ON
         </Text>
@@ -66,23 +66,25 @@ const Hero: React.FC = () => {
           Discover Men's Latest Fashion
         </Text>
         <ChakraButton
+          fontFamily={"DM Mono"}
           w={"fit-content"}
-          p={4}
+          p={3}
           gap={2}
           justifyContent={"center"}
           alignItems={"center"}
-          color="#000000"
+          color={"#fff"}
           fontSize={{ base: "15px", lg: "18px" }}
           fontWeight="300"
           variant="outline"
           borderRadius="5px"
-          borderColor="#000"
+          borderColor="#fff"
           bg="transparent"
           _hover={{
             transform: "scale(0.96)",
-            borderColor: "#bcb8b1",
-            bg: "#edede9",
+            borderColor: "#00000098",
+            bg: "#00000084",
             transition: "all 0.4s linear",
+            color: "#d4d2d2",
           }}
         >
           Discover More <MdKeyboardDoubleArrowRight />
@@ -122,7 +124,7 @@ const Hero: React.FC = () => {
         left="0"
         width="100%"
         height="100%"
-        bg="rgba(0, 0, 0, 0.1)"
+        bg="rgba(0, 0, 0, 0.3)"
         zIndex="0"
       />
     </Flex>

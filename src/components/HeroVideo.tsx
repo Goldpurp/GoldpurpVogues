@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Flex, Heading, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import ShopNowBtn from "./ShowNowBtn";
 
 const Hero: React.FC = () => {
   return (
@@ -11,11 +12,12 @@ const Hero: React.FC = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bg="red"
+      bg="#fff"
+      fontFamily={"DM Mono"}
     >
       <Box
         as="video"
-        src="https://videos.pexels.com/video-files/8515054/8515054-sd_360_640_24fps.mp4"
+        src="https://videos.pexels.com/video-files/7037493/7037493-sd_506_960_25fps.mp4"
         autoPlay
         loop
         muted
@@ -34,17 +36,17 @@ const Hero: React.FC = () => {
         justify="center"
         zIndex="1"
         textAlign="center"
-        color="white"
+        color="#fff"
+        px={9}
       >
-        <Heading as="h1" size="2xl" mb="4">
-          Your Hero Title
+        <Heading fontSize={"22px"} mb="4">
+          Urban Winter Essentials
         </Heading>
-        <Text fontSize="xl" mb="6">
-          Your subtitle or description goes here.
+        <Text fontSize={"13px"} mb="6" px={6}>
+          Experience the perfect blend of style and warmth with our sleek winter
+          collection.
         </Text>
-        <Button colorScheme="teal" size="lg">
-          Call to Action
-        </Button>
+        <ShopNowBtn />
       </Flex>
       <Box
         position="absolute"
