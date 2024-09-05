@@ -56,12 +56,13 @@ export default function ProductGrid() {
     <>
       <TrendsIcons />
       <Box
+        px={2}
         w="100%"
         overflow="hidden"
         letterSpacing="normal"
         fontFamily="Nunito, sans-serif"
       >
-        <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={4}>
+        <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={2}>
           {productList.map((item, itemIndex) => (
             <Box
               key={itemIndex}

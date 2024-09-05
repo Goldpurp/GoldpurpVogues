@@ -138,14 +138,13 @@ const Header = () => {
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent >
           <DrawerCloseButton size={"lg"} mt={1} />
-          <DrawerHeader>
+          <DrawerHeader p={"10px 15px 0px 15px"}>
             <Flex
               justifyContent={"space-between"}
               alignItems={"center"}
               w={{ base: "130px", md: "150px" }}
-              h={"70px"}
             >
               <Image
                 src={Logo}
@@ -158,7 +157,7 @@ const Header = () => {
               />
             </Flex>
           </DrawerHeader>
-          <DrawerBody>
+          <DrawerBody px={4}>
             <SidebarMenu />
           </DrawerBody>
         </DrawerContent>
@@ -261,6 +260,27 @@ const SidebarMenu = () => {
       position={"relative"}
       css={{ "&::-webkit-scrollbar": { display: "none" } }}
     >
+      <Flex justifyContent={"flex-end"} alignItems={"center"} gap={"3%"}>
+        <Text>goldpurp</Text>
+        <Box w={"35px"} h={"35px"}>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </Box>
+
+      </Flex>
+
       <Box>
         <Text>NEW ARRIVALS</Text>
       </Box>
