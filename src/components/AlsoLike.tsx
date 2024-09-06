@@ -8,7 +8,6 @@ import {
   } from "@chakra-ui/react";
   import Img1 from "/ProductImages/1.webp";
   import { PiHandbagThin } from "react-icons/pi";
-  import { useNavigate } from "react-router-dom";
   import { useState } from "react";
   
   interface Color {
@@ -158,7 +157,6 @@ import {
       }));
     };
   
-    const navigate = useNavigate();
   
     return (
       <>
@@ -230,7 +228,6 @@ import {
                   </Heading>
   
                   <Flex justifyContent={"space-between"} alignItems={"center"}>
-                    {/* Color selection */}
                     <Flex pt={2}>
                       {colors.map((color) => (
                         <Box
