@@ -25,8 +25,13 @@ const WhyChooseUs = () => {
             Why Choose Us
           </Heading>
           <Text mb={8}>
-            Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet
-            velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+            At GoldPurp's Vogue, we believe fashion is more than just
+            clothing—it's a lifestyle. Our curated collections are designed to
+            make you stand out, offering a perfect blend of style, comfort, and
+            affordability. From the latest trends to timeless classics, every
+            piece is crafted with quality and attention to detail. Shop with us
+            for exclusive designs, fast delivery, and unmatched customer service
+            that ensures your experience is as flawless as your style.
           </Text>
           <Grid templateColumns="repeat(2, 1fr)" gap={6}>
             <Flex alignItems="left" flexDirection={"column"} textAlign={"left"}>

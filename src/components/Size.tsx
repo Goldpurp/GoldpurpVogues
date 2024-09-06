@@ -27,8 +27,8 @@ export default function SizeSelectComponent() {
             <Box
               key={size}
               fontSize={{ base: "13px", md: "15px" }}
-              py={1}
-              px={2}
+              py={"2px"}
+              px={4}
               borderRadius="0"
               border={activeSize === size ? "2px solid black" : "1px solid #adb5bd"}
               cursor="pointer"

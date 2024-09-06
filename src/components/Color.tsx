@@ -32,8 +32,8 @@ export default function ColorSelectComponent() {
           {colors.map((color) => (
             <Box
               key={color.value}
-              w="25px"
-              h="25px"
+              w="35px"
+              h="23px"
               bg={color.value}
               border={activeColor === color.name ? "2px solid black" : "1px solid #adb5bd"}
               cursor="pointer"

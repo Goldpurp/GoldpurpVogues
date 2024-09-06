@@ -14,48 +14,44 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import demoImg from "/Products/4.png";
+import Img2 from "/ProductImages/2.webp";
+import Img3 from "/ProductImages/3.jpg";
+import Img4 from "/ProductImages/4.webp";
+import Img5 from "/ProductImages/5.webp";
 
-import Img1 from "/ModalImgCards/1.webp";
-import Img2 from "/ModalImgCards/2.webp";
-import Img3 from "/ModalImgCards/3.webp";
-import Img4 from "/ModalImgCards/4.webp";
 import ColorSelectComponent from "./Color";
 import SizeSelectComponent from "./Size";
 import StarRating from "./StarRating";
 import WhyChooseUs from "./WhyChooseUs";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import RelatedChoice from "./RelatedChoice";
+import AlsoLike from "./AlsoLike";
 
-const images = [demoImg, Img1, Img2, Img3, Img4];
+const images = [Img2, Img3, Img4, Img5];
 
 export default function ProductPage() {
   const [value, setValue] = useState(1);
   const [like, setLike] = useState(false);
-  const [activeIndex, _setActiveIndex] = useState(0);
 
   const handleIncrement = () => setValue((prevValue) => prevValue + 1);
   const handleDecrement = () =>
     setValue((prevValue) => Math.max(prevValue - 1, 1));
 
   const toggleLike = () => setLike(!like);
-  // const handleNext = () =>
-  //   setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-  // const handlePrevious = () =>
-  //   setActiveIndex(
-  //     (prevIndex) => (prevIndex - 1 + images.length) % images.length
-  //   );
 
-  const tabs = ["DESCRIPTION", "DETAILS"];
-  const descriptionContent = [
-    "Model Height: 6'1 - Wearing Large",
-    "Big & Tall: Height 6'5 - Wearing XXL",
-    "Available In Green",
-    "Cuban Collar",
-    "Short Sleeve",
-    "Front Button Closure",
+  const tabs = ["DETAILS", "DESCRIPTION"];
+  const detailsContent = [
+    "Available In Olive",
+    "Elastic Waistband",
+    "Drawstring",
+    "100% Polyester",
+    "Back Hand Pocket    ",
+    "Cargo Pockets",
     "Left Chest Pocket",
-    "Disclaimer: Stripe Placement May Vary",
+    "Pair With Cargo Zip Up Hoodie",
     "96% Polyester 4% Elastane",
-    "Pair With 'Show Up Slim Slit Pants' Or 'Show Up Basketball Shorts'",
+    "Disclaimer: Due To The Specialized Distressing & Wash Process, Each Garment Is Unique.",
     "Imported",
   ];
 
@@ -64,112 +60,93 @@ export default function ProductPage() {
       direction={{ base: "column", md: "row" }}
       pt={"100px"}
       pb={"50px"}
-      bg={"#e9ecef"}
-      color={"#000"}
     >
-      <Flex justifyContent={"center"} flex="0.4" position="relative" px={3}>
-        <Image
-          src={images[activeIndex]}
-          alt="Product Image"
-          objectFit="cover"
-          boxSize="100%"
-        />
+      <Flex
+        flexDirection={"column"}
+        justifyContent={"center"}
+        flex="0.4"
+        position="relative"
+        px={3}
+      >
+        <Box maxW="640px" mx="auto">
+          <Carousel
+            autoPlay
+            infiniteLoop
+            showThumbs={false}
+            showStatus={true}
+            showArrows={false}
+          >
+            {images.map((item, index) => (
+              <Box key={index}>
+                <Image alt={`image-${index}`} src={item} />
+              </Box>
+            ))}
+          </Carousel>
+        </Box>
       </Flex>
 
       <Flex
         direction="column"
         flex="0.6"
         ml={{ md: 8 }}
-        mt={{ base: 8, md: 0 }}
-        px={5}
+        mt={{ base: 4, md: 0 }}
+        px={4}
       >
-        <Text fontSize={"21px"}>Demo dress for product page</Text>
+        <Text fontSize={"15px"}>Crosses Cargo Sweatpant - Olive</Text>
         <Flex justify="space-between" align="center" pt={3} pb={4}>
           <Text
             as="h5"
             color="#386648"
-            mt={1}
             fontWeight={600}
             fontSize={{ base: "20px", lg: "18px" }}
           >
-            $230.99
+            ₦41,459.99
             <Text
               as="span"
               color="#780000"
               textDecoration="line-through"
               ml={6}
               fontWeight={400}
-              fontSize={{ base: "15px", lg: "13px" }}
+              fontSize={{ base: "13px", lg: "13px" }}
             >
-              $120.99
+              ₦58,050.00
             </Text>
           </Text>
         </Flex>
 
         <ColorSelectComponent />
         <SizeSelectComponent />
-        
+
         <Flex alignItems={"center"} justifyContent={"space-between"} py={3}>
-
-        <StarRating />
-
-        <Flex align="center">
-          <Button
-        
-            onClick={handleDecrement}
-            cursor="pointer"
-            boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
-          >
-            -
-          </Button>
-          <Text mx={4}>{value}</Text>
-          <Button
-        
-            cursor="pointer"
-            boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
-            onClick={handleIncrement}
-          >
-            +
-          </Button>
+          <StarRating />
+          <Flex align="center">
+            <Button onClick={handleDecrement}>-</Button>
+            <Text mx={4}>{value}</Text>
+            <Button onClick={handleIncrement}>+</Button>
+          </Flex>
         </Flex>
-        </Flex>
-
 
         <Flex alignItems={"center"}>
           <Flex
             justifyContent={"center"}
             alignItems={"center"}
             w={"full"}
-            h={"fit-content"}
             p={"12px"}
-            borderRadius={"10px"}
             bg={"#2D6A4F"}
-            cursor="pointer"
-            boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
+            borderRadius={"10px"}
           >
             <Text fontSize={"16px"} fontWeight={"600"} color={"#fff"}>
               Add to cart
             </Text>
           </Flex>
-          <Box
-            m={4}
-            w={"40px"}
-            h={"40px"}
-            bg={"#fff"}
-            borderRadius={"5px"}
-            cursor="pointer"
-            boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
-          >
+          <Box m={4} w={"40px"} h={"40px"} borderRadius={"5px"} bg="white">
             <IconButton
               w={"40px"}
               h={"40px"}
               aria-label="Like Item"
               icon={
                 like ? (
-                  <Box
-                    boxSize={{ base: "25px", md: "21px", lg: "24px" }}
-                    cursor="pointer"
-                  >
+                  <Box boxSize="24px">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -179,10 +156,7 @@ export default function ProductPage() {
                     </svg>
                   </Box>
                 ) : (
-                  <Box
-                    boxSize={{ base: "25px", md: "21px", lg: "24px" }}
-                    cursor="pointer"
-                  >
+                  <Box boxSize="24px">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -201,9 +175,9 @@ export default function ProductPage() {
               }
               onClick={toggleLike}
               variant="ghost"
-              colorScheme="teal"
-              _hover={{ color: "#2f3e46" }}
-              transition="900ms"
+              colorScheme="red"
+              border="1px solid #e9ecef" 
+              _hover={{ bg: "transparent" }}
             />
           </Box>
         </Flex>
@@ -211,30 +185,45 @@ export default function ProductPage() {
         <Tabs mt={4}>
           <TabList>
             {tabs.map((tab, index) => (
-              <Tab key={index}>{tab} </Tab>
+              <Tab
+                key={index}
+                _selected={{
+                  color: "#000",
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                  borderColor: "#072115",
+                }}
+                color="black"
+                fontSize="14px"
+                fontWeight="normal"
+              >
+                {tab}
+              </Tab>
             ))}
           </TabList>
           <TabPanels>
             <TabPanel py={2} px={0}>
-              <Text>
-                In a constantly changing fashion environment, it's vital to keep
-                pace with the latest tendencies and blaze new trails, which is
-                one of our top priorities. Efforts of our team are directed at
-                making customers' feel trendy with the accessories they pick at
-                our shop.
-              </Text>
-            </TabPanel>
-            <TabPanel py={2} px={0}>
               <UnorderedList>
-                {descriptionContent.map((desc, index) => (
+                {detailsContent.map((desc, index) => (
                   <ListItem key={index}>{desc}</ListItem>
                 ))}
               </UnorderedList>
             </TabPanel>
+
+            <TabPanel py={2} px={0}>
+              <Text>
+                In a constantly changing fashion environment, staying ahead of
+                the curve is key to maintaining a wardrobe that reflects both
+                your personal style and the latest trends.
+              </Text>
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Flex>
-      <WhyChooseUs/>
+      <RelatedChoice/>
+
+      <AlsoLike/>
+      <WhyChooseUs />
     </Flex>
   );
 }

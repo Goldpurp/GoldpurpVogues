@@ -7,43 +7,43 @@ import {
   Button,
   SimpleGrid,
 } from "@chakra-ui/react";
-import Img4 from "/Products/4.png";
+import Img1 from "/ProductImages/1.webp";
 import { PiHandbagThin } from "react-icons/pi";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TrendsIcons from "../components/TrendsIcons";
 import { Routes } from "../routes/baseRoutes";
 
 const productList = [
   {
-    src: Img4,
-    label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
-    price: "24,999.99",
-    oldPrice: "33,000.00",
-    bonus: "Get 10% Off On ₦50,000+ Orders!",
+    src: Img1,
+    label: "Crosses Cargo Sweatpant - Olive",
+    price: "41,459.99",
+    oldPrice: "58,050.00",
+    bonus: "10% Off On ₦50,000+ Orders!",
   },
   {
-    src: Img4,
-    label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
-    price: "24,999.99",
-    oldPrice: "33,000.00",
-    bonus: "Get 10% Off On ₦50,000+ Orders!",
+    src: Img1,
+    label: "Crosses Cargo Sweatpant - Olive",
+    price: "41,459.99",
+    oldPrice: "58,050.00",
+    bonus: "10% Off On ₦50,000+ Orders!",
   },
   {
-    src: Img4,
-    label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
-    price: "24,999.99",
-    oldPrice: "33,000.00",
-    bonus: "Get 10% Off On ₦50,000+ Orders!",
+    src: Img1,
+    label: "Crosses Cargo Sweatpant - Olive",
+    price: "41,459.99",
+    oldPrice: "58,050.00",
+    bonus: "10% Off On ₦50,000+ Orders!",
   },
   {
-    src: Img4,
-    label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
-    price: "24,999.99",
-    oldPrice: "33,000.00",
-    bonus: "Get 10% Off On ₦50,000+ Orders!",
+    src: Img1,
+    label: "Crosses Cargo Sweatpant - Olive",
+    price: "41,459.99",
+    oldPrice: "58,050.00",
+    bonus: "10% Off On ₦50,000+ Orders!",
   },
   {
-    src: Img4,
+    src: Img1,
     label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
     price: "24,999.99",
     oldPrice: "33,000.00",
@@ -73,7 +73,7 @@ export default function ProductGrid() {
               cursor="pointer"
               position={"relative"}
             >
-                <Image src={item.src} alt="image" objectFit="cover" onClick={()=> navigate(Routes.ProductPage)}/>
+              <Image src={item.src} alt="image" objectFit="cover" onClick={() => navigate(Routes.ProductPage)} />
               <Flex
                 position="absolute"
                 right={2}
@@ -108,6 +108,7 @@ export default function ProductGrid() {
                     color="#780000"
                     textDecoration="line-through"
                     ml={2}
+                    fontWeight={"400"}
                     fontSize={{ base: "11px", md: "13px", lg: "15px" }}
                   >
                     ₦{item.oldPrice}
