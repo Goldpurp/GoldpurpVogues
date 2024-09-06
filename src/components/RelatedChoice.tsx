@@ -5,7 +5,7 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import Img from "../../public/Products/4.png";
+import Img from "/Products/4.png";
 
 export default function RelatedChoice() {
   const newArrivalItems = [

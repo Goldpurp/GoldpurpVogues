@@ -9,7 +9,6 @@ import {
   import Img1 from "/ProductImages/1.webp";
   import { PiHandbagThin } from "react-icons/pi";
   import { useNavigate } from "react-router-dom";
-  import { Routes } from "../routes/baseRoutes";
   import { useState } from "react";
   
   interface Color {
@@ -188,7 +187,6 @@ import {
                   src={item.src}
                   alt="image"
                   objectFit="cover"
-                  onClick={() => navigate(Routes.ProductPage)}
                 />
                 <Flex
                   position="absolute"
@@ -254,7 +252,6 @@ import {
                       ))}
                     </Flex>
   
-                    {/* Like button */}
                     <Box onClick={() => toggleLike(itemIndex)}>
                       {likes[itemIndex] ? (
                         <Box boxSize="22px">

@@ -22,7 +22,6 @@ import Img5 from "/ProductImages/5.webp";
 import ColorSelectComponent from "./Color";
 import SizeSelectComponent from "./Size";
 import StarRating from "./StarRating";
-import WhyChooseUs from "./WhyChooseUs";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import RelatedChoice from "./RelatedChoice";
@@ -223,7 +222,6 @@ export default function ProductPage() {
       <RelatedChoice/>
 
       <AlsoLike/>
-      <WhyChooseUs />
     </Flex>
   );
 }
