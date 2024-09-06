@@ -45,7 +45,7 @@ const productLists = [
 ];
 
 export default function Cart() {
-  const [hasItems, setHasItems] = useState(productLists.length > 0);
+  const [hasItems, _setHasItems] = useState(productLists.length > 0);
   const [quantities, setQuantities] = useState(productLists.map(() => 1));
 
   const handleIncrement = (index: number) => {

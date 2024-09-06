@@ -8,7 +8,7 @@ import {
   useBreakpointValue,
   Image,
 } from "@chakra-ui/react";
-import img from "../../public/Images/col.jpg";
+import img from "/Images/col.jpg";
 
 const WhyChooseUs = () => {
   const imageDisplay = useBreakpointValue({
