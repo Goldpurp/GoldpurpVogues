@@ -220,7 +220,6 @@ export default function ProductPage() {
         </Tabs>
       </Flex>
       <RelatedChoice/>
-
       <AlsoLike/>
     </Flex>
   );

@@ -391,7 +391,7 @@ const SidebarMenu = () => {
 
 const CartBadge= () => {
 
-  const [cartCount, _setCartCount] = useState(0);
+  const [cartCount, _setCartCount] = useState(4);
 
   return (
     <Box position="relative">
