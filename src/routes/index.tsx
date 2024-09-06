@@ -5,6 +5,9 @@ import { Routes } from "./baseRoutes";
 import ProductGrid from "../pages/ProductGrid";
 import { createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/SignUp";
+import About from "../components/About";
+import ProductPage from "../components/ProductPage";
+import Cart from "../components/Cart";
 
 const router = createBrowserRouter([
     { path: Routes.Login,
@@ -24,6 +27,15 @@ const router = createBrowserRouter([
             },
             { path: Routes.ProductGrid,
                 element: <ProductGrid/>
+            },
+            { path: Routes.About,
+                element: <About/>
+            },
+            { path: Routes.Cart,
+                element: <Cart/>
+            },
+            { path: Routes.ProductPage,
+                element: <ProductPage/>
             },
 
         

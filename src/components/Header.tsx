@@ -21,11 +21,14 @@ import {
   VStack,
   Collapse,
   Text,
+  Badge,
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Logo from "/icon/gpLogo1.png";
 import NavLinks from "./NavLinks";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,6 +49,8 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const navigate = useNavigate()
 
   return (
     <Flex direction="column">
@@ -78,6 +83,8 @@ const Header = () => {
             h="100%"
             objectFit="contain"
             boxSize={"90%"}
+          onClick={()=> navigate(Routes.home)}
+
           />
         </Flex>
 
@@ -107,24 +114,9 @@ const Header = () => {
               </svg>
             </Box>
           </ChakraLink>
-
-          <ChakraLink>
-            <Box w={"23px"} cursor="pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                />
-              </svg>
-            </Box>
-          </ChakraLink>
+          <Box onClick={()=>navigate(Routes.Cart)}>
+       <CartBadge/>
+          </Box>
           <IconButton
             aria-label="Toggle Menu"
             icon={isOpen ? <></> : <RxHamburgerMenu size="25px" />}
@@ -252,6 +244,7 @@ const SidebarMenu = () => {
   return (
     <VStack
       h={"100%"}
+      pb={"100px"}
       textAlign="left"
       overflowY="scroll"
       spacing={2}
@@ -396,6 +389,47 @@ const SidebarMenu = () => {
   );
 };
 
+const CartBadge= () => {
+
+  const [cartCount, _setCartCount] = useState(0);
+
+  return (
+    <Box position="relative">
+       <ChakraLink>
+            <Box w={"23px"} cursor="pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+            </Box>
+          </ChakraLink>
+      {cartCount > 0 && (
+        <Badge
+          colorScheme="red"
+          borderRadius="full"
+          px={2}
+          position="absolute"
+          top="-1"
+          right="-2"
+          fontSize="11px"
+          fontWeight={400}
+        >
+          {cartCount}
+        </Badge>
+      )}
+    </Box>
+  );
+}
+
 const Section = ({
   title,
   isOpen,
@@ -448,5 +482,7 @@ const SpecialMenuItem = ({ children }: { children: React.ReactNode }) => (
     {children}
   </Text>
 );
+
+
 
 export default Header;

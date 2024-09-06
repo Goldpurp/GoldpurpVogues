@@ -8,7 +8,6 @@ import ShowCaseAds from "./components/ShowCaseAds"
 import Hero from "./components/Hero"
 import Header from "./components/Header"
 import HeroVideo from "./components/HeroVideo"
-// import WhyChooseUs from "./components/WhyChooseUs"
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
       <CollectionsAds/>
       <ProductGallery/>
       <ProductGrid/>
-      {/* <WhyChooseUs/> */}
     </Flex>
   )
 }

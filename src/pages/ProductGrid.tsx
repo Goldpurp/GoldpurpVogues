@@ -5,13 +5,13 @@ import {
   Heading,
   Flex,
   Button,
-  Link,
   SimpleGrid,
 } from "@chakra-ui/react";
 import Img4 from "/Products/4.png";
 import { PiHandbagThin } from "react-icons/pi";
-import { Link as RouterLink } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import TrendsIcons from "../components/TrendsIcons";
+import { Routes } from "../routes/baseRoutes";
 
 const productList = [
   {
@@ -52,6 +52,8 @@ const productList = [
 ];
 
 export default function ProductGrid() {
+
+  const navigate = useNavigate()
   return (
     <>
       <TrendsIcons />
@@ -71,9 +73,7 @@ export default function ProductGrid() {
               cursor="pointer"
               position={"relative"}
             >
-              <Link as={RouterLink} to="product">
-                <Image src={item.src} alt="image" objectFit="cover" />
-              </Link>
+                <Image src={item.src} alt="image" objectFit="cover" onClick={()=> navigate(Routes.ProductPage)}/>
               <Flex
                 position="absolute"
                 right={2}

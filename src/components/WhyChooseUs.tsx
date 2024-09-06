@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
   Image,
 } from "@chakra-ui/react";
+import img from "../../public/Images/col.jpg";
 
 const WhyChooseUs = () => {
   const imageDisplay = useBreakpointValue({
@@ -17,7 +18,7 @@ const WhyChooseUs = () => {
   });
 
   return (
-    <Box p={8} bg={"#f8f9fa76"}>
+    <Box p={4} pt={12} bg={"#f8f9fa76"}>
       <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={8}>
         <GridItem>
           <Heading as="h2" size="lg" mb={4}>
@@ -118,7 +119,7 @@ const WhyChooseUs = () => {
         </GridItem>
         <GridItem display={imageDisplay}>
           <Image
-            src="https://via.placeholder.com/600x400"
+            src={img}
             alt="Living Room"
             borderRadius="md"
             objectFit="cover"
