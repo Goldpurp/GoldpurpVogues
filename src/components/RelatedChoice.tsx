@@ -110,8 +110,7 @@ export default function RelatedChoice() {
                 <Text
                   fontSize={{
                     base: "13px",
-                    md: "20px",
-                    lg: "22px",
+                    lg: "17px",
                   }}
                   fontWeight="400"
                   noOfLines={1}
@@ -121,7 +120,7 @@ export default function RelatedChoice() {
 
                 <Text
                   color="#2d6a4f"
-                  fontSize={{ base: "14px", md: "16px", lg: "20px" }}
+                  fontSize={{ base: "14px", lg: "18px" }}
                   fontWeight="500"
                 >
                   ₦{item.price}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -12,8 +13,8 @@ import {
   UnorderedList,
   ListItem,
   IconButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import Img2 from "/ProductImages/2.webp";
 import Img3 from "/ProductImages/3.jpg";
 import Img4 from "/ProductImages/4.webp";
@@ -26,6 +27,8 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import RelatedChoice from "./RelatedChoice";
 import AlsoLike from "./AlsoLike";
+import ShareButton from "./ShareButton";
+import SizeChartDrawer from "./SizeChart";
 
 const images = [Img2, Img3, Img4, Img5];
 
@@ -45,7 +48,7 @@ export default function ProductPage() {
     "Elastic Waistband",
     "Drawstring",
     "100% Polyester",
-    "Back Hand Pocket    ",
+    "Back Hand Pocket",
     "Cargo Pockets",
     "Left Chest Pocket",
     "Pair With Cargo Zip Up Hoodie",
@@ -54,12 +57,12 @@ export default function ProductPage() {
     "Imported",
   ];
 
+  const state = useBreakpointValue({ base: false, md: true });
+  
   return (
-    <Flex
-      direction={{ base: "column", md: "row" }}
-      pt={"100px"}
-      pb={"50px"}
-    >
+    <Flex direction={{ base: "column", lg: "column" }} pt={"100px"} pb={"50px"} px={{ base: "", md: 9, lg: "80px"}}>
+      <Flex flexDirection={{ base: "column", lg: "row" }}>
+
       <Flex
         flexDirection={"column"}
         justifyContent={"center"}
@@ -73,7 +76,7 @@ export default function ProductPage() {
             infiniteLoop
             showThumbs={false}
             showStatus={true}
-            showArrows={false}
+            showArrows={state}
           >
             {images.map((item, index) => (
               <Box key={index}>
@@ -87,17 +90,20 @@ export default function ProductPage() {
       <Flex
         direction="column"
         flex="0.6"
-        ml={{ md: 8 }}
-        mt={{ base: 4, md: 0 }}
+        ml={{ lg: 8 }}
+        mt={{ base: 4, lg: 0 }}
         px={4}
       >
-        <Text fontSize={"15px"}>Crosses Cargo Sweatpant - Olive</Text>
+        <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Text fontSize={"15px"}>Crosses Cargo Sweatpant - Olive</Text>
+          <ShareButton />
+        </Flex>
         <Flex justify="space-between" align="center" pt={3} pb={4}>
           <Text
             as="h5"
             color="#386648"
             fontWeight={600}
-            fontSize={{ base: "20px", lg: "18px" }}
+            fontSize={{ base: "18px", lg: "18px" }}
           >
             ₦41,459.99
             <Text
@@ -106,15 +112,19 @@ export default function ProductPage() {
               textDecoration="line-through"
               ml={6}
               fontWeight={400}
-              fontSize={{ base: "13px", lg: "13px" }}
+              fontSize={{ base: "12px", lg: "13px" }}
             >
               ₦58,050.00
             </Text>
           </Text>
         </Flex>
 
-        <ColorSelectComponent />
-        <SizeSelectComponent />
+          <ColorSelectComponent />
+
+          <Flex justifyContent={"space-between"} alignItems={"start"}>
+          <SizeSelectComponent />
+          <SizeChartDrawer/>
+        </Flex>
 
         <Flex alignItems={"center"} justifyContent={"space-between"} py={3}>
           <StarRating />
@@ -126,18 +136,20 @@ export default function ProductPage() {
         </Flex>
 
         <Flex alignItems={"center"}>
-          <Flex
+          <Button
             justifyContent={"center"}
             alignItems={"center"}
             w={"full"}
-            p={"12px"}
+            p={"23px"}
             bg={"#2D6A4F"}
             borderRadius={"10px"}
+            fontSize={"16px"}
+            fontWeight={"600"}
+            color={"#fff"}
+            _hover={{ background: "#2D6A4F" }}
           >
-            <Text fontSize={"16px"} fontWeight={"600"} color={"#fff"}>
-              Add to cart
-            </Text>
-          </Flex>
+            Add to cart
+          </Button>
           <Box m={4} w={"40px"} h={"40px"} borderRadius={"5px"} bg="white">
             <IconButton
               w={"40px"}
@@ -160,12 +172,12 @@ export default function ProductPage() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                       />
                     </svg>
@@ -175,7 +187,7 @@ export default function ProductPage() {
               onClick={toggleLike}
               variant="ghost"
               colorScheme="red"
-              border="1px solid #e9ecef" 
+              border="1px solid #e9ecef"
               _hover={{ bg: "transparent" }}
             />
           </Box>
@@ -219,8 +231,10 @@ export default function ProductPage() {
           </TabPanels>
         </Tabs>
       </Flex>
-      <RelatedChoice/>
-      <AlsoLike/>
+
+      </Flex>
+      <RelatedChoice />
+      <AlsoLike />
     </Flex>
   );
 }

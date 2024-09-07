@@ -1,14 +1,14 @@
 import { Box, Text, Image, Container, useBreakpointValue } from "@chakra-ui/react";
-import AboutImg from "../../public/AboutUS/AboutUsImg.jpg";
-import Mission from "../../public/AboutUS/MissionImg.jpg";
-import Story from "../../public/AboutUS/StoryImg.jpg";
+import AboutImg from "/AboutUS/AboutUsImg.jpg";
+import Mission from "/AboutUS/MissionImg.jpg";
+import Story from "/AboutUS/StoryImg.jpg";
 import WhyChooseUs from "./WhyChooseUs";
 
 export default function About() {
   const imageDisplay = useBreakpointValue({ base: "none", md: "block" });
 
   return (
-    <Box>
+    <Box pt={"70px"}>
 
       <Container maxW="container.xl" py={10}>
         <Box display="flex" flexDirection={{ base: "column", md: "row" }} justifyContent="center" alignItems="center">

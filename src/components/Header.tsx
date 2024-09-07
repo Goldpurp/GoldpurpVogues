@@ -241,6 +241,8 @@ const SidebarMenu = () => {
     }));
   };
 
+  const navigate = useNavigate()
+
   return (
     <VStack
       h={"100%"}
@@ -369,9 +371,13 @@ const SidebarMenu = () => {
         <SpecialMenuItem>Blog</SpecialMenuItem>
         <SpecialMenuItem>Reviews</SpecialMenuItem>
         <SpecialMenuItem>Store</SpecialMenuItem>
+        <Box onClick={()=> navigate(Routes.Login)}>
         <SpecialMenuItem>Login/SignUp</SpecialMenuItem>
+        </Box>
         <SpecialMenuItem>Contact Us</SpecialMenuItem>
+        <Box onClick={()=> navigate(Routes.About)}>
         <SpecialMenuItem>About</SpecialMenuItem>
+        </Box>
       </VStack>
 
       <Flex

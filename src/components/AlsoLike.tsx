@@ -203,7 +203,7 @@ import {
                 <Box p={2} w={"full"} bg={"#fff"}>
                   <Text
                     noOfLines={1}
-                    fontSize={{ base: "12px", md: "15px", lg: "17px" }}
+                    fontSize={{ base: "12px",lg: "15px" }}
                   >
                     {item.label}
                   </Text>
@@ -212,7 +212,7 @@ import {
                     size="sm"
                     color="#386648"
                     mt={1}
-                    fontSize={{ base: "13px", md: "16px", lg: "18px" }}
+                    fontSize={{ base: "13px", lg: "14px" }}
                   >
                     ₦{item.price}
                     <Text
@@ -221,7 +221,7 @@ import {
                       textDecoration="line-through"
                       ml={2}
                       fontWeight={"400"}
-                      fontSize={{ base: "11px", md: "13px", lg: "15px" }}
+                      fontSize={{ base: "11px", lg: "15px" }}
                     >
                       ₦{item.oldPrice}
                     </Text>

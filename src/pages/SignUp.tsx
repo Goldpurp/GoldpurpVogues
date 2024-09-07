@@ -8,9 +8,11 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   return (
     <Flex
       align="center"
@@ -30,72 +32,61 @@ export default function SignUp() {
 
       <Text fontWeight="500" textAlign="center">
         Have account?{" "}
-        <Link as={ReactRouterLink} to="login" color="#386648">
-          Login here
-        </Link>
+        <Text onClick={() => navigate(Routes.Login)}>login here</Text>
       </Text>
 
-      <VStack
-          as="form"
-          w="85vw"
-          spacing="20px"
-          align="center"
-          justify="center"
-        >
-    <FormControl id="email" w={{ base: "full", md: "500px" }}>
-            <FormLabel fontSize="13px" fontWeight="500" ml="10px">
-              Email
-            </FormLabel>
-            <Input
-              type="email"
-              placeholder="email address"
-              h="45px"
-              fontSize="14px"
-              borderRadius="10px"
-              bg="#fff"
-              p="7px 45px 7px 12px"
-              borderColor="#000"
-            />
-          </FormControl>
+      <VStack as="form" w="85vw" spacing="20px" align="center" justify="center">
+        <FormControl id="email" w={{ base: "full", md: "500px" }}>
+          <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+            Email
+          </FormLabel>
+          <Input
+            type="email"
+            placeholder="email address"
+            h="45px"
+            fontSize="14px"
+            borderRadius="10px"
+            bg="#fff"
+            p="7px 45px 7px 12px"
+            borderColor="#000"
+          />
+        </FormControl>
 
-       
         <FormControl id="password" w={{ base: "full", md: "500px" }}>
-            <FormLabel fontSize="13px" fontWeight="500" ml="10px">
-              Password
-            </FormLabel>
-            <Input
-              type="password"
-              placeholder="password"
-              fontSize="14px"
-              borderRadius="10px"
-              bg="#fff"
-              h="45px"
-              p="7px 45px 7px 12px"
-              borderColor="#000"
-            />
-          </FormControl>
+          <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+            Password
+          </FormLabel>
+          <Input
+            type="password"
+            placeholder="password"
+            fontSize="14px"
+            borderRadius="10px"
+            bg="#fff"
+            h="45px"
+            p="7px 45px 7px 12px"
+            borderColor="#000"
+          />
+        </FormControl>
 
-          <FormControl id="mobileNumber" w={{ base: "full", md: "500px" }}>
-
+        <FormControl id="mobileNumber" w={{ base: "full", md: "500px" }}>
           <FormLabel marginLeft="10px" fontSize="13px" fontWeight="500">
             Phone
           </FormLabel>
           <Input
-              type="text"
-             placeholder="mobile number"
-              h="45px"
-              fontSize="14px"
-              borderRadius="10px"
-              bg="#fff"
-              p="7px 45px 7px 12px"
-              borderColor="#000"
-            />
+            type="text"
+            placeholder="mobile number"
+            h="45px"
+            fontSize="14px"
+            borderRadius="10px"
+            bg="#fff"
+            p="7px 45px 7px 12px"
+            borderColor="#000"
+          />
         </FormControl>
 
         <Button
-            mt={6}
-
-            w={{ base: "full", md: "500px" }}
+          mt={6}
+          w={{ base: "full", md: "500px" }}
           colorScheme="gray"
           fontSize="15px"
           fontWeight="700"
