@@ -13,7 +13,7 @@ const HeroVideo = lazy(() => import("./components/HeroVideo"));
 
 function App() {
   return (
-    <Flex flexDirection={"column"}>
+    <Flex flexDirection={"column"} bg={"#f0fff11a"}>
       <Suspense fallback={<div>Loading...</div>}>
         <Header />
         <Hero />

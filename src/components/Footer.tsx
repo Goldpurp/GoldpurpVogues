@@ -39,7 +39,7 @@ export default function Footer() {
   };
 
   return (
-    <Box as="footer" color="white" p="10px 20px" bg="#0b090a">
+    <Box as="footer" color="white" p="10px 20px" bg="#344e41">
       <HStack justify="center" spacing="15px" py="10px">
         <Icon as={FaPinterest} boxSize="22px" cursor="pointer" />
         <Icon as={IoLogoYoutube} boxSize="22px" cursor="pointer" />
@@ -121,7 +121,6 @@ export default function Footer() {
         >
           <Link color={"#dee2e6"}>About Us</Link>
           <Link color={"#dee2e6"}>Contact Us</Link>
-          <Link color={"#dee2e6"}>FAQs</Link>
         </Section>
 
         <Section
@@ -130,7 +129,6 @@ export default function Footer() {
           onToggle={() => toggleSection("legal")}
         >
           <Link color={"#dee2e6"}>Privacy Policy</Link>
-          <Link color={"#dee2e6"}> Terms of Service</Link>
           <Link color={"#dee2e6"}>Return and Refund Policy</Link>
         </Section>
       </VStack>

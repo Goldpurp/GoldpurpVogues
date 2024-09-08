@@ -128,12 +128,12 @@ export default function ProductGrid() {
         <Flex align="center" justify="center" p={4}>
           <Button
             color="white"
-            width={{ base: "228px", lg: "385px" }}
+            width={{ base: "200px", lg: "385px" }}
             height="48px"
             fontSize="13px"
             borderRadius="30px"
-            bg="black"
-            _hover={{ bg: "#212529" }}
+            bg="#2d6a4f"
+            _hover={{ bg: "#344e41" }}
           >
             Show more
           </Button>

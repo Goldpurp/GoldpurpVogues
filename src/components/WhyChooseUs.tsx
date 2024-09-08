@@ -18,7 +18,8 @@ const WhyChooseUs = () => {
   });
 
   return (
-    <Box p={4} pt={12} bg={"#f8f9fa76"}>
+    <Box p={4} pt={12} bg={"#b7efc535"}
+    >
       <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={8}>
         <GridItem>
           <Heading as="h2" size="lg" mb={4}>
