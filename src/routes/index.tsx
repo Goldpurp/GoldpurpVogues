@@ -14,7 +14,7 @@ import HelpCenter from "../pages/HelpCenter";
 import ReturnPolicy from "../TodoPages.ts/ReturnPolicy";
 import TrackOrder from "../pages/TrackOrder";
 import ErrorPage from "../TodoPages.ts/ErrorPage";
-import Wishlist from "../TodoPages.ts/Wishlist";
+import Wishlist from "../pages/Wishlist";
 
 const router = createBrowserRouter([
     {

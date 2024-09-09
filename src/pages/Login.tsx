@@ -10,10 +10,14 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
+import Header from "../components/Header";
 
 export default function Login() {
   const navigate = useNavigate();
   return (
+    <>
+
+    <Header/>
     <Flex
       align="center"
       justify="center"
@@ -30,54 +34,70 @@ export default function Login() {
         LOGIN ACCOUNT
       </Text>
 
-      <Text fontWeight="500">
-        New here? <Text onClick={() => navigate(Routes.SignUp)}>Sign up</Text>
-      </Text>
+      <Flex alignItems={"center"} fontWeight="500" gap={"5px"} pb={7}>
+        <Text> New here?</Text>
+        <Text color={"#53a548"} onClick={() => navigate(Routes.SignUp)}>Sign up</Text>
+      </Flex>
 
       <VStack as="form" w="85vw" spacing="20px" align="center" justify="center">
-        <FormControl id="email" w={{ base: "full", md: "500px" }}>
-          <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+      
+      <FormControl
+          id="email"
+          w={{ base: "full", md: "500px" }}
+          border={"1px solid #000"}
+          borderRadius="10px"
+          bg={"#CED4DA"}
+          mb={"20px"}
+        >
+          <FormLabel fontSize="16px" fontWeight="500" pl={4} mb={0} py={"2px"}>
             Email
           </FormLabel>
           <Input
             type="email"
             placeholder="email address"
-            h="45px"
-            fontSize="14px"
+            h="50px"
+            fontSize="15px"
             borderRadius="10px"
+            border={"none"}
             bg="#fff"
             p="7px 45px 7px 12px"
-            borderColor="#000"
           />
         </FormControl>
 
-        <FormControl id="password" w={{ base: "full", md: "500px" }}>
-          <FormLabel fontSize="13px" fontWeight="500" ml="10px">
+        <FormControl
+          id="password"
+          w={{ base: "full", md: "500px" }}
+          border={"1px solid #000"}
+          borderRadius="10px"
+          bg={"#CED4DA"}
+        >
+          <FormLabel fontSize="16px" fontWeight="500" pl={4} mb={0} py={"2px"}>
             Password
           </FormLabel>
           <Input
             type="password"
-            placeholder="password"
-            fontSize="14px"
+            placeholder="passsword"
+            h="50px"
+            fontSize="15px"
             borderRadius="10px"
+            border={"none"}
             bg="#fff"
-            h="45px"
             p="7px 45px 7px 12px"
-            borderColor="#000"
           />
         </FormControl>
 
         <Button
+          h="45px"
           w={{ base: "full", md: "500px" }}
           fontSize="15px"
-          fontWeight="700"
-          p="12px 18px"
+          fontWeight="600"
+          p="15px 18px"
           borderRadius="30px"
           transition="400ms"
-          borderColor="#daddd8"
-          _hover={{ bg: "#ced4da" }}
-          color="black"
-          bg="transparent"
+          borderColor="#0d0d0c9a"
+          _hover={{ bg: "#2f8c62a6" }}
+          color="#fff"
+          bg="#2f8c62d2"
           border="0.6px solid"
           mt={6}
         >
@@ -93,7 +113,7 @@ export default function Login() {
         maxW="200px"
       >
         Problem trying to access?{" "}
-        <Link textDecoration="underline" _hover={{ color: "#9f9aa4" }}>
+        <Link textDecoration="underline" color={"#2f8c62d2"} _hover={{ color: "#9f9aa4" }}>
           Reset password
         </Link>
       </Text>
@@ -104,10 +124,11 @@ export default function Login() {
           Privacy Policy
         </Link>{" "}
         and{" "}
-        <Link textDecoration="underline" _hover={{ color: "#9f9aa4" }}>
+        <Link textDecoration="underline" color={"#0c3725"} _hover={{ color: "#9f9aa4" }}>
           Terms & Conditions
         </Link>
       </Text>
     </Flex>
+    </>
   );
 }

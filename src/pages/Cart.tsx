@@ -150,7 +150,7 @@ export default function Cart() {
           </Flex>
         ))
       ) : (
-        <Box display="flex" flexDirection="column" alignItems="center" minH="500px" mt={6}>
+        <Box display="flex" flexDirection="column" alignItems="center" mt={6}>
           <Heading as="h3" size="md" fontWeight="300" mb={4}>
             Your cart has no items.
           </Heading>

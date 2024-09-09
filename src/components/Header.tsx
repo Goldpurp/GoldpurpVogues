@@ -366,15 +366,18 @@ const SidebarMenu = () => {
       </Section>
 
       <VStack align="start" spacing={5}>
+      <Box onClick={()=> navigate(Routes.Wishlist)}>
         <SpecialMenuItem>Wishlist</SpecialMenuItem>
+        </Box>
         <SpecialMenuItem>Media</SpecialMenuItem>
         <SpecialMenuItem>Blog</SpecialMenuItem>
-        <SpecialMenuItem>Reviews</SpecialMenuItem>
         <SpecialMenuItem>Store</SpecialMenuItem>
         <Box onClick={()=> navigate(Routes.Login)}>
         <SpecialMenuItem>Login/SignUp</SpecialMenuItem>
         </Box>
+        <Box onClick={()=> navigate(Routes.ContactUs)}>
         <SpecialMenuItem>Contact Us</SpecialMenuItem>
+</Box>
         <Box onClick={()=> navigate(Routes.About)}>
         <SpecialMenuItem>About</SpecialMenuItem>
         </Box>

@@ -233,6 +233,10 @@ export default function ProductPage() {
         </Flex>
 
       </Flex>
+      
+      <Flex justifyContent={"center"} alignContent={"center"} pt={6}>
+                <Text fontSize={"16px"}>RELATED STYLES</Text>
+            </Flex>
       <RelatedChoice />
       <AlsoLike />
     </Flex>

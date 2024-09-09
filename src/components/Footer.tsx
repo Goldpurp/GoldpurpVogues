@@ -17,6 +17,8 @@ import { IoLogoYoutube } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosDoneAll } from "react-icons/io";
 import CopyRight from "./CopyRight";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 export default function Footer() {
   type OpenState = {
@@ -37,6 +39,9 @@ export default function Footer() {
       [section]: !prevState[section],
     }));
   };
+
+  const navigate = useNavigate()
+
 
   return (
     <Box as="footer" color="white" p="10px 20px" bg="#344e41">
@@ -109,9 +114,8 @@ export default function Footer() {
           isOpen={isOpen.help}
           onToggle={() => toggleSection("help")}
         >
-          <Link color={"#dee2e6"}>Help Center</Link>
-          <Link color={"#dee2e6"}>Track Order</Link>
-          <Link color={"#dee2e6"}>Shipping Information</Link>
+          <Link onClick={()=> navigate(Routes.HelpCenter)} color={"#dee2e6"}>Help Center</Link>
+          <Link onClick={()=> navigate(Routes.TrackOrder)} color={"#dee2e6"}>Track Order</Link>
         </Section>
 
         <Section
@@ -119,8 +123,8 @@ export default function Footer() {
           isOpen={isOpen.company}
           onToggle={() => toggleSection("company")}
         >
-          <Link color={"#dee2e6"}>About Us</Link>
-          <Link color={"#dee2e6"}>Contact Us</Link>
+          <Link onClick={()=> navigate(Routes.About)} color={"#dee2e6"}>About Us</Link>
+          <Link onClick={()=> navigate(Routes.ContactUs)} color={"#dee2e6"}>Contact Us</Link>
         </Section>
 
         <Section
@@ -128,8 +132,8 @@ export default function Footer() {
           isOpen={isOpen.legal}
           onToggle={() => toggleSection("legal")}
         >
-          <Link color={"#dee2e6"}>Privacy Policy</Link>
-          <Link color={"#dee2e6"}>Return and Refund Policy</Link>
+          <Link onClick={()=> navigate(Routes.PrivacyPolicy)} color={"#dee2e6"}>Privacy Policy</Link>
+          <Link onClick={()=> navigate(Routes.ReturnPolicy)} color={"#dee2e6"}>Return and Refund Policy</Link>
         </Section>
       </VStack>
 

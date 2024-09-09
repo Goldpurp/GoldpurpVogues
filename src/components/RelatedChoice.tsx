@@ -80,10 +80,6 @@ export default function RelatedChoice() {
   return (
     <Flex pt={"30px"} flexDirection={"column"}>
 
-<Flex justifyContent={"center"} alignContent={"center"} pb={4}>
-                <Text fontSize={"16px"}>RELATED STYLES</Text>
-            </Flex>
-
       <VStack w="100%" pl={2}>
         <Flex overflowX="auto" w="100%"  css={{ scrollbarWidth: "none" }}>
           {newArrivalItems.map((item, index) => (
