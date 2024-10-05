@@ -53,6 +53,9 @@ export default function TrackOrder() {
                 h="50px"
                 bg="white"
                 _placeholder={{ color: "gray.400" }}
+                _focus={{
+                  boxShadow: "none",
+                }}
               />
             </Box>
 
@@ -68,6 +71,9 @@ export default function TrackOrder() {
                 h="50px"
                 bg="white"
                 _placeholder={{ color: "gray.400" }}
+                _focus={{
+                  boxShadow: "none",
+                }}
               />
             </Box>
           </VStack>

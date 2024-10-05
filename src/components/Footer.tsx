@@ -69,6 +69,9 @@ export default function Footer() {
             borderRadius="7px"
             h="50px"
             pr="45px"
+            _focus={{
+              boxShadow: "none",
+            }}
           />
           <Button
             position="absolute"

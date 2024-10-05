@@ -42,6 +42,9 @@ import {
             fontSize="17px"
             borderRadius="5px"
             border="1px solid black"
+            _focus={{
+              boxShadow: "none",
+            }}
           />
         </Box>
   

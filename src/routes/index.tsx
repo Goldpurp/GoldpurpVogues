@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import { Routes } from "./baseRoutes";
 import ProductGrid from "../pages/ProductGrid";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import ProductPage from "../pages/ProductPage";
@@ -15,6 +15,10 @@ import ReturnPolicy from "../TodoPages.ts/ReturnPolicy";
 import TrackOrder from "../pages/TrackOrder";
 import ErrorPage from "../TodoPages.ts/ErrorPage";
 import Wishlist from "../pages/Wishlist";
+import Checkout from "../TodoPages.ts/Checkout";
+import CategoryPage from "../TodoPages.ts/CategoryPage";
+import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
+// import SubCategoryPage from "../TodoPages.ts/SubCategoryPage";
 
 const router = createBrowserRouter([
     {
@@ -29,10 +33,19 @@ const router = createBrowserRouter([
         path: Routes.ErrorPage,
         element: <ErrorPage />
     },
+    {
+        path: Routes.Checkout,
+        element: <Checkout />
+    },
 
     {
         path: Routes.home,
-        element: <Home />,
+        element: (
+            <>
+                <ScrollRestoration />
+                <Home />
+            </>
+        ),
         children: [
             {
                 index: true,
@@ -78,6 +91,15 @@ const router = createBrowserRouter([
             {
                 path: Routes.Wishlist,
                 element: <Wishlist />
+            },
+
+            {
+                path: Routes.Category,
+                element: <CategoryPage />,
+            },
+            {
+                path: Routes.SubCategory,
+                element: <CategoryItemsDisplay />,
             },
 
 
