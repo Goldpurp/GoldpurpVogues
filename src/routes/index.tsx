@@ -18,6 +18,7 @@ import Wishlist from "../pages/Wishlist";
 import Checkout from "../TodoPages.ts/Checkout";
 import CategoryPage from "../TodoPages.ts/CategoryPage";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
+import CollectionsPage from "../TodoPages.ts/CollectionsPage";
 // import SubCategoryPage from "../TodoPages.ts/SubCategoryPage";
 
 const router = createBrowserRouter([
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
             {
                 path: Routes.SubCategory,
                 element: <CategoryItemsDisplay />,
+            },
+            {
+                path: Routes.Collection,
+                element: <CollectionsPage />,
             },
 
 

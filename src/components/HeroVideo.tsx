@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
           Experience the perfect blend of style and warmth with our sleek winter
           collection.
         </Text>
-        <ShopNowBtn />
+        <ShopNowBtn onclickBtn={() => {}} />
       </Flex>
       <Box
         position="absolute"

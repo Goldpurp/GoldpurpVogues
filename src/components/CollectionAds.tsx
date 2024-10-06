@@ -2,11 +2,15 @@ import { Box, Text, Image, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Banner from "/Images/collection.jpg";
 import ShopNowBtn from "./ShowNowBtn";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 const MotionBox = motion(Box);
 const MotionVStack = motion(VStack);
 
 export default function CollectionsAds() {
+
+  const navigate = useNavigate()
   return (
     <MotionBox
       width="100%"
@@ -53,7 +57,7 @@ export default function CollectionsAds() {
         <Text color="white" fontSize={{ base: "40px", sm: "45px", md: "55px", lg: "70px", xl: "80px" }} fontWeight="500" lineHeight={{ base: "60px", xl: "90px" }}>
           COLLECTIONS
         </Text>
-        <ShopNowBtn />
+        <ShopNowBtn onclickBtn={()=> navigate(Routes.Collection)}/>
       </MotionBox>
 
       <Box

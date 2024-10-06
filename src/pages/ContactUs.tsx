@@ -42,34 +42,22 @@ const ContactForm = () => {
             </Text>
             <FormControl id="name">
               <FormLabel>Name</FormLabel>
-              <Input type="text" placeholder="Enter your name" 
-                 _focus={{
-                  boxShadow: "none",
-                }}
+              <Input type="text" placeholder="Enter your name"
               />
             </FormControl>
             <FormControl id="email">
               <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Enter your email" 
-                 _focus={{
-                  boxShadow: "none",
-                }}
+              <Input type="email" placeholder="Enter your email"
               />
             </FormControl>
             <FormControl id="name">
               <FormLabel>Subject</FormLabel>
-              <Input type="text" placeholder="Enter your name" 
-                 _focus={{
-                  boxShadow: "none",
-                }}
+              <Input type="text" placeholder="Enter your name"
               />
             </FormControl>
             <FormControl id="message">
               <FormLabel>Message</FormLabel>
-              <Textarea placeholder="Enter your message" 
-                 _focus={{
-                  boxShadow: "none",
-                }}
+              <Textarea placeholder="Enter your message"
               />
             </FormControl>
             <Button colorScheme="green" size="lg" mt={4}>

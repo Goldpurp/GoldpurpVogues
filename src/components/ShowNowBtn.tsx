@@ -2,10 +2,15 @@ import { Button, Icon } from "@chakra-ui/react";
 import { IoMdArrowDropright } from "react-icons/io";
 import { motion } from "framer-motion";
 
-export default function ShopNowBtn() {
+type shopNowBtnProps = {
+  onclickBtn: () => void;
+}
+
+export default function ShopNowBtn({onclickBtn}:shopNowBtnProps) {
   return (
     <Button
       as={motion.button}
+      onClick={onclickBtn}
       variant="unstyled"
       display="flex"
       alignItems="center"

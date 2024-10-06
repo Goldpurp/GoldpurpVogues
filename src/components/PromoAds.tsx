@@ -44,7 +44,7 @@ export default function PromoAds() {
         >
           SUMMER SALE
         </Text>
-        <ShopNowBtn />
+        <ShopNowBtn onclickBtn={() => {}} />
       </VStack>
     </Box>
   );
