@@ -1,4 +1,3 @@
-// components/SidebarMenu.tsx
 import React, { useState } from "react";
 import {
   Box,
@@ -7,11 +6,10 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
-// Main SidebarMenu Component
 const SidebarMenu = () => {
   const [isOpenItem, setIsOpenItem] = useState({
     Accessories: false,
@@ -47,8 +45,8 @@ const SidebarMenu = () => {
       position="relative"
       css={{ "&::-webkit-scrollbar": { display: "none" } }}
     >
-      {/* Top Bar */}
-      <Flex justifyContent="flex-end" alignItems="center" gap="3%">
+
+      {/* <Flex justifyContent="flex-end" alignItems="center" gap="3%" display={"none"}>
         <Text>goldpurp</Text>
         <Box w="35px" h="35px">
           <svg
@@ -65,10 +63,10 @@ const SidebarMenu = () => {
             />
           </svg>
         </Box>
-      </Flex>
+      </Flex> */}
 
-      <Box>
-        <Text>NEW ARRIVALS</Text>
+      <Box pt={5}>
+        <Link to={"/"}>ALL PRODUCTS</Link>
       </Box>
 
       {/* Accessories Section */}
@@ -210,15 +208,19 @@ const SidebarMenu = () => {
 
       {/* Bottom Currency Information */}
       <Flex
-        w="70%"
+      alignItems={"center"}
+        justifyContent={"space-between"}
+        w={{ base: "70%", md: "38%" }}
         position="fixed"
         bottom={0}
         zIndex={10}
         bg="#fff"
-        py={2}
+        py={3}
         borderTop="1px solid #878484a9"
       >
         <Text>NG | 434,000.99</Text>
+        <Link to={"/"}>goldpurp</Link>
+
       </Flex>
     </VStack>
   );

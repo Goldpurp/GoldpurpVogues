@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
     <Flex
       w="100vw"
       h="100%"
-      pt={"80px"}
+      pt={"70px"}
       bg="#D8DAD3"
       justifyContent="space-evenly"
       position="relative"

@@ -53,7 +53,7 @@ const Header = () => {
     <Flex direction="column">
       <Flex
         w="100%"
-        h={{ base: "80px", lg: "100px" }}
+        h={{ base: "90px", lg: "100px" }}
         px={{ base: "10px", lg: "35px", "2xl": "40px" }}
         align="center"
         justify="space-between"
@@ -69,8 +69,9 @@ const Header = () => {
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
-          w={{ base: "130px", md: "150px", lg: "180px" }}
-          h={"90px"}
+          w={{ base: "130px", md: "150px" }}
+          pt={"15px"}
+          h={"110px"}
         >
           <Image
             src={Logo}
