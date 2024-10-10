@@ -1,4 +1,13 @@
-import { Box, Button, Text, Heading, Container, Flex, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  Heading,
+  Container,
+  Flex,
+  Image,
+  HStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import Img1 from "/Products/sideBag.jpg";
 import Img2 from "/Products/shoe.jpg";
@@ -61,7 +70,13 @@ export default function Cart() {
   };
 
   return (
-    <Container maxW="container.lg" pb={10} pt={"100px"} display="flex" flexDirection="column">
+    <Container
+      maxW="container.lg"
+      pb={10}
+      pt={"100px"}
+      display="flex"
+      flexDirection="column"
+    >
       <Flex alignItems={"center"} mb={6} gap={2}>
         <Heading as="h1" fontSize={"30px"}>
           Cart
@@ -147,6 +162,21 @@ export default function Cart() {
                 </Text>
               </Flex>
             </Flex>
+
+            <Box boxSize="25px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                color="red"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </Box>
           </Flex>
         ))
       ) : (
@@ -167,6 +197,27 @@ export default function Cart() {
           </Button>
         </Box>
       )}
+
+      <Flex flexDirection={"column"} mt={4}>
+        <HStack justify="space-between" pb={2}>
+          <Text>Total Price</Text>
+          <Text fontWeight="500">₦430,000.90</Text>
+        </HStack>
+        <HStack justify="space-between">
+          <Text>Delivery Fee</Text>
+          <Text fontWeight="500">₦2,050.00</Text>
+        </HStack>
+        <Button
+          colorScheme="green"
+          mt={8}
+          w="80%"
+          py={6}
+          alignSelf={"center"}
+          boxShadow={"1px 0px 3px 1px #403b3b55"}
+        >
+          Checkout
+        </Button>
+      </Flex>
     </Container>
   );
 }

@@ -16,10 +16,9 @@ import TrackOrder from "../pages/TrackOrder";
 import ErrorPage from "../TodoPages.ts/ErrorPage";
 import Wishlist from "../pages/Wishlist";
 import Checkout from "../TodoPages.ts/Checkout";
-import CategoryPage from "../TodoPages.ts/CategoryPage";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
-import CollectionsPage from "../TodoPages.ts/CollectionsPage";
-// import SubCategoryPage from "../TodoPages.ts/SubCategoryPage";
+import CollectionSection from "../pages/CollectionSection";
+import CollectionsPage from "../pages/CollectionsPage";
 
 const router = createBrowserRouter([
     {
@@ -93,17 +92,16 @@ const router = createBrowserRouter([
                 path: Routes.Wishlist,
                 element: <Wishlist />
             },
-
-            {
-                path: Routes.Category,
-                element: <CategoryPage />,
-            },
             {
                 path: Routes.SubCategory,
                 element: <CategoryItemsDisplay />,
             },
             {
                 path: Routes.Collection,
+                element: <CollectionSection />,
+            },
+            {
+                path: Routes.CollectionPage,
                 element: <CollectionsPage />,
             },
 

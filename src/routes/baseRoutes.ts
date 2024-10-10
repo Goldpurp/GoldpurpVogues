@@ -16,5 +16,6 @@ export enum Routes {
   Checkout = "/checkout",
   Category = "/category/:categoryName",
   SubCategory = "/category/:categoryName/:subCategoryName",
-  Collection = "collection",
+  Collection = "/collection",
+  CollectionPage = "/collection-page",
 }
