@@ -206,11 +206,10 @@ const SidebarMenu = () => {
         </Box>
       </VStack>
 
-      {/* Bottom Currency Information */}
       <Flex
       alignItems={"center"}
         justifyContent={"space-between"}
-        w={{ base: "70%", md: "38%" }}
+        w={{ base: "92%", md: "83%" }}
         position="fixed"
         bottom={0}
         zIndex={10}

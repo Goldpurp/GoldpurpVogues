@@ -5,7 +5,7 @@ export enum Routes {
   SignUp = "/sign-up",
   ProductGrid = "product-grid",
   About = "about",
-  Cart = "cart",
+  // Cart = "cart",
   ProductPage = "product-page",
   ContactUs = "contact-us",
   PrivacyPolicy = "privacy-policy",
@@ -18,4 +18,5 @@ export enum Routes {
   SubCategory = "/category/:categoryName/:subCategoryName",
   Collection = "/collection",
   CollectionPage = "/collection-page",
+  // MyComponent = "MyComponent",
 }

@@ -7,7 +7,7 @@ import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import ProductPage from "../pages/ProductPage";
-import Cart from "../pages/Cart";
+// import Cart from "../pages/Cart";
 import ContactUs from "../pages/ContactUs";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import HelpCenter from "../pages/HelpCenter";
@@ -19,6 +19,7 @@ import Checkout from "../TodoPages.ts/Checkout";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
 import CollectionSection from "../pages/CollectionSection";
 import CollectionsPage from "../pages/CollectionsPage";
+// import MyComponent from "../TodoPages.ts/MyComponent";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: Routes.Checkout,
         element: <Checkout />
     },
+    // {
+    //     path: Routes.MyComponent,
+    //     element: <MyComponent />
+    // },
 
     {
         path: Routes.home,
@@ -59,10 +64,10 @@ const router = createBrowserRouter([
                 path: Routes.About,
                 element: <About />
             },
-            {
-                path: Routes.Cart,
-                element: <Cart />
-            },
+            // {
+            //     path: Routes.Cart,
+            //     element: <Cart />
+            // },
             {
                 path: Routes.ProductPage,
                 element: <ProductPage />

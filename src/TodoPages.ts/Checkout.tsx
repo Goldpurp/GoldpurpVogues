@@ -1,124 +1,134 @@
 import {
-    Box,
-    Button,
-    Container,
-    Heading,
-    HStack,
-    Image,
-    SimpleGrid,
-    Stack,
-    Text,
-    useColorModeValue,
-    VStack,
-    Divider,
-    FormControl,
-    FormLabel,
-    Input,
-  } from "@chakra-ui/react";
-  import { useState } from "react";
-  
-  interface CartItem {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    image: string;
-  }
-  
-  const Checkout = () => {
-    const [cartItems, _setCartItems] = useState<CartItem[]>([
-      {
-        id: 1,
-        name: "Product 1",
-        price: 29.99,
-        quantity: 2,
-        image: "https://via.placeholder.com/150",
-      },
-      {
-        id: 2,
-        name: "Product 2",
-        price: 49.99,
-        quantity: 1,
-        image: "https://via.placeholder.com/150",
-      },
-    ]);
-  
-    const totalPrice = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  
-    return (
-      <Container maxW="container.lg" py={8}>
-        <Heading mb={4}>Checkout</Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-          {/* Cart Items Section */}
-          <Box>
-            <Heading size="md" mb={4}>
-              Your Cart
-            </Heading>
-            {cartItems.map((item) => (
-              <HStack key={item.id} justify="space-between" mb={4}>
-                <HStack>
-                  <Image boxSize="50px" src={item.image} alt={item.name} />
-                  <VStack align="flex-start">
-                    <Text>{item.name}</Text>
-                    <Text>Quantity: {item.quantity}</Text>
-                  </VStack>
-                </HStack>
-                <Text>${(item.price * item.quantity).toFixed(2)}</Text>
-              </HStack>
-            ))}
-            <Divider my={4} />
-            <HStack justify="space-between">
-              <Text fontSize="lg" fontWeight="bold">
-                Total
-              </Text>
-              <Text fontSize="lg" fontWeight="bold">
-                ${totalPrice.toFixed(2)}
-              </Text>
-            </HStack>
-          </Box>
-  
-          {/* Checkout Form Section */}
-          <Box bg={useColorModeValue("gray.50", "gray.700")} p={6} borderRadius="md">
-            <Heading size="md" mb={4}>
-              Billing Information
-            </Heading>
-            <Stack spacing={4}>
-              <FormControl>
-                <FormLabel>Full Name</FormLabel>
-                <Input type="text" placeholder="John Doe" 
-                   _focus={{
-                    boxShadow: "none",
-                  }}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="johndoe@example.com" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Address</FormLabel>
-                <Input type="text" placeholder="123 Main St" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>City</FormLabel>
-                <Input type="text" placeholder="City" />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Postal Code</FormLabel>
-                <Input type="text" placeholder="Postal Code" />
-              </FormControl>
-              <Button colorScheme="blue" size="lg" mt={4}>
-                Place Order
-              </Button>
-            </Stack>
-          </Box>
-        </SimpleGrid>
-      </Container>
-    );
-  };
-  
-  export default Checkout;
-  
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+
+const CheckoutPage = () => {
+  return (
+    <Box
+      p={5}
+      maxW="425px"
+      mx="auto"
+      borderWidth={1}
+      borderRadius="md"
+      boxShadow="md"
+    >
+   
+      <FormControl mb={4}>
+        <FormLabel>Country/Region</FormLabel>
+        <Select defaultValue="Nigeria">
+          <option value="Nigeria">Nigeria</option>
+          {/* Add more options if needed */}
+        </Select>
+      </FormControl>
+
+      <Stack spacing={4}>
+        <FormControl>
+          <FormLabel>First name</FormLabel>
+          <Input placeholder="First name" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Last name</FormLabel>
+          <Input placeholder="Last name" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Address</FormLabel>
+          <Input placeholder="Address" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Apartment, suite, etc. (optional)</FormLabel>
+          <Input placeholder="Apartment, suite, etc. (optional)" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>City</FormLabel>
+          <Input placeholder="City" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>State</FormLabel>
+          <Select defaultValue="Lagos">
+            <option value="Lagos">Lagos</option>
+            {/* Add more states if needed */}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <FormLabel>Postal code (optional)</FormLabel>
+          <Input placeholder="Postal code (optional)" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Phone</FormLabel>
+          <Input placeholder="Phone" />
+        </FormControl>
+        <Checkbox>Text me with news and offers</Checkbox>
+      </Stack>
+
+      {/* Shipping Method Section */}
+      <Text fontSize="xl" mt={6} mb={4} fontWeight="bold">
+        Shipping method
+      </Text>
+      <Box borderWidth={1} borderRadius="md" p={4} mb={4}>
+        <Checkbox defaultChecked>
+          Orders over $300 via DHL Express (1-3 Business Days) - FREE
+        </Checkbox>
+        <Checkbox>DHL Express (1-3 Business Days) - $15.00</Checkbox>
+      </Box>
+
+      {/* Payment Section */}
+      <Text fontSize="xl" mt={6} mb={4} fontWeight="bold">
+        Payment
+      </Text>
+      <Text mb={4}>All transactions are secure and encrypted.</Text>
+      <FormControl mb={4}>
+        <FormLabel>Card number</FormLabel>
+        <Input placeholder="Card number" />
+      </FormControl>
+      <Stack spacing={4}>
+        <FormControl>
+          <FormLabel>Expiration date (MM/YY)</FormLabel>
+          <Input placeholder="MM / YY" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Security code</FormLabel>
+          <Input placeholder="Security code" />
+        </FormControl>
+      </Stack>
+      <FormControl mb={4}>
+        <FormLabel>Name on card</FormLabel>
+        <Input placeholder="Name on card" />
+      </FormControl>
+
+      <Checkbox mb={4}>Use shipping address as billing address</Checkbox>
+      <Checkbox mb={4}>PayPal</Checkbox>
+      <Checkbox mb={4}>NihaoPay</Checkbox>
+
+      {/* Order Summary Section */}
+      <Text fontSize="xl" mt={6} mb={4} fontWeight="bold">
+        Order Summary
+      </Text>
+      <FormControl mb={4}>
+        <Input placeholder="Discount code or gift card" />
+        <Button>Apply</Button>
+      </FormControl>
+      <Text fontWeight="bold">Subtotal • 2 items: $380.00</Text>
+
+      <Button
+        colorScheme="green"
+        mt={8}
+        w="100%"
+        py={6}
+        alignSelf={"center"}
+        boxShadow={"1px 0px 3px 1px #403b3b55"}
+      >
+        Place Order
+      </Button>
+    </Box>
+  );
+};
+
+export default CheckoutPage;

@@ -26,9 +26,11 @@ import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 import SidebarMenu from "./SideMenu";
+import Cart from "../pages/Cart";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -112,7 +114,7 @@ const Header = () => {
               </svg>
             </Box>
           </ChakraLink>
-          <Box onClick={()=>navigate(Routes.Cart)}>
+          <Box onClick={onCartOpen}>
        <CartBadge/>
           </Box>
           <IconButton
@@ -126,7 +128,7 @@ const Header = () => {
         </Flex>
       </Flex>
 
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen} size={"lg"}>
         <DrawerOverlay />
         <DrawerContent >
           <DrawerCloseButton size={"lg"} mt={1} />
@@ -149,6 +151,16 @@ const Header = () => {
           </DrawerHeader>
           <DrawerBody px={4}>
             <SidebarMenu />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
+      <Drawer placement="right" onClose={onCartClose} isOpen={isCartOpen} size={"lg"}>
+        <DrawerOverlay />
+        <DrawerContent>
+        <DrawerCloseButton size={"lg"} mt={1} zIndex={10}/>
+          <DrawerBody>
+            <Cart/>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

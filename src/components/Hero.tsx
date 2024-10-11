@@ -47,34 +47,34 @@ const Hero: React.FC = () => {
         top={{ base: "220px", md: "330px", lg: "350px" }}
         zIndex="1"
         opacity={"0.7"}
-        css={css`
-          animation: ${fadeIn} 5s ease-out;
-        `}
+         css={css`
+        animation: ${fadeIn} 5s ease-out;
+      `}
       >
         <Text
-          fontSize={{ base: "15px", md: "25px", lg: "35px" }}
+          fontSize={{ base: "14px", md: "18px", lg: "25px" }}
           fontWeight="600"
           fontFamily={"Inter, sans-serif"}
         >
-          SUMMER SALE IS ON
+          TRENDY LOOKS AWAIT!
         </Text>
         <Text
           as="h1"
-          fontSize={{ base: "30px", md: "45px", lg: "65px" }}
+          fontSize={{ base: "20px", md: "35px", lg: "45px" }}
           fontWeight="400"
           fontFamily="Irish Grover, system-ui"
         >
-          Discover Men's Latest Fashion
+          UNLEASH YOUR STYLES WITH OUR NEWEST ARRIVALS.
         </Text>
         <ChakraButton
           fontFamily={"DM Mono"}
           w={"fit-content"}
-          p={3}
+          p={2}
           gap={2}
           justifyContent={"center"}
           alignItems={"center"}
           color={"#fff"}
-          fontSize={{ base: "15px", lg: "18px" }}
+          fontSize={{ base: "13px", lg: "18px" }}
           fontWeight="300"
           variant="outline"
           borderRadius="5px"
@@ -125,7 +125,7 @@ const Hero: React.FC = () => {
         left="0"
         width="100%"
         height="100%"
-        bg="rgba(0, 0, 0, 0.1)"
+        bg="rgba(0, 0, 0, 0.3)"
         zIndex="0"
       />
     </Flex>
