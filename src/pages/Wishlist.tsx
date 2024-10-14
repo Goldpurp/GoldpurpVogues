@@ -37,7 +37,7 @@ export default function Wishlist() {
   ];
 
   const images = [..._images, ..._images];
-  
+
   const wishlist = [
     {
       src: Img1,
@@ -46,17 +46,33 @@ export default function Wishlist() {
       oldPrice: "58,050.00",
       bonus: "10% Off On ₦50,000+ Orders!",
     },
+    {
+      src: Img2,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img3,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+
   ];
 
   return (
-    <Container maxW="container.xl" pt="100px" px="4">
+    <Container maxW="container.xl" pt={{ base: "50px", md: "70px", lg: "90px" }} px="4">
       {wishlist.length === 0 ? (
         <>
-          <Flex alignItems={"center"} mb={6} gap={2}>
-            <Heading as="h1" fontSize={"30px"}>
+          <Flex alignItems="center" justifyContent={"center"} pt={3}>
+            <Heading as="h1" fontSize="20px">
               WishList
+
             </Heading>
-            <Box w={"30px"}>
+            <Box w="20px" ml={2}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -148,18 +164,19 @@ export default function Wishlist() {
         </>
       ) : (
         <Box
-        pb={12}
-        px={2}
-        w="100%"
-        overflow="hidden"
-        letterSpacing="normal"
-        fontFamily="Nunito, sans-serif"
-      >
-           <Flex alignItems={"center"} mb={6} gap={2}>
-            <Heading as="h1" fontSize={"30px"}>
+          pb={12}
+          px={2}
+          w="100%"
+          overflow="hidden"
+          letterSpacing="normal"
+          fontFamily="Nunito, sans-serif"
+        >
+          <Flex alignItems="center" justifyContent={"center"} pt={3}>
+            <Heading as="h1" fontSize="20px">
               WishList
+
             </Heading>
-            <Box w={"30px"}>
+            <Box w="20px" ml={2}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -169,69 +186,69 @@ export default function Wishlist() {
               </svg>
             </Box>
           </Flex>
-          
-        <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={2}>
-          {wishlist.map((item, itemIndex) => (
-            <Box
-              key={itemIndex}
-              bg="#e3e7eb"
-              border="1px solid #e2e6e9"
-              cursor="pointer"
-              position={"relative"}
-            >
-              <Image src={item.src} alt="image" objectFit="cover"/>
-              <Flex
-                position="absolute"
-                right={2}
-                top={3}
-                bg="white"
-                p={1}
-                borderRadius="full"
+
+          <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={2} pt={6}>
+            {wishlist.map((item, itemIndex) => (
+              <Box
+                key={itemIndex}
+                bg="#e3e7eb"
+                border="1px solid #e2e6e9"
+                cursor="pointer"
+                position={"relative"}
               >
-                <Box
-                  as={PiHandbagThin}
-                  w={{ base: 5, lg: 6 }}
-                  h={{ base: 5, lg: 6 }}
-                />
-              </Flex>
-              <Box p={2} w={"full"} bg={"#fff"}>
-                <Text
-                  noOfLines={1}
-                  fontSize={{ base: "12px", md: "15px", lg: "17px" }}
+                <Image src={item.src} alt="image" objectFit="cover" />
+                <Flex
+                  position="absolute"
+                  right={2}
+                  top={3}
+                  bg="white"
+                  p={1}
+                  borderRadius="full"
                 >
-                  {item.label}
-                </Text>
-                <Heading
-                  as="h5"
-                  size="sm"
-                  color="#386648"
-                  mt={1}
-                  fontSize={{ base: "13px", md: "16px", lg: "18px" }}
-                >
-                  ₦{item.price}
+                  <Box
+                    as={PiHandbagThin}
+                    w={{ base: 5, lg: 6 }}
+                    h={{ base: 5, lg: 6 }}
+                  />
+                </Flex>
+                <Box p={2} w={"full"} bg={"#fff"}>
                   <Text
-                    as="span"
-                    color="#780000"
-                    textDecoration="line-through"
-                    ml={2}
-                    fontWeight={"400"}
-                    fontSize={{ base: "11px", md: "13px", lg: "15px" }}
+                    noOfLines={1}
+                    fontSize={{ base: "12px", md: "15px", lg: "17px" }}
                   >
-                    ₦{item.oldPrice}
+                    {item.label}
                   </Text>
-                </Heading>
-                <Text
-                  color="#9d2226"
-                  fontSize={{ base: "9px", md: "13px", lg: "15px" }}
-                  mt={"5px"}
-                >
-                  {item.bonus}
-                </Text>
+                  <Heading
+                    as="h5"
+                    size="sm"
+                    color="#386648"
+                    mt={1}
+                    fontSize={{ base: "13px", md: "16px", lg: "18px" }}
+                  >
+                    ₦{item.price}
+                    <Text
+                      as="span"
+                      color="#780000"
+                      textDecoration="line-through"
+                      ml={2}
+                      fontWeight={"400"}
+                      fontSize={{ base: "11px", md: "13px", lg: "15px" }}
+                    >
+                      ₦{item.oldPrice}
+                    </Text>
+                  </Heading>
+                  <Text
+                    color="#9d2226"
+                    fontSize={{ base: "9px", md: "13px", lg: "15px" }}
+                    mt={"5px"}
+                  >
+                    {item.bonus}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-          ))}
-        </SimpleGrid>
-      </Box>
+            ))}
+          </SimpleGrid>
+        </Box>
       )}
     </Container>
   );

@@ -46,7 +46,7 @@ const CollectionPage = () => {
             bg="gray.50"
             color="gray.800"
             p={4}
-            pt={{ base: "65px", md: "70px" }}
+            pt={{ base: "45px", md: "70px" }}
         >
             <Box as="section" my={8}>
                 <Image

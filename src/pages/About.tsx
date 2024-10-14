@@ -14,7 +14,7 @@ export default function About() {
   const imageDisplay = useBreakpointValue({ base: "none", md: "block" });
 
   return (
-    <Box pt={{ base: "60px", md: "100px" }} bg={"#b7efc510"}>
+    <Box pt={{ base: "30px", md: "100px" }} bg={"#b7efc510"}>
       <Container maxW="container.xl" py={10}>
         <Box
           display="flex"

@@ -22,15 +22,14 @@ import {
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Logo from "/icon/gpLogo1.png";
+import LOGO from "/icon/GoldpurpIcon.png";
 import NavLinks from "./NavLinks";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 import SidebarMenu from "./SideMenu";
-import Cart from "../pages/Cart";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -49,15 +48,21 @@ const Header = () => {
     };
   }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHomePage = location.pathname === Routes.home || 
+  location.pathname === Routes.Login || 
+  location.pathname === Routes.SignUp;
+
 
   return (
     <Flex direction="column">
       <Flex
         w="100%"
-        h={{ base: "90px", lg: "100px" }}
+        h={isHomePage ? { base: "90px", lg: "100px" } : { base: "60px", lg: "100px" }}
         px={{ base: "10px", lg: "35px", "2xl": "40px" }}
-        align="center"
+        alignItems={"center"}
         justify="space-between"
         bg="transparent"
         position={"fixed"}
@@ -76,15 +81,14 @@ const Header = () => {
           h={"110px"}
         >
           <Image
-            src={Logo}
+            src={isHomePage ? Logo : LOGO}
             alt="logo"
             cursor="pointer"
             w="100%"
             h="100%"
             objectFit="contain"
             boxSize={"90%"}
-          onClick={()=> navigate(Routes.home)}
-
+            onClick={() => navigate(Routes.home)} 
           />
         </Flex>
 
@@ -114,8 +118,8 @@ const Header = () => {
               </svg>
             </Box>
           </ChakraLink>
-          <Box onClick={onCartOpen}>
-       <CartBadge/>
+          <Box onClick={() => navigate(Routes.Cart)}>
+            <CartBadge />
           </Box>
           <IconButton
             aria-label="Toggle Menu"
@@ -130,7 +134,7 @@ const Header = () => {
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen} size={"lg"}>
         <DrawerOverlay />
-        <DrawerContent >
+        <DrawerContent>
           <DrawerCloseButton size={"lg"} mt={1} />
           <DrawerHeader p={"10px 15px 0px 15px"}>
             <Flex
@@ -151,16 +155,6 @@ const Header = () => {
           </DrawerHeader>
           <DrawerBody px={4}>
             <SidebarMenu />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-
-      <Drawer placement="right" onClose={onCartClose} isOpen={isCartOpen} size={"lg"}>
-        <DrawerOverlay />
-        <DrawerContent>
-        <DrawerCloseButton size={"lg"} mt={1} zIndex={10}/>
-          <DrawerBody>
-            <Cart/>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -232,29 +226,28 @@ const SearchModal = ({
   </Modal>
 );
 
-const CartBadge= () => {
-
+const CartBadge = () => {
   const [cartCount, _setCartCount] = useState(4);
 
   return (
     <Box position="relative">
-       <ChakraLink>
-            <Box w={"23px"} cursor="pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                />
-              </svg>
-            </Box>
-          </ChakraLink>
+      <ChakraLink>
+        <Box w={"23px"} cursor="pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+        </Box>
+      </ChakraLink>
       {cartCount > 0 && (
         <Badge
           colorScheme="red"
@@ -271,6 +264,6 @@ const CartBadge= () => {
       )}
     </Box>
   );
-}
+};
 
 export default Header;

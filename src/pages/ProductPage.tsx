@@ -60,7 +60,7 @@ export default function ProductPage() {
   const state = useBreakpointValue({ base: false, md: true });
 
   return (
-    <Flex direction={{ base: "column", lg: "column" }} pt={"100px"} pb={"50px"} px={{ base: "", md: 9, lg: "80px" }}>
+    <Flex direction={{ base: "column", lg: "column" }} pt={{base:"70px", md:"80px", lg: "100px"}} pb={"50px"} px={{ base: "", md: 9, lg: "80px" }}>
       <Flex flexDirection={{ base: "column", lg: "row" }}>
 
         <Flex

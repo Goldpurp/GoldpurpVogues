@@ -8,7 +8,7 @@ import {
   FormControl,
   FormLabel,
   Icon,
-
+  Heading,
 } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaMapMarkerAlt, FaClock } from "react-icons/fa";
@@ -23,42 +23,40 @@ const ContactForm = () => {
         bg="white"
         pt={{ base: "65px", md: "0px" }}
       >
+        <Flex alignItems="center" justifyContent={"center"}>
+          <Heading as="h1" fontSize="20px">
+            Contact Us
+          </Heading>
+        </Flex>
         <Flex
           flex={1}
           align="center"
           justify="center"
-          p={8}
+          p={4}
           bg="white"
           color="black"
         >
           <Stack spacing={4} maxW="md" w="full">
-            <Text fontSize="3xl" fontWeight="bold">
-              Contact Us
-            </Text>
-            <Text>
+            <Text textAlign={"center"}>
               Feel free to reach out to us at any time. We'll respond as soon as
-              possible to assist you with your inquiry.Feel free to contact us
+              possible to assist you with your inquiry. Feel free to contact us
               any time. We will get back to you as soon as we can!
             </Text>
             <FormControl id="name">
               <FormLabel>Name</FormLabel>
-              <Input type="text" placeholder="Enter your name"
-              />
+              <Input type="text" placeholder="Enter your name" />
             </FormControl>
             <FormControl id="email">
               <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Enter your email"
-              />
+              <Input type="email" placeholder="Enter your email" />
             </FormControl>
             <FormControl id="name">
               <FormLabel>Subject</FormLabel>
-              <Input type="text" placeholder="Enter your name"
-              />
+              <Input type="text" placeholder="Enter your name" />
             </FormControl>
             <FormControl id="message">
               <FormLabel>Message</FormLabel>
-              <Textarea placeholder="Enter your message"
-              />
+              <Textarea placeholder="Enter your message" />
             </FormControl>
             <Button colorScheme="green" size="lg" mt={4}>
               Send

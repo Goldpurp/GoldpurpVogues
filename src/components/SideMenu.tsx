@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Collapse,
@@ -45,25 +45,6 @@ const SidebarMenu = () => {
       position="relative"
       css={{ "&::-webkit-scrollbar": { display: "none" } }}
     >
-
-      {/* <Flex justifyContent="flex-end" alignItems="center" gap="3%" display={"none"}>
-        <Text>goldpurp</Text>
-        <Box w="35px" h="35px">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-          </svg>
-        </Box>
-      </Flex> */}
 
       <Box pt={5}>
         <Link to={"/"}>ALL PRODUCTS</Link>
@@ -141,7 +122,6 @@ const SidebarMenu = () => {
         )}
       </Section>
 
-      {/* Additional Sections */}
       <Section
         title="ACTIVEWEAR"
         isOpen={isOpenItem.Activewear}
@@ -187,7 +167,6 @@ const SidebarMenu = () => {
         ))}
       </Section>
 
-      {/* Static Menu Items (Bottom Section) */}
       <VStack align="start" spacing={5}>
         <Box onClick={() => navigate(Routes.Wishlist)}>
           <SpecialMenuItem>Wishlist</SpecialMenuItem>
@@ -225,21 +204,18 @@ const SidebarMenu = () => {
   );
 };
 
-// MenuItem Component for each collapsible item
 const MenuItem = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
   <Text fontSize="sm" cursor="pointer" _hover={{ color: "blue.500" }} onClick={onClick}>
     {children}
   </Text>
 );
 
-// SpecialMenuItem Component for static menu items
 const SpecialMenuItem = ({ children }: { children: React.ReactNode }) => (
   <Text fontWeight={600} fontSize="sm" cursor="pointer" _hover={{ color: "blue.500" }}>
     {children}
   </Text>
 );
 
-// Section Component for collapsible menu sections
 const Section = ({
   title,
   isOpen,

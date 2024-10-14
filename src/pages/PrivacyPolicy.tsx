@@ -1,13 +1,15 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 export default function PrivacyPolicy() {
   return (
-    <Box maxW="800px" mx="auto" p="20px" fontFamily="Arial, sans-serif" pt={"100px"} bg={"#f0fff11a"}>
-      <Heading as="h1" fontSize="2.5em" mb="20px">
+    <Box maxW="800px" mx="auto" p="20px" fontFamily="Arial, sans-serif" pt={"60px"} bg={"#f0fff11a"}>
+      <Flex alignItems="center" justifyContent={"center"}>
+        <Heading as="h1" fontSize="20px">
         Privacy Policy
-      </Heading>
+        </Heading>
+      </Flex>
 
-      <Box mb="20px">
+      <Box my="20px">
         <Heading as="h2" fontSize="1.8em" mb="15px">
           Introduction
         </Heading>

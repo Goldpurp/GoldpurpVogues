@@ -13,9 +13,8 @@ import Img1 from "/Products/sideBag.jpg";
 import Img2 from "/Products/shoe.jpg";
 import Img3 from "/Products/Sneaker.jpg";
 import Img4 from "/Products/faceCap.jpg";
-import LOGO from "/icon/GoldpurpIcon.png";
 import { useNavigate } from "react-router-dom";
-// import { Routes } from "../routes/baseRoutes";
+import RelatedChoice from "../components/RelatedChoice";
 
 const productLists = [
   {
@@ -86,49 +85,23 @@ export default function Cart() {
       display="flex"
       flexDirection="column"
     >
-      <Flex
-        alignItems="center"
-        gap={2}
-        mb={4}
-        p={4}
-        bg="#ffffffea"
-        boxShadow="md"
-        position="fixed"
-        top={0}
-        left={{ base: 0, md: "13%", lg: "34.5%", xl: "60%" }}
-        right={0}
-        zIndex={9}
-      >
-        <Flex alignItems="center">
-          <Heading as="h1" fontSize="25px">
-            Cart
-          </Heading>
-          <Box w="30px" ml={2}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-            </svg>
-          </Box>
-        </Flex>
-
-        <Box
-          position="absolute"
-          left="50%"
-          transform="translateX(-50%)"
-          maxW="100px"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Image src={LOGO} alt="LOGO" objectFit="cover" />
-        </Box>
-      </Flex>
-
       {hasItems ? (
-        <Flex flexDirection={"column"} pt={"60px"}>
+        <Flex flexDirection={"column"} pt={{base:"50px", md:"70px", lg: "90px"}} px={3}>
+          <Flex alignItems="center" justifyContent={"center"}>
+            <Heading as="h1" fontSize="20px">
+              Cart
+            </Heading>
+            <Box w="20px" ml={2}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+              </svg>
+            </Box>
+          </Flex>
+
           {productLists.map((productList, index) => (
             <Flex key={index} py={4} borderBottom={"1px solid #adadad48"}>
               <Box flex={"0.3"} display={"flex"} justifyContent={"center"}>
@@ -176,7 +149,7 @@ export default function Cart() {
                 </Flex>
               </Flex>
 
-              <Box boxSize="25px">
+              <Box boxSize="20px">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -184,16 +157,16 @@ export default function Cart() {
                   color="red"
                 >
                   <path
-                    fillRule="evenodd"
-                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
+                    fill-rule="evenodd"
+                    d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                    clip-rule="evenodd"
                   />
                 </svg>
               </Box>
             </Flex>
           ))}
 
-          <Flex flexDirection={"column"} mt={4}>
+          <Flex bg={"#fff"} flexDirection={"column"} p={"15px 15px 0px 15px"}>
             <HStack justify="space-between" pb={2}>
               <Text>Total Price</Text>
               <Text fontWeight="500">₦430,000.90</Text>
@@ -221,6 +194,7 @@ export default function Cart() {
           flexDirection="column"
           alignItems="center"
           pt={"120px"}
+          px={1}
         >
           <Heading as="h3" size="md" fontWeight="300" mb={4}>
             Your cart has no items.
@@ -236,6 +210,10 @@ export default function Cart() {
           <Button variant="outline" colorScheme="gray" mb={4}>
             Login / Sign up
           </Button>
+
+          <Flex direction={{ base: "column", lg: "column" }} maxW={"100%"} pt={3}>
+            <RelatedChoice />
+          </Flex>
         </Flex>
       )}
     </Container>

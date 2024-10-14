@@ -6,12 +6,115 @@ import {
     Flex,
     SimpleGrid,
   } from "@chakra-ui/react";
-  import Img1 from "/ProductImages/1.webp";
+  import Img1 from "../../public/Products/spec.jpg";
   import { PiHandbagThin } from "react-icons/pi";
-  import { useNavigate } from "react-router-dom";
-  import { Routes } from "../routes/baseRoutes";
   
   const ItemList = [
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
+      price: "24,999.99",
+      oldPrice: "33,000.00",
+      bonus: "Get 10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
+      price: "24,999.99",
+      oldPrice: "33,000.00",
+      bonus: "Get 10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Crosses Cargo Sweatpant - Olive",
+      price: "41,459.99",
+      oldPrice: "58,050.00",
+      bonus: "10% Off On ₦50,000+ Orders!",
+    },
+    {
+      src: Img1,
+      label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
+      price: "24,999.99",
+      oldPrice: "33,000.00",
+      bonus: "Get 10% Off On ₦50,000+ Orders!",
+    },
     {
       src: Img1,
       label: "Crosses Cargo Sweatpant - Olive",
@@ -51,11 +154,10 @@ import {
   
   export default function CategoryItemsDisplay() {
   
-    const navigate = useNavigate()
     return (
       <>
         <Box
-        pt={"100px"}
+        pt={"70px"}
         pb={"40px"}
           px={2}
           w="100%"
@@ -72,7 +174,7 @@ import {
                 cursor="pointer"
                 position={"relative"}
               >
-                <Image src={item.src} alt="image" objectFit="cover" onClick={() => navigate(Routes.ProductPage)} />
+                <Image src={item.src} alt="image" objectFit="cover"/>
                 <Flex
                   position="absolute"
                   right={2}

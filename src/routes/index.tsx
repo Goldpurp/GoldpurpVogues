@@ -7,7 +7,7 @@ import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import ProductPage from "../pages/ProductPage";
-// import Cart from "../pages/Cart";
+import Cart from "../pages/Cart";
 import ContactUs from "../pages/ContactUs";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import HelpCenter from "../pages/HelpCenter";
@@ -64,10 +64,10 @@ const router = createBrowserRouter([
                 path: Routes.About,
                 element: <About />
             },
-            // {
-            //     path: Routes.Cart,
-            //     element: <Cart />
-            // },
+            {
+                path: Routes.Cart,
+                element: <Cart />
+            },
             {
                 path: Routes.ProductPage,
                 element: <ProductPage />

@@ -21,7 +21,7 @@ export default function ReturnPolicy() {
   return (
     <Flex
     bg={"#b7efc510"}
-    pt={"100px"}
+    pt={"60px"}
     pb={"50px"}
       direction={{ base: "column", md: "row" }}
       maxW="1200px"
