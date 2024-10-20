@@ -51,9 +51,9 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isHomePage = location.pathname === Routes.home || 
-  location.pathname === Routes.Login || 
-  location.pathname === Routes.SignUp;
+  const isHomePage = location.pathname === Routes.home ||
+    location.pathname === Routes.Login ||
+    location.pathname === Routes.SignUp;
 
 
   return (
@@ -88,15 +88,22 @@ const Header = () => {
             h="100%"
             objectFit="contain"
             boxSize={"90%"}
-            onClick={() => navigate(Routes.home)} 
+            onClick={() => navigate(Routes.home)}
           />
         </Flex>
 
-        <Box display={{ base: "none", lg: "flex" }} width="400px">
+        <Box
+          display={{ base: "none", lg: "flex" }}
+          position="absolute"
+          left="50%" 
+          transform="translateX(-50%)" 
+          width="400px"
+          justifyContent="center"
+        >
           <NavLinks />
         </Box>
 
-        <Flex gap={{ base: "15px", md: "15px" }} align="center">
+        <Flex gap={{ base: "15px", md: "25px" }} align="center">
           <ChakraLink>
             <Box
               w={"23px"}
