@@ -6,11 +6,13 @@ import {
   keyframes,
   useBreakpointValue,
   Box,
+  Skeleton,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import HeroImg from "/Images/heroImg5.png";
 import HeroImgMini from "/Images/heroImg5mini.png";
+import { useEffect, useState } from "react";
 
 const fadeIn = keyframes`
     from {
@@ -22,11 +24,17 @@ const fadeIn = keyframes`
   `;
 
 const Hero: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const heroImgWidth = useBreakpointValue({ base: "300px", md: "520px" });
   const miniImgDisplay = useBreakpointValue({
     base: "none",
     sm: "block",
   });
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Flex
@@ -47,77 +55,89 @@ const Hero: React.FC = () => {
         top={{ base: "220px", md: "330px", lg: "350px" }}
         zIndex="1"
         opacity={"0.7"}
-         css={css`
-        animation: ${fadeIn} 5s ease-out;
-      `}
+        css={css`
+          animation: ${fadeIn} 5s ease-out;
+        `}
       >
-        <Text
-          fontSize={{ base: "14px", md: "18px", lg: "25px" }}
-          fontWeight="600"
-          fontFamily={"Inter, sans-serif"}
-        >
-          TRENDY LOOKS AWAIT!
-        </Text>
-        <Text
-          as="h1"
-          fontSize={{ base: "20px", md: "35px", lg: "45px" }}
-          fontWeight="400"
-          fontFamily="Irish Grover, system-ui"
-        >
-          UNLEASH YOUR STYLES WITH OUR NEWEST ARRIVALS.
-        </Text>
-        <ChakraButton
-          fontFamily={"DM Mono"}
-          w={"fit-content"}
-          p={2}
-          gap={2}
-          justifyContent={"center"}
-          alignItems={"center"}
-          color={"#fff"}
-          fontSize={{ base: "13px", lg: "18px" }}
-          fontWeight="300"
-          variant="outline"
-          borderRadius="5px"
-          borderColor="#fff"
-          bg="transparent"
-          _hover={{
-            transform: "scale(0.96)",
-            borderColor: "#00000098",
-            bg: "#00000084",
-            transition: "all 0.4s linear",
-            color: "#d4d2d2",
-          }}
-        >
-          Discover More <MdKeyboardDoubleArrowRight />
-        </ChakraButton>
+        <Skeleton isLoaded={!isLoading}>
+          <Text
+            fontSize={{ base: "14px", md: "18px", lg: "25px" }}
+            fontWeight="600"
+            fontFamily={"Inter, sans-serif"}
+          >
+            TRENDY LOOKS AWAIT!
+          </Text>
+        </Skeleton>
+
+        <Skeleton isLoaded={!isLoading}>
+          <Text
+            as="h1"
+            fontSize={{ base: "20px", md: "35px", lg: "45px" }}
+            fontWeight="400"
+            fontFamily="Irish Grover, system-ui"
+          >
+            UNLEASH YOUR STYLES WITH OUR NEWEST ARRIVALS.
+          </Text>
+        </Skeleton>
+
+        <Skeleton isLoaded={!isLoading}>
+          <ChakraButton
+            fontFamily={"DM Mono"}
+            w={"fit-content"}
+            p={2}
+            gap={2}
+            justifyContent={"center"}
+            alignItems={"center"}
+            color={"#fff"}
+            fontSize={{ base: "13px", lg: "18px" }}
+            fontWeight="300"
+            variant="outline"
+            borderRadius="5px"
+            borderColor="#fff"
+            bg="transparent"
+            _hover={{
+              transform: "scale(0.96)",
+              borderColor: "#00000098",
+              bg: "#00000084",
+              transition: "all 0.4s linear",
+              color: "#d4d2d2",
+            }}
+          >
+            Discover More <MdKeyboardDoubleArrowRight />
+          </ChakraButton>
+        </Skeleton>
       </Flex>
 
-      <Image
-        src={HeroImg}
-        alt="HomeImage"
-        position="relative"
-        width={heroImgWidth}
-      />
+      <Skeleton isLoaded={!isLoading}>
+        <Image
+          src={HeroImg}
+          alt="HomeImage"
+          position="relative"
+          width={heroImgWidth}
+        />
+      </Skeleton>
 
-      <Image
-        src={HeroImgMini}
-        alt="HomeImage"
-        position="absolute"
-        right="0"
-        display={miniImgDisplay}
-        top={{
-          base: "150px",
-          sm: "210px",
-          md: "312px",
-          lg: "300px",
-        }}
-        width={{
-          base: "200px",
-          sm: "160px",
-          md: "220px",
-          lg: "320px",
-        }}
-      />
+      <Skeleton isLoaded={!isLoading}>
+        <Image
+          src={HeroImgMini}
+          alt="HomeImage"
+          position="absolute"
+          right="0"
+          display={miniImgDisplay}
+          top={{
+            base: "150px",
+            sm: "210px",
+            md: "312px",
+            lg: "300px",
+          }}
+          width={{
+            base: "200px",
+            sm: "160px",
+            md: "220px",
+            lg: "320px",
+          }}
+        />
+      </Skeleton>
 
       <Box
         position="absolute"

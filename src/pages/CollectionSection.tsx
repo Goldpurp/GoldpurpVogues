@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Text, Button, Flex, Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Text, Button, Flex, Box, Skeleton } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
@@ -35,13 +35,20 @@ const MotionBox = motion(Flex);
 
 const CollectionSection = () => {
   const [currentMedia, setCurrentMedia] = useState(collections[0]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); 
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMediaChange = (index: number) => {
     setCurrentMedia(collections[index]);
   };
 
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -49,10 +56,19 @@ const CollectionSection = () => {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      textAlign={"center"}
       position="relative"
     >
       <AnimatePresence mode="wait">
-        {currentMedia.type === "image" ? (
+        {loading ? (
+          <Skeleton
+            height="100%"
+            width="100%"
+            isLoaded={!loading}
+            startColor="gray.200"
+            endColor="gray.400"
+          />
+        ) : currentMedia.type === "image" ? (
           <MotionBox
             key={currentMedia.imageUrl}
             bgImage={`url(${currentMedia.imageUrl})`}
@@ -64,10 +80,10 @@ const CollectionSection = () => {
             right="0"
             bottom="0"
             zIndex="-1"
-            initial={{ y: "100%" }} 
-            animate={{ y: "0%" }} 
-            exit={{ y: "-100%" }}  
-            transition={{ duration: 1 }} 
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 1 }}
           />
         ) : (
           <motion.video
@@ -87,57 +103,62 @@ const CollectionSection = () => {
               zIndex: -1,
             }}
             initial={{ y: "100%" }}
-            animate={{ y: "0%" }} 
-            exit={{ y: "-100%" }}  
-            transition={{ duration: 1 }} 
+            animate={{ y: "0%" }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 1 }}
           />
         )}
       </AnimatePresence>
 
-      <Text
-        fontSize="12px"
-        fontWeight="medium"
-        color="white"
-        cursor="pointer"
-        mb={3}
-        zIndex={10}
-      >
-        EXPLORE COLLECTIONS
-      </Text>
+      <Skeleton isLoaded={!loading} width="200px">
+        <Text
+          fontSize="12px"
+          fontWeight="medium"
+          color="#fff"
+          cursor="pointer"
+          mb={3}
+          zIndex={10}
+        >
+          EXPLORE COLLECTIONS
+        </Text>
+      </Skeleton>
 
-      <Box textAlign="center" zIndex={10}>
+      <Box display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"} textAlign="center" zIndex={10}>
         {collections.map((collection, index) => (
-          <Text
-            key={index}
-            lineHeight={9}
-            opacity={currentMedia === collection ? "1" : "0.4"}
-            fontWeight={currentMedia === collection ? "900" : "700"}
-            fontSize={"25px"}
-            color={"#ffff"}
-            cursor="pointer"
-            onClick={() => handleMediaChange(index)}
-          >
-            {collection.label}
-          </Text>
+          <Skeleton key={index} isLoaded={!loading}>
+            <Text
+              lineHeight={9}
+              opacity={currentMedia === collection ? "1" : "0.4"}
+              fontWeight={currentMedia === collection ? "900" : "700"}
+              fontSize={"25px"}
+              color={"#ffff"}
+              cursor="pointer"
+              onClick={() => handleMediaChange(index)}
+            >
+              {collection.label}
+            </Text>
+          </Skeleton>
         ))}
 
         <Box mt={12}>
-          <Button
-            borderBottom={"1px solid #ffffff"}
-            color={"#fff"}
-            background={"transparent"}
-            variant="unstyled"
-            alignItems="center"
-            justifyContent="center"
-            fontSize={"12px"}
-            cursor="pointer"
-            transition="color 0.4s, border-color 0.4s"
-            alignSelf="center"
-            _hover={{ color: "#dee2e6", borderBottomColor: "#dee2e6" }}
-            onClick={() => navigate(Routes.CollectionPage)}
-          >
-            Discover Now
-          </Button>
+          <Skeleton isLoaded={!loading} width="150px" height="35px">
+            <Button
+              borderBottom={"1px solid #ffffff"}
+              color={"#fff"}
+              background={"transparent"}
+              variant="unstyled"
+              alignItems="center"
+              justifyContent="center"
+              fontSize={"12px"}
+              cursor="pointer"
+              transition="color 0.4s, border-color 0.4s"
+              alignSelf="center"
+              _hover={{ color: "#dee2e6", borderBottomColor: "#dee2e6" }}
+              onClick={() => navigate(Routes.CollectionPage)}
+            >
+              Discover Now
+            </Button>
+          </Skeleton>
         </Box>
       </Box>
 

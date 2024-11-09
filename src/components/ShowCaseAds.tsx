@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Heading, Button, Image } from "@chakra-ui/react";
+import { Box, Flex, Text, Heading, Button, Image, Skeleton } from "@chakra-ui/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { motion } from "framer-motion";
 import capImage from "/Images/cap.png";
@@ -39,45 +39,55 @@ const ShowcaseItem = ({
         gap="15px"
       >
         <Box>
-          <Text
-            fontSize={{ base: "17px", md: "20px", xl: "26px" }}
-            fontWeight="600"
-            fontFamily="Concert One, sans-serif"
-          >
-            {title}
-          </Text>
-          <Heading
-            fontSize={{ base: "14px", md: "15px", xl: "22px" }}
-            fontWeight="400"
-            fontFamily="Julee, cursive"
-          >
-            {description}
-          </Heading>
+          <Skeleton isLoaded={true}>
+            <Text
+              fontSize={{ base: "17px", md: "20px", xl: "26px" }}
+              fontWeight="600"
+              fontFamily="Concert One, sans-serif"
+            >
+              {title}
+            </Text>
+          </Skeleton>
+
+          <Skeleton isLoaded={true}>
+            <Heading
+              fontSize={{ base: "14px", md: "15px", xl: "22px" }}
+              fontWeight="400"
+              fontFamily="Julee, cursive"
+            >
+              {description}
+            </Heading>
+          </Skeleton>
         </Box>
-        <Button
-          rightIcon={<MdKeyboardDoubleArrowRight />}
-          fontFamily="Jolly Lodger, system-ui"
-          border="1px solid #000"
-          borderRadius="5px"
-          variant="outline"
-          w={"fit-content"}
-          _hover={{
-            transform: "scale(0.96)",
-            borderColor: "#bcb8b1",
-            bgColor: "#edede9",
-            transition: "all 0.4s linear",
-          }}
-        >
-          Enter Shop
-        </Button>
+        <Skeleton isLoaded={true}>
+          <Button
+            rightIcon={<MdKeyboardDoubleArrowRight />}
+            fontFamily="Jolly Lodger, system-ui"
+            border="1px solid #000"
+            borderRadius="5px"
+            variant="outline"
+            w={"fit-content"}
+            _hover={{
+              transform: "scale(0.96)",
+              borderColor: "#bcb8b1",
+              bgColor: "#edede9",
+              transition: "all 0.4s linear",
+            }}
+          >
+            Enter Shop
+          </Button>
+        </Skeleton>
       </Flex>
-      <Image
-        src={imageSrc}
-        alt={title}
-        width={{ base: "200px", sm: "250px", md: "320px" }}
-        height={{ base: "200px", sm: "250px", md: "320px" }}
-        objectFit="contain"
-      />
+
+      <Skeleton isLoaded={true}>
+        <Image
+          src={imageSrc}
+          alt={title}
+          width={{ base: "200px", sm: "250px", md: "320px" }}
+          height={{ base: "200px", sm: "250px", md: "320px" }}
+          objectFit="contain"
+        />
+      </Skeleton>
     </MotionFlex>
   );
 };

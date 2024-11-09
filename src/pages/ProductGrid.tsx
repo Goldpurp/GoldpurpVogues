@@ -1,129 +1,134 @@
-import {
-  Box,
-  Image,
-  Text,
-  Heading,
-  Flex,
-  Button,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import Img1 from "/ProductImages/1.webp";
-import { PiHandbagThin } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
-import TrendsIcons from "../components/TrendsIcons";
-import { Routes } from "../routes/baseRoutes";
-
-const productList = [
-  {
-    src: Img1,
-    label: "Crosses Cargo Sweatpant - Olive",
-    price: "41,459.99",
-    oldPrice: "58,050.00",
-    bonus: "10% Off On ₦50,000+ Orders!",
-  },
-  {
-    src: Img1,
-    label: "Crosses Cargo Sweatpant - Olive",
-    price: "41,459.99",
-    oldPrice: "58,050.00",
-    bonus: "10% Off On ₦50,000+ Orders!",
-  },
-  {
-    src: Img1,
-    label: "Crosses Cargo Sweatpant - Olive",
-    price: "41,459.99",
-    oldPrice: "58,050.00",
-    bonus: "10% Off On ₦50,000+ Orders!",
-  },
-  {
-    src: Img1,
-    label: "Crosses Cargo Sweatpant - Olive",
-    price: "41,459.99",
-    oldPrice: "58,050.00",
-    bonus: "10% Off On ₦50,000+ Orders!",
-  },
-  {
-    src: Img1,
-    label: "Los Angeles Palm Trees Oversized Short Sleeve Tee - Charcoal",
-    price: "24,999.99",
-    oldPrice: "33,000.00",
-    bonus: "Get 10% Off On ₦50,000+ Orders!",
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, CartItem } from '../redux/cartSlice';
+import { Box, Image, Text, Heading, Flex, Button, SimpleGrid, Skeleton, useToast } from '@chakra-ui/react';
+import { PiHandbagThin } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../routes/baseRoutes';
+import { useState, useEffect } from 'react';
+import fallbackImg from '/icon/WebLogo.png';
+import productsData from '../redux/data';
 
 export default function ProductGrid() {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const cartItems = useSelector((state: any) => state.cart.items);
+  const dispatch = useDispatch();
+  const toast = useToast();
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleAddToCart = (item: CartItem) => {
+    const existingItem = cartItems.find((cartItem: CartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      dispatch(addToCart({
+        ...existingItem,
+        quantity: existingItem.quantity + 1,  
+        total: (existingItem.quantity + 1) * existingItem.price, 
+      }));
+      toast({
+        title: "Item Quantity Updated",
+        description: `${item.label} quantity updated in your cart.`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: 'Nunito, sans-serif',
+        },
+      });
+    } else {
+      const newItem: CartItem = {
+        ...item,
+        quantity: 1, 
+        total: item.price,
+      };
+      dispatch(addToCart(newItem));
+      toast({
+        title: "Item Added to Cart",
+        description: `${item.label} has been added to your cart.`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: 'Nunito, sans-serif',
+        },
+      });
+    }
+  };
+
+
+
   return (
     <>
-      <TrendsIcons />
-      <Box
-        px={2}
-        w="100%"
-        overflow="hidden"
-        letterSpacing="normal"
-        fontFamily="Nunito, sans-serif"
-      >
-        <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={2}>
-          {productList.map((item, itemIndex) => (
-            <Box
-              key={itemIndex}
-              bg="#e3e7eb"
-              border="1px solid #e2e6e9"
-              cursor="pointer"
-              position={"relative"}
-            >
-              <Image src={item.src} alt="image" objectFit="cover" onClick={() => navigate(Routes.ProductPage)} />
-              <Flex
-                position="absolute"
-                right={2}
-                top={3}
-                bg="white"
-                p={1}
-                borderRadius="full"
-              >
-                <Box
-                  as={PiHandbagThin}
-                  w={{ base: 5, lg: 6 }}
-                  h={{ base: 5, lg: 6 }}
-                />
-              </Flex>
-              <Box p={2} w={"full"} bg={"#fff"}>
-                <Text
-                  noOfLines={1}
-                  fontSize={{ base: "12px", md: "15px", lg: "17px" }}
-                >
-                  {item.label}
-                </Text>
-                <Heading
-                  as="h5"
-                  size="sm"
-                  color="#386648"
-                  mt={1}
-                  fontSize={{ base: "13px", md: "16px", lg: "18px" }}
-                >
-                  ₦{item.price}
-                  <Text
-                    as="span"
-                    color="#780000"
-                    textDecoration="line-through"
-                    ml={2}
-                    fontWeight={"400"}
-                    fontSize={{ base: "11px", md: "13px", lg: "15px" }}
-                  >
-                    ₦{item.oldPrice}
-                  </Text>
-                </Heading>
-                <Text
-                  color="#9d2226"
-                  fontSize={{ base: "9px", md: "13px", lg: "15px" }}
-                  mt={"5px"}
-                >
-                  {item.bonus}
-                </Text>
+      <Box px={2} py={6} w="100%" overflow="hidden" letterSpacing="normal" fontFamily="Nunito, sans-serif">
+        <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={3}>
+          {productsData.map((item, itemIndex) => {
+            const isItemInCart = cartItems.some((cartItem: CartItem) => cartItem.id === item.id);
+            return (
+              <Box key={itemIndex} bg="transparent" border="1px solid #e2e6e9" cursor="pointer" position={"relative"}>
+                <Skeleton isLoaded={!loading}>
+                  <Image
+                    src={item.src}
+                    alt="image"
+                    fallbackSrc={fallbackImg}
+                    objectFit="cover"
+                    onClick={() => navigate(Routes.ProductPage)}
+                  />
+                </Skeleton>
+                <Flex position="absolute" right={2} top={3} bg="white" p={1} borderRadius="full">
+                  <Box
+                    as={PiHandbagThin}
+                    w={{ base: 5, lg: 6 }}
+                    h={{ base: 5, lg: 6 }}
+                    onClick={() => handleAddToCart(item)}
+                    opacity={isItemInCart ? 0.5 : 1}
+                    cursor={isItemInCart ? 'not-allowed' : 'pointer'}
+                    color={isItemInCart ? '#ccc' : '#000'}
+                  />
+                </Flex>
+                <Box p={2} w={"full"} bg={"#fff"}>
+                  <Skeleton isLoaded={!loading}>
+                    <Text noOfLines={1} fontSize={{ base: "12px", md: "15px", lg: "17px" }}>
+                      {item.label}
+                    </Text>
+                  </Skeleton>
+                  <Skeleton isLoaded={!loading}>
+                    <Heading
+                      as="h5"
+                      size="sm"
+                      color="#386648"
+                      mt={1}
+                      fontSize={{ base: "13px", md: "16px", lg: "18px" }}
+                    >
+                      ₦{item.price}
+                      <Text
+                        as="span"
+                        color="#780000"
+                        textDecoration="line-through"
+                        ml={2}
+                        fontWeight={"400"}
+                        fontSize={{ base: "10px", md: "13px", lg: "15px" }}
+                      >
+                        ₦{item.oldPrice}
+                      </Text>
+                    </Heading>
+                  </Skeleton>
+                  <Skeleton isLoaded={!loading}>
+                    <Text color="#9d2226" fontSize={{ base: "9px", md: "13px", lg: "15px" }} mt={"5px"}>
+                      {item.bonus}
+                    </Text>
+                  </Skeleton>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            );
+          })}
         </SimpleGrid>
         <Flex align="center" justify="center" p={4}>
           <Button

@@ -1,6 +1,7 @@
-import { Box, Text, VStack, keyframes } from "@chakra-ui/react";
+import { Box, Text, VStack, keyframes, Skeleton } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import ShopNowBtn from "./ShowNowBtn";
+import { useState, useEffect } from "react";
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -9,6 +10,15 @@ const pulse = keyframes`
 `;
 
 export default function PromoAds() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); 
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Box
       color="white"
@@ -23,28 +33,35 @@ export default function PromoAds() {
       mb={1}
       fontFamily="Arial, sans-serif"
     >
-      <Text
-        position="absolute"
-        top="7px"
-        left="18px"
-        color="#660708"
-        fontSize={{ base: "17px", md: "24px", lg: "26px", xl: "30px" }}
-        fontWeight="100"
-        css={css`
-          animation: ${pulse} 1.5s infinite;
-        `}
-      >
-        10-15% OFF
-      </Text>
+      <Skeleton isLoaded={!loading}>
+        <Text
+          position="absolute"
+          top="7px"
+          left="18px"
+          color="#660708"
+          fontSize={{ base: "17px", md: "24px", lg: "26px", xl: "30px" }}
+          fontWeight="100"
+          css={css`
+            animation: ${pulse} 1.5s infinite;
+          `}
+        >
+          10-15% OFF
+        </Text>
+      </Skeleton>
 
       <VStack align="center" mt={4}>
-        <Text
-          fontSize={{ base: "40px", md: "60px", lg: "90px", xl: "100px" }}
-          fontWeight="100"
-        >
-          SUMMER SALE
-        </Text>
-        <ShopNowBtn onclickBtn={() => {}} />
+        <Skeleton isLoaded={!loading}>
+          <Text
+            fontSize={{ base: "40px", md: "60px", lg: "90px", xl: "100px" }}
+            fontWeight="100"
+          >
+            SUMMER SALE
+          </Text>
+        </Skeleton>
+
+        <Skeleton isLoaded={!loading}>
+          <ShopNowBtn onclickBtn={() => {}} />
+        </Skeleton>
       </VStack>
     </Box>
   );

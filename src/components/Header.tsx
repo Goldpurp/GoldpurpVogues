@@ -27,11 +27,16 @@ import NavLinks from "./NavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 import SidebarMenu from "./SideMenu";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartCount = cartItems.length;
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -95,8 +100,8 @@ const Header = () => {
         <Box
           display={{ base: "none", lg: "flex" }}
           position="absolute"
-          left="50%" 
-          transform="translateX(-50%)" 
+          left="50%"
+          transform="translateX(-50%)"
           width="400px"
           justifyContent="center"
         >
@@ -125,8 +130,11 @@ const Header = () => {
               </svg>
             </Box>
           </ChakraLink>
+          <Box onClick={() => navigate(Routes.Wishlist)}>
+            <WishlistBadge />
+          </Box>
           <Box onClick={() => navigate(Routes.Cart)}>
-            <CartBadge />
+            <CartBadge cartCount={cartCount} />
           </Box>
           <IconButton
             aria-label="Toggle Menu"
@@ -233,9 +241,8 @@ const SearchModal = ({
   </Modal>
 );
 
-const CartBadge = () => {
-  const [cartCount, _setCartCount] = useState(4);
-
+// CartBadge.js
+const CartBadge = ({ cartCount }: { cartCount: number }) => {
   return (
     <Box position="relative">
       <ChakraLink>
@@ -267,6 +274,47 @@ const CartBadge = () => {
           fontWeight={400}
         >
           {cartCount}
+        </Badge>
+      )}
+    </Box>
+  );
+};
+
+
+const WishlistBadge = () => {
+  const [wishlistCount, _setWishlistCount] = useState(3);
+
+  return (
+    <Box position="relative">
+      <ChakraLink>
+        <Box w={"23px"} cursor="pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+        </Box>
+      </ChakraLink>
+      {wishlistCount > 0 && (
+        <Badge
+          colorScheme="pink"
+          borderRadius="full"
+          px={2}
+          position="absolute"
+          top="-1"
+          right="-2"
+          fontSize="11px"
+          fontWeight={400}
+        >
+          {wishlistCount}
         </Badge>
       )}
     </Box>

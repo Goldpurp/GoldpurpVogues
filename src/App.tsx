@@ -1,20 +1,18 @@
 import { Flex } from "@chakra-ui/react";
-import { lazy, Suspense } from "react";
-
-const ProductGrid = lazy(() => import("./pages/ProductGrid"));
-const ProductGallery = lazy(() => import("./components/CollectionGallery"));
-const CollectionsAds = lazy(() => import("./components/CollectionAds"));
-const PromoAds = lazy(() => import("./components/PromoAds"));
-const NewArrivalsCarousel = lazy(() => import("./components/NewArrivalsCarousel"));
-const ShowCaseAds = lazy(() => import("./components/ShowCaseAds"));
-const Hero = lazy(() => import("./components/Hero"));
-const Header = lazy(() => import("./components/Header"));
-const HeroVideo = lazy(() => import("./components/HeroVideo"));
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import HeroVideo from "./components/HeroVideo";
+import ShowCaseAds from "./components/ShowCaseAds";
+import NewArrivalsCarousel from "./components/NewArrivalsCarousel";
+import PromoAds from "./components/PromoAds";
+import CollectionsAds from "./components/CollectionAds";
+import ProductGallery from "./components/CollectionGallery";
+import ProductGrid from "./pages/ProductGrid";
 
 function App() {
+
   return (
     <Flex flexDirection={"column"} bg={"#f0fff11a"}>
-      <Suspense fallback={<div>Loading...</div>}>
         <Header />
         <Hero />
         <HeroVideo />
@@ -24,7 +22,6 @@ function App() {
         <CollectionsAds />
         <ProductGallery />
         <ProductGrid />
-      </Suspense>
     </Flex>
   );
 }
