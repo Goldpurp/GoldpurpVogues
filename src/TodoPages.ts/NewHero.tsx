@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
         maxW="600px"
         h={"fit-content"}
         p={6}
-        ml={{ md: "-200px", lg: "0"}}
+        ml={{ md: "-200px", lg: "0" }}
         borderRadius="md"
         pt={{ base: "200px", lg: "0" }}
       >

@@ -1,12 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, CartItem } from '../redux/cartSlice';
-import { Box, Image, Text, Heading, Flex, Button, SimpleGrid, Skeleton, useToast } from '@chakra-ui/react';
-import { PiHandbagThin } from 'react-icons/pi';
-import { useNavigate } from 'react-router-dom';
-import { Routes } from '../routes/baseRoutes';
-import { useState, useEffect } from 'react';
-import fallbackImg from '/icon/WebLogo.png';
-import productsData from '../redux/data';
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, CartItem } from "../redux/cartSlice";
+import {
+  Box,
+  Image,
+  Text,
+  Heading,
+  Flex,
+  Button,
+  SimpleGrid,
+  Skeleton,
+  useToast,
+} from "@chakra-ui/react";
+import { PiHandbagThin } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
+import { useState, useEffect } from "react";
+import fallbackImg from "/icon/WebLogo.png";
+import productsData from "../redux/data";
 
 export default function ProductGrid() {
   const [loading, setLoading] = useState(true);
@@ -23,17 +33,19 @@ export default function ProductGrid() {
   }, []);
 
   const handleAddToCart = (item: CartItem) => {
-    const existingItem = cartItems.find((cartItem: CartItem) => cartItem.id === item.id);
-  
+    const existingItem = cartItems.find(
+      (cartItem: CartItem) => cartItem.id === item.id
+    );
+
     if (!existingItem) {
       const newItem: CartItem = {
         ...item,
         quantity: 1,
         total: item.price,
       };
-  
+
       dispatch(addToCart(newItem));
-  
+
       toast({
         title: "Saved to Your Cart",
         status: "success",
@@ -41,7 +53,7 @@ export default function ProductGrid() {
         isClosable: true,
         position: "top",
         containerStyle: {
-          fontFamily: 'Nunito, sans-serif',
+          fontFamily: "Nunito, sans-serif",
         },
       });
     } else {
@@ -52,7 +64,7 @@ export default function ProductGrid() {
         isClosable: true,
         position: "top",
         containerStyle: {
-          fontFamily: 'Nunito, sans-serif',
+          fontFamily: "Nunito, sans-serif",
         },
       });
     }
@@ -60,11 +72,24 @@ export default function ProductGrid() {
 
   return (
     <>
-      <Box px={2} py={6} w="100%" overflow="hidden" letterSpacing="normal" fontFamily="Nunito, sans-serif">
+      <Box
+        px={2}
+        py={6}
+        w="100%"
+        overflow="hidden"
+        letterSpacing="normal"
+        fontFamily="Nunito, sans-serif"
+      >
         <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={3}>
           {productsData.map((item, itemIndex) => {
             return (
-              <Box key={itemIndex} bg="transparent" border="1px solid #e2e6e9" cursor="pointer" position={"relative"}>
+              <Box
+                key={itemIndex}
+                bg="transparent"
+                border="1px solid #e2e6e9"
+                cursor="pointer"
+                position={"relative"}
+              >
                 <Skeleton isLoaded={!loading}>
                   <Image
                     src={item.src}
@@ -74,7 +99,14 @@ export default function ProductGrid() {
                     onClick={() => navigate(Routes.ProductPage)}
                   />
                 </Skeleton>
-                <Flex position="absolute" right={2} top={3} bg="white" p={1} borderRadius="full">
+                <Flex
+                  position="absolute"
+                  right={2}
+                  top={3}
+                  bg="white"
+                  p={1}
+                  borderRadius="full"
+                >
                   <Box
                     as={PiHandbagThin}
                     w={{ base: 5, lg: 6 }}
@@ -85,7 +117,10 @@ export default function ProductGrid() {
                 </Flex>
                 <Box p={2} w={"full"} bg={"#fff"}>
                   <Skeleton isLoaded={!loading}>
-                    <Text noOfLines={1} fontSize={{ base: "12px", md: "15px", lg: "17px" }}>
+                    <Text
+                      noOfLines={1}
+                      fontSize={{ base: "12px", md: "15px", lg: "17px" }}
+                    >
                       {item.label}
                     </Text>
                   </Skeleton>
@@ -111,7 +146,11 @@ export default function ProductGrid() {
                     </Heading>
                   </Skeleton>
                   <Skeleton isLoaded={!loading}>
-                    <Text color="#9d2226" fontSize={{ base: "9px", md: "13px", lg: "15px" }} mt={"5px"}>
+                    <Text
+                      color="#9d2226"
+                      fontSize={{ base: "9px", md: "13px", lg: "15px" }}
+                      mt={"5px"}
+                    >
                       {item.bonus}
                     </Text>
                   </Skeleton>

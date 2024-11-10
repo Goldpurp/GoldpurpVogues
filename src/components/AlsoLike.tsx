@@ -13,13 +13,16 @@ import productsData from "../redux/data";
 import { addToCart, CartItem } from "../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { removeWishlistItem, toggleWishlistItem, WishlistItem } from "../redux/wishlistSlice";
+import {
+  removeWishlistItem,
+  toggleWishlistItem,
+  WishlistItem,
+} from "../redux/wishlistSlice";
 
 interface Color {
   name: string;
   value: string;
 }
-
 
 const colors: Color[] = [
   { name: "Black", value: "#000000" },
@@ -29,7 +32,9 @@ const colors: Color[] = [
 ];
 
 export default function AlsoLike() {
-  const [activeColors, setActiveColors] = useState<{ [key: number]: string | null }>({});
+  const [activeColors, setActiveColors] = useState<{
+    [key: number]: string | null;
+  }>({});
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
   const toast = useToast();
@@ -86,7 +91,9 @@ export default function AlsoLike() {
   const cartItems = useSelector((state: any) => state.cart.items);
 
   const handleAddToCart = (item: CartItem) => {
-    const existingItem = cartItems.find((cartItem: CartItem) => cartItem.id === item.id);
+    const existingItem = cartItems.find(
+      (cartItem: CartItem) => cartItem.id === item.id
+    );
 
     if (!existingItem) {
       const newItem: CartItem = {
@@ -104,7 +111,7 @@ export default function AlsoLike() {
         isClosable: true,
         position: "top",
         containerStyle: {
-          fontFamily: 'Nunito, sans-serif',
+          fontFamily: "Nunito, sans-serif",
         },
       });
     } else {
@@ -115,12 +122,11 @@ export default function AlsoLike() {
         isClosable: true,
         position: "top",
         containerStyle: {
-          fontFamily: 'Nunito, sans-serif',
+          fontFamily: "Nunito, sans-serif",
         },
       });
     }
   };
-
 
   return (
     <>
@@ -145,11 +151,7 @@ export default function AlsoLike() {
               cursor="pointer"
               position={"relative"}
             >
-              <Image
-                src={item.src}
-                alt="image"
-                objectFit="cover"
-              />
+              <Image src={item.src} alt="image" objectFit="cover" />
               <Flex
                 position="absolute"
                 right={2}
@@ -164,14 +166,10 @@ export default function AlsoLike() {
                   h={{ base: 5, lg: 6 }}
                   cursor={"pointer"}
                   onClick={() => handleAddToCart(item)}
-
                 />
               </Flex>
               <Box p={2} w={"full"} bg={"#fff"}>
-                <Text
-                  noOfLines={1}
-                  fontSize={{ base: "12px", lg: "15px" }}
-                >
+                <Text noOfLines={1} fontSize={{ base: "12px", lg: "15px" }}>
                   {item.label}
                 </Text>
                 <Heading
