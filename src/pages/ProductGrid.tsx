@@ -24,18 +24,20 @@ export default function ProductGrid() {
 
   const handleAddToCart = (item: CartItem) => {
     const existingItem = cartItems.find((cartItem: CartItem) => cartItem.id === item.id);
-
-    if (existingItem) {
-      dispatch(addToCart({
-        ...existingItem,
-        quantity: existingItem.quantity + 1,  
-        total: (existingItem.quantity + 1) * existingItem.price, 
-      }));
+  
+    if (!existingItem) {
+      const newItem: CartItem = {
+        ...item,
+        quantity: 1,
+        total: item.price,
+      };
+  
+      dispatch(addToCart(newItem));
+  
       toast({
-        title: "Item Quantity Updated",
-        description: `${item.label} quantity updated in your cart.`,
-        status: "info",
-        duration: 3000,
+        title: "Saved to Your Cart",
+        status: "success",
+        duration: 2000,
         isClosable: true,
         position: "top",
         containerStyle: {
@@ -43,17 +45,10 @@ export default function ProductGrid() {
         },
       });
     } else {
-      const newItem: CartItem = {
-        ...item,
-        quantity: 1, 
-        total: item.price,
-      };
-      dispatch(addToCart(newItem));
       toast({
-        title: "Item Added to Cart",
-        description: `${item.label} has been added to your cart.`,
-        status: "success",
-        duration: 3000,
+        title: "Already in Cart",
+        status: "info",
+        duration: 2000,
         isClosable: true,
         position: "top",
         containerStyle: {
@@ -63,14 +58,11 @@ export default function ProductGrid() {
     }
   };
 
-
-
   return (
     <>
       <Box px={2} py={6} w="100%" overflow="hidden" letterSpacing="normal" fontFamily="Nunito, sans-serif">
         <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={3}>
           {productsData.map((item, itemIndex) => {
-            const isItemInCart = cartItems.some((cartItem: CartItem) => cartItem.id === item.id);
             return (
               <Box key={itemIndex} bg="transparent" border="1px solid #e2e6e9" cursor="pointer" position={"relative"}>
                 <Skeleton isLoaded={!loading}>
@@ -87,10 +79,8 @@ export default function ProductGrid() {
                     as={PiHandbagThin}
                     w={{ base: 5, lg: 6 }}
                     h={{ base: 5, lg: 6 }}
+                    cursor={"pointer"}
                     onClick={() => handleAddToCart(item)}
-                    opacity={isItemInCart ? 0.5 : 1}
-                    cursor={isItemInCart ? 'not-allowed' : 'pointer'}
-                    color={isItemInCart ? '#ccc' : '#000'}
                   />
                 </Flex>
                 <Box p={2} w={"full"} bg={"#fff"}>

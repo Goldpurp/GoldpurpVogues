@@ -7,6 +7,8 @@ const productsData = [
     oldPrice: 146200,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Classic oversized fit with bold white font print, perfect for casual wear.",
+    quantity: 1, 
+    total: 87700,
   },
   {
     id: 2,
@@ -16,6 +18,8 @@ const productsData = [
     oldPrice: 117000,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "A perfect blend of style and comfort, ideal for everyday wear.",
+    quantity: 1, 
+    total: 70200,
   },
   {
     id: 3,
@@ -25,6 +29,8 @@ const productsData = [
     oldPrice: 138400,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Oversized and laid-back style, perfect for a casual and comfortable look.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 4,
@@ -34,6 +40,8 @@ const productsData = [
     oldPrice: 118400,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "A stylish and versatile pair of jeans, ideal for all occasions.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 5,
@@ -43,6 +51,8 @@ const productsData = [
     oldPrice: 146200,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Bold lime oversized shirt with white font, a must-have for casual wardrobes.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 6,
@@ -52,6 +62,8 @@ const productsData = [
     oldPrice: 118400,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Comfortable and durable jeans, perfect for any casual outing.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 7,
@@ -61,6 +73,8 @@ const productsData = [
     oldPrice: 146200,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Versatile tan oversized shirt, great for casual wear with a touch of style.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 8,
@@ -70,6 +84,8 @@ const productsData = [
     oldPrice: 117000,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Classic navy jeans, perfect for adding style to any outfit.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 9,
@@ -79,6 +95,8 @@ const productsData = [
     oldPrice: 146200,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Bold orange oversized shirt with a statement white font, perfect for a trendy look.",
+    quantity: 1, 
+    total: 83200,
   },
   {
     id: 10,
@@ -88,6 +106,8 @@ const productsData = [
     oldPrice: 117000,
     bonus: "40% Off Everything! Use Code: SAVE40",
     description: "Sleek black jeans, versatile for day-to-day outfits.",
+    quantity: 1, 
+    total: 83200,
   },
   // {
   //   id: 11,

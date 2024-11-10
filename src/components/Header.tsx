@@ -37,6 +37,8 @@ const Header = () => {
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartCount = cartItems.length;
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const wishlistCount = wishlistItems.length;
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -131,7 +133,7 @@ const Header = () => {
             </Box>
           </ChakraLink>
           <Box onClick={() => navigate(Routes.Wishlist)}>
-            <WishlistBadge />
+            <WishlistBadge wishlistCount={wishlistCount}/>
           </Box>
           <Box onClick={() => navigate(Routes.Cart)}>
             <CartBadge cartCount={cartCount} />
@@ -241,7 +243,6 @@ const SearchModal = ({
   </Modal>
 );
 
-// CartBadge.js
 const CartBadge = ({ cartCount }: { cartCount: number }) => {
   return (
     <Box position="relative">
@@ -281,8 +282,7 @@ const CartBadge = ({ cartCount }: { cartCount: number }) => {
 };
 
 
-const WishlistBadge = () => {
-  const [wishlistCount, _setWishlistCount] = useState(3);
+const WishlistBadge = ({ wishlistCount }: { wishlistCount: number }) => {
 
   return (
     <Box position="relative">

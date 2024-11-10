@@ -9,27 +9,108 @@ import {
   HStack,
   Skeleton,
   Link as ChakraLink,
+  useToast,
 } from "@chakra-ui/react";
 import DecorativeText from "./DecorativeText";
-import fallbackImg from "/icon/WebLogo.png"
+import fallbackImg from "/icon/WebLogo.png";
 import productsData from "../redux/data";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, CartItem } from "../redux/cartSlice";
+import {
+  toggleWishlistItem,
+  removeWishlistItem,
+  WishlistItem,
+} from "../redux/wishlistSlice";
+import { RootState } from "../redux/store";
 
 export default function NewArrivalsCarousel() {
+  const [isLoading, setIsLoading] = useState(true);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const dispatch = useDispatch();
+  const toast = useToast();
+
   const [likedItems, setLikedItems] = useState<boolean[]>(
     new Array(productsData.length).fill(false)
   );
 
-  const [isLoading, setIsLoading] = useState(true);
+  const handleLikeToggle = (index: number, item: WishlistItem) => {
+    const itemInWishlist = wishlistItems.some(
+      (wishlistItem: { id: number }) => wishlistItem.id === item.id
+    );
 
-  const handleLikeToggle = (index: number) => {
     setLikedItems((prevState) => {
       const updatedLikes = [...prevState];
       updatedLikes[index] = !updatedLikes[index];
       return updatedLikes;
     });
+
+    if (itemInWishlist) {
+      dispatch(removeWishlistItem(item.id));
+      toast({
+        title: "Removed from Wishlist",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    } else {
+      dispatch(toggleWishlistItem(item));
+      toast({
+        title: "Added to Wishlist",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    }
   };
 
   setTimeout(() => setIsLoading(false), 1000);
+
+  const handleAddToCart = (item: CartItem) => {
+    const existingItem = cartItems.find(
+      (cartItem: CartItem) => cartItem.id === item.id
+    );
+
+    if (!existingItem) {
+      const newItem: CartItem = {
+        ...item,
+        quantity: 1,
+        total: item.price,
+      };
+
+      dispatch(addToCart(newItem));
+
+      toast({
+        title: "Saved to Your Cart",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    } else {
+      toast({
+        title: "Already in Cart",
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -44,12 +125,10 @@ export default function NewArrivalsCarousel() {
               overflow="hidden"
               flexShrink={0}
               w={{ base: "160px", md: "190px", lg: "210px", xl: "250px" }}
-              // h={{ base: "320px", md: "350px", lg: "390px", xl: "490px" }}
               mr={2}
               position="relative"
             >
-              <ChakraLink
-              >
+              <ChakraLink>
                 <Skeleton isLoaded={!isLoading}>
                   <Image
                     src={item.src}
@@ -62,7 +141,6 @@ export default function NewArrivalsCarousel() {
                     bg="#d8dad3"
                     boxShadow="md"
                   />
-
                 </Skeleton>
               </ChakraLink>
               <VStack p={1} align="start">
@@ -94,7 +172,11 @@ export default function NewArrivalsCarousel() {
                   </Text>
                 </Skeleton>
 
-                <Flex w={"100%"} justifyContent={"space-between"} alignItems={"center"} >
+                <Flex
+                  w={"100%"}
+                  justifyContent={"space-between"}
+                  alignItems={"center"}
+                >
                   <Skeleton isLoaded={!isLoading}>
                     <Text
                       color="#2d6a4f"
@@ -146,8 +228,8 @@ export default function NewArrivalsCarousel() {
                             </Box>
                           )
                         }
-                        onClick={() => handleLikeToggle(index)}
-                        variant="ghost"
+                        onClick={() => handleLikeToggle(index, item)}
+                        variant="black"
                         colorScheme="teal"
                         _hover={{ color: "#2f3e46" }}
                         transition="900ms"
@@ -158,10 +240,15 @@ export default function NewArrivalsCarousel() {
                       <IconButton
                         w={"10px"}
                         h={"20px"}
-                        ml={{ base: "-15px", lg: "-1" }}
                         aria-label="Add to Cart"
+                        ml={{ base: "-15px", lg: "-1" }}
+                        onClick={() => handleAddToCart(item)}
+                        cursor={"pointer"}
                         icon={
-                          <Box boxSize={{ base: "19px", md: "21px", lg: "24px" }}>
+                          <Box
+                            boxSize={{ base: "19px", md: "21px", lg: "24px" }}
+                            cursor="pointer"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -178,8 +265,7 @@ export default function NewArrivalsCarousel() {
                           </Box>
                         }
                         variant="ghost"
-                        colorScheme="teal"
-                        _hover={{ color: "#2f3e46" }}
+                        colorScheme="black"
                       />
                     </Skeleton>
                   </HStack>

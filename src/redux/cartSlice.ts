@@ -8,7 +8,7 @@ export interface CartItem {
   oldPrice: number;
   bonus: string;
   description: string;
-  quantity: number;  
+  quantity: number;
   total: number;
 }
 
@@ -30,16 +30,12 @@ const cartSlice = createSlice({
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
-
-      if (existingItem) {
-        existingItem.quantity += action.payload.quantity;
-        existingItem.total = existingItem.price * existingItem.quantity;
-      } else {
-        state.items.push(action.payload);
+      if (!existingItem) {
+        state.items.push({ ...action.payload });
       }
-
       state.count = state.items.reduce((sum, item) => sum + item.total, 0);
     },
+
     removeFromCart: (state, action: PayloadAction<number>) => {
       const itemToRemove = state.items.find(
         (item) => item.id === action.payload
@@ -56,21 +52,21 @@ const cartSlice = createSlice({
       const item = state.items.find((item) => item.id === action.payload.id);
       if (item) {
         item.quantity = action.payload.quantity;
-        item.total = item.price * item.quantity; 
+        item.total = item.price * item.quantity;
       }
     },
     incrementQuantity(state, action: PayloadAction<number>) {
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
-        item.quantity ++;
-        item.total = item.price * item.quantity; 
+        item.quantity++;
+        item.total = item.price * item.quantity;
       }
     },
     decrementQuantity(state, action: PayloadAction<number>) {
       const item = state.items.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {
-        item.quantity --; 
-        item.total = item.price * item.quantity; 
+        item.quantity--;
+        item.total = item.price * item.quantity;
       }
     },
     clearCart: (state) => {

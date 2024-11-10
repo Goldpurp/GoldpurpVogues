@@ -59,7 +59,7 @@ const HeroSection: React.FC = () => {
       as="section"
       position="relative"
       w="100vw"
-      h="100%"
+      h="100vh"
       bgImage={`url(${currentMovie.background})`}
       bgPosition="center"
       bgSize="cover"

@@ -35,11 +35,11 @@ const images = [Img2, Img3, Img4, Img5];
 export default function ProductPage() {
   const [value, setValue] = useState(1);
   const [like, setLike] = useState(false);
+  const state = useBreakpointValue({ base: false, md: true });
 
   const handleIncrement = () => setValue((prevValue) => prevValue + 1);
   const handleDecrement = () =>
     setValue((prevValue) => Math.max(prevValue - 1, 1));
-
   const toggleLike = () => setLike(!like);
 
   const tabs = ["DETAILS", "DESCRIPTION"];
@@ -57,12 +57,14 @@ export default function ProductPage() {
     "Imported",
   ];
 
-  const state = useBreakpointValue({ base: false, md: true });
-
   return (
-    <Flex direction={{ base: "column", lg: "column" }} pt={{base:"70px", md:"80px", lg: "100px"}} pb={"50px"} px={{ base: "", md: 9, lg: "80px" }}>
+    <Flex
+      direction={{ base: "column", lg: "column" }}
+      pt={{ base: "70px", md: "80px", lg: "100px" }}
+      pb={"50px"}
+      px={{ base: "", md: 9, lg: "80px" }}
+    >
       <Flex flexDirection={{ base: "column", lg: "row" }}>
-
         <Flex
           flexDirection={"column"}
           justifyContent={"center"}
@@ -147,6 +149,8 @@ export default function ProductPage() {
               fontWeight={"600"}
               color={"#fff"}
               _hover={{ background: "#2D6A4F" }}
+              // onClick={() => handleAddToCart(item)}
+              cursor={"pointer"}
             >
               Add to cart
             </Button>
@@ -231,12 +235,11 @@ export default function ProductPage() {
             </TabPanels>
           </Tabs>
         </Flex>
-
       </Flex>
-      
+
       <Flex justifyContent={"center"} alignContent={"center"} pt={6}>
-                <Text fontSize={"16px"}>RELATED STYLES</Text>
-            </Flex>
+        <Text fontSize={"16px"}>RELATED STYLES</Text>
+      </Flex>
       <RelatedChoice />
       <AlsoLike />
     </Flex>

@@ -8,69 +8,68 @@ import {
   HStack,
   Flex,
   SimpleGrid,
+  useToast,
 } from "@chakra-ui/react";
-import Img1 from "../../public/Products/Sneaker.jpg";
-import Img2 from "../../public/Products/shoe.jpg";
-import Img3 from "../../public/Products/shade.jpg";
-import Img4 from "../../public/Products/sideBag.jpg";
 import RelatedChoice from "../components/RelatedChoice";
 import { PiHandbagThin } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import productsData from "../redux/data";
+import { removeWishlistItem } from "../redux/wishlistSlice";
+import { addToCart, CartItem } from "../redux/cartSlice";
 
 export default function Wishlist() {
-  const _images = [
-    {
-      src: Img1,
-      hashtag: "Sold",
-    },
-    {
-      src: Img2,
-      hashtag: "Sold",
-    },
-    {
-      src: Img3,
-      hashtag: "Sold",
-    },
-    {
-      src: Img4,
-      hashtag: "Sold",
-    },
-  ];
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: any) => state.cart.items);
+  const toast = useToast();
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const handleRemove = (id: number) => {
+    dispatch(removeWishlistItem(id));
+  };
 
-  const images = [..._images, ..._images];
+  const handleAddToCart = (item: CartItem) => {
+    const existingItem = cartItems.find((cartItem: CartItem) => cartItem.id === item.id);
 
-  const wishlist = [
-    {
-      src: Img1,
-      label: "Crosses Cargo Sweatpant - Olive",
-      price: "41,459.99",
-      oldPrice: "58,050.00",
-      bonus: "10% Off On ₦50,000+ Orders!",
-    },
-    {
-      src: Img2,
-      label: "Crosses Cargo Sweatpant - Olive",
-      price: "41,459.99",
-      oldPrice: "58,050.00",
-      bonus: "10% Off On ₦50,000+ Orders!",
-    },
-    {
-      src: Img3,
-      label: "Crosses Cargo Sweatpant - Olive",
-      price: "41,459.99",
-      oldPrice: "58,050.00",
-      bonus: "10% Off On ₦50,000+ Orders!",
-    },
+    if (!existingItem) {
+      const newItem: CartItem = {
+        ...item,
+        quantity: 1,
+        total: item.price,
+      };
 
-  ];
+      dispatch(addToCart(newItem));
+
+      toast({
+        title: "Saved to Your Cart",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: 'Nunito, sans-serif',
+        },
+      });
+    } else {
+      toast({
+        title: "Already in Cart",
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: 'Nunito, sans-serif',
+        },
+      });
+    }
+  };
 
   return (
     <Container maxW="container.xl" pt={{ base: "50px", md: "70px", lg: "90px" }} px="4">
-      {wishlist.length === 0 ? (
+      {wishlistItems.length === 0 ? (
         <>
           <Flex alignItems="center" justifyContent={"center"} pt={3}>
             <Heading as="h1" fontSize="20px">
               WishList
-
             </Heading>
             <Box w="20px" ml={2}>
               <svg
@@ -113,7 +112,7 @@ export default function Wishlist() {
                     },
                   }}
                 >
-                  {images.map((e, i) => (
+                  {productsData.map((e, i) => (
                     <Box
                       key={i}
                       position="relative"
@@ -128,8 +127,8 @@ export default function Wishlist() {
 
                       <VStack
                         position="absolute"
-                        right="-110px"
-                        top="10px"
+                        left="120px"
+                        bottom="10px"
                         w="80%"
                         textAlign="center"
                         transform="translate(-50%, 0%)"
@@ -137,12 +136,13 @@ export default function Wishlist() {
                       >
                         <Text
                           borderRadius={4}
-                          bg={"#a44a3f"}
+                          bg={"#a52615"}
                           p={"0 4px"}
                           color={"#ffffff"}
                           fontWeight="500"
+                          fontSize={"13px"}
                         >
-                          {e.hashtag}
+                          Sold
                         </Text>
                       </VStack>
 
@@ -188,7 +188,7 @@ export default function Wishlist() {
           </Flex>
 
           <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={2} pt={6}>
-            {wishlist.map((item, itemIndex) => (
+            {wishlistItems.map((item, itemIndex) => (
               <Box
                 key={itemIndex}
                 bg="#e3e7eb"
@@ -209,6 +209,8 @@ export default function Wishlist() {
                     as={PiHandbagThin}
                     w={{ base: 5, lg: 6 }}
                     h={{ base: 5, lg: 6 }}
+                    cursor={"pointer"}
+                    onClick={() => handleAddToCart(item)}
                   />
                 </Flex>
                 <Box p={2} w={"full"} bg={"#fff"}>
@@ -237,13 +239,24 @@ export default function Wishlist() {
                       ₦{item.oldPrice}
                     </Text>
                   </Heading>
-                  <Text
-                    color="#9d2226"
-                    fontSize={{ base: "9px", md: "13px", lg: "15px" }}
-                    mt={"5px"}
-                  >
-                    {item.bonus}
-                  </Text>
+                  <Flex flex={1} justifyContent={"space-between"}>
+
+                    <Text
+                      color="#9d2226"
+                      fontSize={{ base: "9px", md: "13px", lg: "15px" }}
+                      mt={"5px"}
+                    >
+                      {item.bonus}
+                    </Text>
+
+                    <Box boxSize="20px" onClick={() => handleRemove(item.id)} cursor="pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="red">
+                        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
+                      </svg>
+                    </Box>
+                  </Flex>
+
+
                 </Box>
               </Box>
             ))}

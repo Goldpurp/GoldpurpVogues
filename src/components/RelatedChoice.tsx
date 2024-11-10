@@ -1,82 +1,56 @@
-import { Box, Image, Text, Flex, VStack } from "@chakra-ui/react";
-import Img from "/Products/4.png";
-
-const newArrivalItems = [
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-  {
-    src: Img,
-    title: "Breathable Shirt",
-    description: "Ethel Textured Knit Johnny Collar Shirt - white",
-    price: "16,499.99",
-  },
-];
+import { Box, Image, Text, Flex, VStack, useToast } from "@chakra-ui/react";
+import productsData from "../redux/data";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, CartItem } from "../redux/cartSlice";
 
 export default function RelatedChoice() {
+  const cartItems = useSelector((state: any) => state.cart.items);
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const handleAddToCart = (item: CartItem) => {
+    const existingItem = cartItems.find(
+      (cartItem: CartItem) => cartItem.id === item.id
+    );
+
+    if (!existingItem) {
+      const newItem: CartItem = {
+        ...item,
+        quantity: 1,
+        total: item.price,
+      };
+
+      dispatch(addToCart(newItem));
+
+      toast({
+        title: "Saved to Your Cart",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    } else {
+      toast({
+        title: "Already in Cart",
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          fontFamily: "Nunito, sans-serif",
+        },
+      });
+    }
+  };
 
   return (
     <Flex pt={"30px"} flexDirection={"column"} overflowX={"scroll"}>
       <VStack w="100%" pl={2}>
         <Flex overflowX="scroll" w="100%" css={{ scrollbarWidth: "none" }}>
-          {newArrivalItems.map((item, index) => (
+          {productsData.map((item, index) => (
             <Box
               key={index}
               bg="#f8f8f8"
@@ -90,7 +64,7 @@ export default function RelatedChoice() {
             >
               <Image
                 src={item.src}
-                alt={item.title}
+                alt={item.label}
                 w="100%"
                 objectFit="cover"
                 bg="#d8dad35d"
@@ -105,10 +79,15 @@ export default function RelatedChoice() {
                   fontWeight="400"
                   noOfLines={1}
                 >
-                  {item.title}
+                  {item.label}
                 </Text>
 
-                <Flex justifyContent={"space-between"}>
+                <Flex
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"space-evenly"}
+                  w={"100%"}
+                >
                   <Text
                     color="#2d6a4f"
                     fontSize={{ base: "14px", lg: "18px" }}
@@ -116,7 +95,12 @@ export default function RelatedChoice() {
                   >
                     ₦{item.price}
                   </Text>
-                  <Box w="20px" ml={12}>
+                  <Box
+                    w="20px"
+                    ml={"50px"}
+                    cursor={"pointer"}
+                    onClick={() => handleAddToCart(item)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
