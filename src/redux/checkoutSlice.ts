@@ -1,77 +1,77 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CheckoutItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number; 
+interface BillingInfo {
+  email: string;
+  cardName: string;
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
 }
 
-interface ShippingDetails {
+interface ShippingInfo {
+  fullName: string;
   address: string;
+  phoneNumber: string;
   city: string;
-  postalCode: string;
-  country: string;
+  state: string;
+  zipCode: string;
 }
 
 interface CheckoutState {
-  items: CheckoutItem[];
-  shippingDetails: ShippingDetails | null;
-  loading: boolean;
-  error: string | null;
+  billingInfo: BillingInfo;
+  shippingInfo: ShippingInfo;
+  useShippingAsBilling: boolean;
+  selectedShipping: "pickUp" | "delivery";
 }
 
 const initialState: CheckoutState = {
-  items: [],
-  shippingDetails: null,
-  loading: false,
-  error: null,
+  billingInfo: {
+    email: "",
+    cardName: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
+  },
+  shippingInfo: {
+    fullName: "",
+    address: "",
+    phoneNumber: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  },
+  useShippingAsBilling: true,
+  selectedShipping: "delivery",
 };
 
 const checkoutSlice = createSlice({
-  name: 'checkout',
+  name: "checkout",
   initialState,
   reducers: {
-    addItemToCheckout: (state, action: PayloadAction<CheckoutItem>) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
-      if (existingItem) {
-        existingItem.quantity += action.payload.quantity;
-      } else {
-        state.items.push(action.payload);
-      }
+    setBillingInfo(state, action: PayloadAction<BillingInfo>) {
+      state.billingInfo = action.payload;
     },
-    removeItemFromCheckout: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
+    setShippingInfo(state, action: PayloadAction<ShippingInfo>) {
+      state.shippingInfo = action.payload;
     },
-    clearCheckout: (state) => {
-      state.items = [];
-      state.shippingDetails = null;
+    setUseShippingAsBilling(state, action: PayloadAction<boolean>) {
+      state.useShippingAsBilling = action.payload;
     },
-    setShippingDetails: (state, action: PayloadAction<ShippingDetails>) => {
-      state.shippingDetails = action.payload;
+    setSelectedShipping(state, action: PayloadAction<"pickUp" | "delivery">) {
+      state.selectedShipping = action.payload;
     },
-    fetchCheckoutStart: (state) => {
-      state.loading = true;
-    },
-    fetchCheckoutSuccess: (state) => {
-      state.loading = false;
-      state.error = null;
-    },
-    fetchCheckoutFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload;
+    resetCheckout(state) {
+      Object.assign(state, initialState);
     },
   },
 });
 
 export const {
-  addItemToCheckout,
-  removeItemFromCheckout,
-  clearCheckout,
-  setShippingDetails,
-  fetchCheckoutStart,
-  fetchCheckoutSuccess,
-  fetchCheckoutFailure,
+  setBillingInfo,
+  setShippingInfo,
+  setUseShippingAsBilling,
+  setSelectedShipping,
+  resetCheckout,
 } = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

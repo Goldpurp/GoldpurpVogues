@@ -18,4 +18,5 @@ export enum Routes {
   SubCategory = "/category/:categoryName/:subCategoryName",
   Collection = "/collection",
   CollectionPage = "/collection-page",
+  CheckoutBilling = "/checkout-billing",
 }

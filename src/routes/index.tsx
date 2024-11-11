@@ -19,6 +19,7 @@ import Checkout from "../TodoPages.ts/Checkout";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
 import CollectionSection from "../pages/CollectionSection";
 import CollectionsPage from "../pages/CollectionsPage";
+import CheckoutBilling from "../TodoPages.ts/CheckoutBilling";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: Routes.Checkout,
         element: <Checkout />
+    },
+    {
+        path: Routes.CheckoutBilling,
+        element: <CheckoutBilling />
     },
 
     {

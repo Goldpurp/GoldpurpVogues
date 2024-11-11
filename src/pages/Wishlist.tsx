@@ -261,6 +261,14 @@ export default function Wishlist() {
               </Box>
             ))}
           </SimpleGrid>
+
+          <Box pt={9}>
+        <Heading size="md" pl={5}>
+          Similar items you might like
+        </Heading>
+        <RelatedChoice />
+      </Box>
+
         </Box>
       )}
     </Container>
