@@ -35,7 +35,7 @@ export default function ColorSelectComponent() {
               w="35px"
               h="23px"
               bg={color.value}
-              border={activeColor === color.name ? "2px solid black" : "1px solid #adb5bd"}
+              border={activeColor === color.name ? "2px solid #c4a163" : "1px solid #adb5bd"}
               cursor="pointer"
               mr={3}
               _hover={{ border: "2px solid #c4a163" }}

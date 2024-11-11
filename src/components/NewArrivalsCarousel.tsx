@@ -22,6 +22,8 @@ import {
   WishlistItem,
 } from "../redux/wishlistSlice";
 import { RootState } from "../redux/store";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 export default function NewArrivalsCarousel() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +31,8 @@ export default function NewArrivalsCarousel() {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
   const toast = useToast();
+  const navigate = useNavigate();
+
 
   const [likedItems, setLikedItems] = useState<boolean[]>(
     new Array(productsData.length).fill(false)
@@ -140,6 +144,7 @@ export default function NewArrivalsCarousel() {
                     borderRadius="lg"
                     bg="#d8dad3"
                     boxShadow="md"
+                onClick={() => navigate(Routes.ProductPage, { state: { product: item } })}
                   />
                 </Skeleton>
               </ChakraLink>

@@ -18,7 +18,8 @@ import {
   toggleWishlistItem,
   WishlistItem,
 } from "../redux/wishlistSlice";
-
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 interface Color {
   name: string;
   value: string;
@@ -37,6 +38,8 @@ export default function AlsoLike() {
   }>({});
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const toast = useToast();
 
   const [likedItems, setLikedItems] = useState<boolean[]>(
@@ -151,7 +154,8 @@ export default function AlsoLike() {
               cursor="pointer"
               position={"relative"}
             >
-              <Image src={item.src} alt="image" objectFit="cover" />
+              <Image src={item.src} alt="image" objectFit="cover" onClick={() => navigate(Routes.ProductPage, { state: { product: item } })}
+/>
               <Flex
                 position="absolute"
                 right={2}

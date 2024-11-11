@@ -1,11 +1,14 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Box, Flex, Heading, Text, Skeleton } from "@chakra-ui/react";
 import ShopNowBtn from "./ShowNowBtn";
+import { Routes } from "../routes/baseRoutes";
+import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(true); 
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true); 
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -64,7 +67,9 @@ const Hero: React.FC = () => {
         </Skeleton>
 
         <Skeleton isLoaded={!isLoading}>
-          <ShopNowBtn onclickBtn={() => {}} />
+          <ShopNowBtn onclickBtn={()=>navigate(Routes.CollectionPage)} />
+
+
         </Skeleton>
       </Flex>
 

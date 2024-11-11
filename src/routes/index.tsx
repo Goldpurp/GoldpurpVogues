@@ -19,7 +19,6 @@ import Checkout from "../TodoPages.ts/Checkout";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
 import CollectionSection from "../pages/CollectionSection";
 import CollectionsPage from "../pages/CollectionsPage";
-// import MyComponent from "../TodoPages.ts/MyComponent";
 
 const router = createBrowserRouter([
     {
@@ -38,10 +37,6 @@ const router = createBrowserRouter([
         path: Routes.Checkout,
         element: <Checkout />
     },
-    // {
-    //     path: Routes.MyComponent,
-    //     element: <MyComponent />
-    // },
 
     {
         path: Routes.home,

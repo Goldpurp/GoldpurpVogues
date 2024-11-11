@@ -13,6 +13,8 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import HeroImg from "/Images/heroImg5.png";
 import HeroImgMini from "/Images/heroImg5mini.png";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 const fadeIn = keyframes`
     from {
@@ -24,6 +26,7 @@ const fadeIn = keyframes`
   `;
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true);
   const heroImgWidth = useBreakpointValue({ base: "300px", md: "520px" });
   const miniImgDisplay = useBreakpointValue({
@@ -35,6 +38,7 @@ const Hero: React.FC = () => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <Flex
@@ -82,6 +86,7 @@ const Hero: React.FC = () => {
 
         <Skeleton isLoaded={!isLoading}>
           <ChakraButton
+            onClick={()=>navigate(Routes.CollectionPage)}
             fontFamily={"DM Mono"}
             w={"fit-content"}
             p={2}

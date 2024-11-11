@@ -2,10 +2,13 @@ import { Box, Image, Text, Flex, VStack, useToast } from "@chakra-ui/react";
 import productsData from "../redux/data";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, CartItem } from "../redux/cartSlice";
+import { Routes } from "../routes/baseRoutes";
+import { useNavigate } from "react-router-dom";
 
 export default function RelatedChoice() {
   const cartItems = useSelector((state: any) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toast = useToast();
 
   const handleAddToCart = (item: CartItem) => {
@@ -47,7 +50,7 @@ export default function RelatedChoice() {
   };
 
   return (
-    <Flex pt={"30px"} flexDirection={"column"} overflowX={"scroll"}>
+    <Flex pt={"30px"} flexDirection={"column"} overflowX={"scroll"} cursor={"pointer"}>
       <VStack w="100%" pl={2}>
         <Flex overflowX="scroll" w="100%" css={{ scrollbarWidth: "none" }}>
           {productsData.map((item, index) => (
@@ -69,6 +72,7 @@ export default function RelatedChoice() {
                 objectFit="cover"
                 bg="#d8dad35d"
                 boxShadow="sm"
+                onClick={() => navigate(Routes.ProductPage, { state: { product: item } })}
               />
               <VStack py={4} pl={2} align="start">
                 <Text

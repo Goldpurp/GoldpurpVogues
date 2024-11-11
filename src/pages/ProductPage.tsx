@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   Flex,
@@ -13,34 +12,88 @@ import {
   UnorderedList,
   ListItem,
   IconButton,
-  useBreakpointValue,
+  useToast,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
-import Img2 from "/ProductImages/2.webp";
-import Img3 from "/ProductImages/3.jpg";
-import Img4 from "/ProductImages/4.webp";
-import Img5 from "/ProductImages/5.webp";
-
 import ColorSelectComponent from "../components/Color";
 import SizeSelectComponent from "../components/Size";
 import StarRating from "../components/StarRating";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import RelatedChoice from "../components/RelatedChoice";
 import AlsoLike from "../components/AlsoLike";
 import ShareButton from "../components/ShareButton";
 import SizeChartDrawer from "../components/SizeChart";
-
-const images = [Img2, Img3, Img4, Img5];
+import { useLocation, Link as RouterLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeWishlistItem,
+  toggleWishlistItem,
+  WishlistItem,
+} from "../redux/wishlistSlice";
+import { useState } from "react";
+import { RootState } from "../redux/store";
+import { addToCart } from "../redux/cartSlice";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export default function ProductPage() {
-  const [value, setValue] = useState(1);
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const { state } = useLocation();
+  const navigate = useNavigate();
   const [like, setLike] = useState(false);
-  const state = useBreakpointValue({ base: false, md: true });
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleIncrement = () => setValue((prevValue) => prevValue + 1);
-  const handleDecrement = () =>
-    setValue((prevValue) => Math.max(prevValue - 1, 1));
-  const toggleLike = () => setLike(!like);
+  const product = state.product;
+  const handleLikeToggle = (item: WishlistItem) => {
+    const itemInWishlist = wishlistItems.some(
+      (wishlistItem) => wishlistItem.id === item.id
+    );
+
+    setLike(!like);
+
+    if (itemInWishlist) {
+      dispatch(removeWishlistItem(item.id));
+      showToast("Removed from Wishlist", "warning");
+    } else {
+      dispatch(toggleWishlistItem(item));
+      showToast("Added to Wishlist", "success");
+    }
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: product.id,
+      src: product.src,
+      label: product.label,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      bonus: product.bonus || "",
+      description: product.description,
+      quantity: 1,
+      total: product.price,
+    };
+
+    dispatch(addToCart(cartItem));
+    showToast("Added to Cart", "success");
+  };
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
+
+  const showToast = (title: string, status: "success" | "warning") => {
+    toast({
+      title,
+      status,
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+      containerStyle: {
+        fontFamily: "Nunito, sans-serif",
+      },
+    });
+  };
 
   const tabs = ["DETAILS", "DESCRIPTION"];
   const detailsContent = [
@@ -59,106 +112,99 @@ export default function ProductPage() {
 
   return (
     <Flex
-      direction={{ base: "column", lg: "column" }}
+      direction="column"
       pt={{ base: "70px", md: "80px", lg: "100px" }}
-      pb={"50px"}
+      pb="50px"
       px={{ base: "", md: 9, lg: "80px" }}
     >
+
+      <Breadcrumb
+        spacing="8px"
+        separator={<ChevronRightIcon color="gray.500" />}
+        mb={4}
+        pl={{ base: 4, lg: 12 }}
+        fontSize={"12px"}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={RouterLink} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink onClick={handleBackClick}>
+            Go back
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink >
+            <Text isTruncated maxW="170px">{product.label}</Text>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+
       <Flex flexDirection={{ base: "column", lg: "row" }}>
-        <Flex
-          flexDirection={"column"}
-          justifyContent={"center"}
-          flex="0.4"
-          position="relative"
-          px={3}
-        >
+        <Flex flex="0.4" px={3}>
           <Box maxW="640px" mx="auto">
-            <Carousel
-              autoPlay
-              infiniteLoop
-              showThumbs={false}
-              showStatus={true}
-              showArrows={state}
-            >
-              {images.map((item, index) => (
-                <Box key={index}>
-                  <Image alt={`image-${index}`} src={item} />
-                </Box>
-              ))}
-            </Carousel>
+            <Image src={product.src} alt={product.label} />
           </Box>
         </Flex>
 
-        <Flex
-          direction="column"
-          flex="0.6"
-          ml={{ lg: 8 }}
-          mt={{ base: 4, lg: 0 }}
-          px={4}
-        >
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
-            <Text fontSize={"15px"}>Crosses Cargo Sweatpant - Olive</Text>
+        <Flex direction="column" flex="0.6" ml={{ lg: 8 }} mt={{ base: 4, lg: 0 }} px={4}>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Text fontSize="15px">{product.label}</Text>
             <ShareButton />
           </Flex>
+
           <Flex justify="space-between" align="center" pt={3} pb={4}>
-            <Text
-              as="h5"
-              color="#386648"
-              fontWeight={600}
-              fontSize={{ base: "18px", lg: "18px" }}
-            >
-              ₦41,459.99
-              <Text
-                as="span"
-                color="#780000"
-                textDecoration="line-through"
-                ml={6}
-                fontWeight={400}
-                fontSize={{ base: "12px", lg: "13px" }}
-              >
-                ₦58,050.00
+            <Text as="h5" color="#386648" fontWeight={600} fontSize="18px">
+              ₦{product.price}
+              <Text as="span" color="#780000" textDecoration="line-through" ml={6} fontWeight={400} fontSize="13px">
+                ₦{product.oldPrice}
               </Text>
             </Text>
           </Flex>
 
           <ColorSelectComponent />
 
-          <Flex justifyContent={"space-between"} alignItems={"start"}>
+          <Flex justify="space-between" alignItems="start">
             <SizeSelectComponent />
-            <SizeChartDrawer />
+
           </Flex>
 
-          <Flex alignItems={"center"} justifyContent={"space-between"} py={3}>
+          <Flex alignItems="center" flex={1} justifyContent={"space-between"} py={3}>
             <StarRating />
-            <Flex align="center">
-              <Button onClick={handleDecrement}>-</Button>
-              <Text mx={4}>{value}</Text>
-              <Button onClick={handleIncrement}>+</Button>
-            </Flex>
+            <SizeChartDrawer />
+
+            {/* <Flex align="center">
+              <Button onClick={() => handleDecrement(product.id)}>-</Button>
+              <Text mx={4}>{product.quantity}</Text>
+              <Button onClick={() => handleIncrement(product.id)}>+</Button>
+            </Flex> */}
           </Flex>
 
-          <Flex alignItems={"center"}>
+          <Flex alignItems="center">
             <Button
-              justifyContent={"center"}
-              alignItems={"center"}
-              w={"full"}
-              p={"23px"}
-              bg={"#2D6A4F"}
-              borderRadius={"10px"}
-              fontSize={"16px"}
-              fontWeight={"600"}
-              color={"#fff"}
+              w="full"
+              p="23px"
+              bg="#2D6A4F"
+              borderRadius="10px"
+              fontSize="16px"
+              fontWeight="600"
+              color="#fff"
               _hover={{ background: "#2D6A4F" }}
-              // onClick={() => handleAddToCart(item)}
-              cursor={"pointer"}
+              cursor="pointer"
+              onClick={handleAddToCart}
             >
               Add to cart
             </Button>
-            <Box m={4} w={"40px"} h={"40px"} borderRadius={"5px"} bg="white">
+            <Box m={4} w="40px" h="40px" borderRadius="5px" bg="white">
               <IconButton
-                w={"40px"}
-                h={"40px"}
+                w="40px"
+                h="40px"
                 aria-label="Like Item"
+                onClick={() => handleLikeToggle(product)}
                 icon={
                   like ? (
                     <Box boxSize="24px">
@@ -188,7 +234,6 @@ export default function ProductPage() {
                     </Box>
                   )
                 }
-                onClick={toggleLike}
                 variant="ghost"
                 colorScheme="red"
                 border="1px solid #e9ecef"
@@ -200,18 +245,7 @@ export default function ProductPage() {
           <Tabs mt={4}>
             <TabList>
               {tabs.map((tab, index) => (
-                <Tab
-                  key={index}
-                  _selected={{
-                    color: "#000",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                    borderColor: "#072115",
-                  }}
-                  color="black"
-                  fontSize="14px"
-                  fontWeight="normal"
-                >
+                <Tab key={index} _selected={{ color: "#000", fontWeight: "bold", fontSize: "18px", borderColor: "#072115" }} color="black" fontSize="14px">
                   {tab}
                 </Tab>
               ))}
@@ -224,12 +258,9 @@ export default function ProductPage() {
                   ))}
                 </UnorderedList>
               </TabPanel>
-
               <TabPanel py={2} px={0}>
-                <Text>
-                  In a constantly changing fashion environment, staying ahead of
-                  the curve is key to maintaining a wardrobe that reflects both
-                  your personal style and the latest trends.
+                <Text fontSize="14px" color="gray.600">
+                  {product.description}
                 </Text>
               </TabPanel>
             </TabPanels>
@@ -237,9 +268,6 @@ export default function ProductPage() {
         </Flex>
       </Flex>
 
-      <Flex justifyContent={"center"} alignContent={"center"} pt={6}>
-        <Text fontSize={"16px"}>RELATED STYLES</Text>
-      </Flex>
       <RelatedChoice />
       <AlsoLike />
     </Flex>

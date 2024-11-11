@@ -27,7 +27,7 @@ export default function SizeSelectComponent() {
               py={"2px"}
               px={4}
               borderRadius="0"
-              border={activeSize === size ? "2px solid black" : "1px solid #adb5bd"}
+              border={activeSize === size ? "2px solid #c4a163" : "1px solid #adb5bd"}
               cursor="pointer"
               mr={3}
               _hover={{ border: "2px solid #c4a163" }}

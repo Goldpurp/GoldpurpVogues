@@ -2,6 +2,8 @@ import { Box, Text, VStack, keyframes, Skeleton } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import ShopNowBtn from "./ShowNowBtn";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -10,6 +12,7 @@ const pulse = keyframes`
 `;
 
 export default function PromoAds() {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,6 +44,7 @@ export default function PromoAds() {
           color="#660708"
           fontSize={{ base: "17px", md: "24px", lg: "26px", xl: "30px" }}
           fontWeight="100"
+          cursor={"pointer"}
           css={css`
             animation: ${pulse} 1.5s infinite;
           `}
@@ -60,7 +64,7 @@ export default function PromoAds() {
         </Skeleton>
 
         <Skeleton isLoaded={!loading}>
-          <ShopNowBtn onclickBtn={() => {}} />
+          <ShopNowBtn onclickBtn={() => navigate(Routes.CollectionPage)} />
         </Skeleton>
       </VStack>
     </Box>
