@@ -405,10 +405,12 @@ export default function ProductGrid() {
         ))}
       </SimpleGrid>
       <Button
-        mt={4}
-        w="full"
+        mt={5}
+        colorScheme={"green"}
+        size={"lg"}
+        w={"full"}
+        cursor={"pointer"}
         onClick={handleShowMore}
-        display={visibleProducts >= productsData.length ? "none" : "block"}
       >
         Show More
       </Button>

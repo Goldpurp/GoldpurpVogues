@@ -167,21 +167,11 @@ export default function ProductPage() {
           </Flex>
 
           <ColorSelectComponent />
-
-          <Flex justify="space-between" alignItems="start">
-            <SizeSelectComponent />
-
-          </Flex>
+          <SizeSelectComponent />
 
           <Flex alignItems="center" flex={1} justifyContent={"space-between"} py={3}>
             <StarRating />
             <SizeChartDrawer />
-
-            {/* <Flex align="center">
-              <Button onClick={() => handleDecrement(product.id)}>-</Button>
-              <Text mx={4}>{product.quantity}</Text>
-              <Button onClick={() => handleIncrement(product.id)}>+</Button>
-            </Flex> */}
           </Flex>
 
           <Flex alignItems="center">

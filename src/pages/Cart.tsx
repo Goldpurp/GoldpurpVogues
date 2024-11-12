@@ -161,7 +161,7 @@ export default function Cart() {
           flexDirection="column"
           alignItems="center"
           pt={"120px"}
-          px={1}
+          px={9}
         >
           <Heading as="h3" size="md" fontWeight="300" mb={4}>
             Your cart has no items.
@@ -172,9 +172,10 @@ export default function Cart() {
           </Text>
 
           <Button
-            colorScheme="whatsapp"
-            variant="outline"
-            w={{ base: "100%", md: "100%" }}
+          colorScheme={"green"}
+          size={"lg"}
+          w={"full"}
+          cursor={"pointer"}
             boxShadow="1px 1px 5px 1px #a5a5a5"
             mt={6}
           >
@@ -183,17 +184,16 @@ export default function Cart() {
         </Flex>
       )}
 
-      <Box pt={9}>
-        <Heading size="md" pl={5}>
-          Similar items you might like
-        </Heading>
         <RelatedChoice />
-      </Box>
 
       {hasItems ? (
         <>
           <Divider p={4} />
           <Flex bg={"#fff"} flexDirection={"column"} p={"15px 15px 0px 15px"}>
+            <HStack justify="space-between" color={"green"} px={1}>
+              <Text fontWeight={"medium"}>→</Text>
+              <Text fontWeight={"bold"}>0</Text>
+            </HStack>
             <HStack justify="space-between" color={"green"} px={1}>
               <Text fontWeight={"medium"}>Total</Text>
               <Text fontWeight={"bold"}>₦{totalAmount}</Text>
