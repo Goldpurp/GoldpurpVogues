@@ -154,7 +154,7 @@ const CollectionSection = () => {
               transition="color 0.4s, border-color 0.4s"
               alignSelf="center"
               _hover={{ color: "#dee2e6", borderBottomColor: "#dee2e6" }}
-              onClick={() => navigate(Routes.CollectionPage)}
+              onClick={() => navigate(Routes.Collection)}
             >
               Discover Now
             </Button>

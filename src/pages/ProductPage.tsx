@@ -17,14 +17,13 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/react";
-import ColorSelectComponent from "../components/Color";
 import SizeSelectComponent from "../components/Size";
 import StarRating from "../components/StarRating";
 import RelatedChoice from "../components/RelatedChoice";
 import AlsoLike from "../components/AlsoLike";
 import ShareButton from "../components/ShareButton";
 import SizeChartDrawer from "../components/SizeChart";
-import { useLocation, Link as RouterLink, useNavigate } from "react-router-dom";
+import { useLocation, Link as RouterLink, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeWishlistItem,
@@ -35,6 +34,7 @@ import { useState } from "react";
 import { RootState } from "../redux/store";
 import { addToCart } from "../redux/cartSlice";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import ColorSelectComponent from "../components/Color";
 
 export default function ProductPage() {
   const toast = useToast();
@@ -45,6 +45,7 @@ export default function ProductPage() {
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
   const product = state.product;
+
   const handleLikeToggle = (item: WishlistItem) => {
     const itemInWishlist = wishlistItems.some(
       (wishlistItem) => wishlistItem.id === item.id

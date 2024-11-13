@@ -172,10 +172,10 @@ export default function Cart() {
           </Text>
 
           <Button
-          colorScheme={"green"}
-          size={"lg"}
-          w={"full"}
-          cursor={"pointer"}
+            colorScheme={"green"}
+            size={"lg"}
+            w={"full"}
+            cursor={"pointer"}
             boxShadow="1px 1px 5px 1px #a5a5a5"
             mt={6}
           >
@@ -184,18 +184,18 @@ export default function Cart() {
         </Flex>
       )}
 
-        <RelatedChoice />
+      <RelatedChoice />
 
       {hasItems ? (
         <>
-          <Divider p={4} />
+          <Divider py={4} />
           <Flex bg={"#fff"} flexDirection={"column"} p={"15px 15px 0px 15px"}>
             <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"}>→</Text>
-              <Text fontWeight={"bold"}>0</Text>
+              <Text fontWeight={"medium"}>Discount:</Text>
+              <Text fontWeight={"bold"}>5%</Text>
             </HStack>
             <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"}>Total</Text>
+              <Text fontWeight={"medium"}>Total:</Text>
               <Text fontWeight={"bold"}>₦{totalAmount}</Text>
             </HStack>
             <Button

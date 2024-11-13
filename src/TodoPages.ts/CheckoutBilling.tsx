@@ -42,7 +42,7 @@ const CheckoutPage: React.FC = () => {
   const FinalCost = shippingCost + total;
 
   return (
-    <Box position={"relative"} bg="gray.50" minH="100vh" p={[4, 8]}>
+    <Box position={"relative"} minH="100vh" pt={{ base: "45px", md: "50px" }}>
       <Flex direction={["column", "row"]} gap={8}>
         <Box flex="1" bg="white" p={6} borderRadius="lg" shadow="sm">
 
@@ -99,19 +99,19 @@ const CheckoutPage: React.FC = () => {
                 bg={"#b7e4c7"}
               >
                 <FormLabel
-                  fontSize="12px"
+                  fontSize="13px"
                   fontWeight="500"
                   pl={4}
                   mb={0}
-                  py={"1px"}
+                  py={"3px"}
                 >
                   Email Address
                 </FormLabel>
                 <Input
                   type="text"
                   placeholder="goldpurp@example.com"
-                  h="40px"
-                  fontSize="12px"
+                  h="48px"
+                  fontSize="13px"
                   borderRadius="10px"
                   border={"none"}
                   bg="#fff"
@@ -130,19 +130,19 @@ const CheckoutPage: React.FC = () => {
                 bg={"#b7e4c7"}
               >
                 <FormLabel
-                  fontSize="12px"
+                  fontSize="13px"
                   fontWeight="500"
                   pl={4}
                   mb={0}
-                  py={"1px"}
+                  py={"3px"}
                 >
                   Card Name
                 </FormLabel>
                 <Input
                   type="text"
                   placeholder="GoldPurp Vogue"
-                  h="40px"
-                  fontSize="12px"
+                  h="48px"
+                  fontSize="13px"
                   borderRadius="10px"
                   border={"none"}
                   bg="#fff"
@@ -161,19 +161,19 @@ const CheckoutPage: React.FC = () => {
                 bg={"#b7e4c7"}
               >
                 <FormLabel
-                  fontSize="12px"
+                  fontSize="13px"
                   fontWeight="500"
                   pl={4}
                   mb={0}
-                  py={"1px"}
+                  py={"3px"}
                 >
                   Card Number
                 </FormLabel>
                 <Input
                   type="text"
                   placeholder="5330 2345 8390 7219"
-                  h="40px"
-                  fontSize="12px"
+                  h="48px"
+                  fontSize="13px"
                   borderRadius="10px"
                   border={"none"}
                   bg="#fff"
@@ -193,19 +193,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     Expiration Date
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="04/27"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -224,19 +224,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     Cvv
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="027"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -271,19 +271,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     Full Name
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="Goldpurp Vogue"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -302,19 +302,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     Address
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="01 Ibzc Ave Sagamu ogun Ng"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -333,19 +333,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     Phone Number
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="2348109675377"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -364,19 +364,19 @@ const CheckoutPage: React.FC = () => {
                   bg={"#b7e4c7"}
                 >
                   <FormLabel
-                    fontSize="12px"
+                    fontSize="13px"
                     fontWeight="500"
                     pl={4}
                     mb={0}
-                    py={"1px"}
+                    py={"3px"}
                   >
                     City
                   </FormLabel>
                   <Input
                     type="text"
                     placeholder="Sagamu"
-                    h="40px"
-                    fontSize="12px"
+                    h="48px"
+                    fontSize="13px"
                     borderRadius="10px"
                     border={"none"}
                     bg="#fff"
@@ -396,19 +396,19 @@ const CheckoutPage: React.FC = () => {
                     bg={"#b7e4c7"}
                   >
                     <FormLabel
-                      fontSize="12px"
+                      fontSize="13px"
                       fontWeight="500"
                       pl={4}
                       mb={0}
-                      py={"1px"}
+                      py={"3px"}
                     >
                       State
                     </FormLabel>
                     <Input
                       type="text"
                       placeholder="Ogun"
-                      h="40px"
-                      fontSize="12px"
+                      h="48px"
+                      fontSize="13px"
                       borderRadius="10px"
                       border={"none"}
                       bg="#fff"
@@ -426,19 +426,19 @@ const CheckoutPage: React.FC = () => {
                     bg={"#b7e4c7"}
                   >
                     <FormLabel
-                      fontSize="12px"
+                      fontSize="13px"
                       fontWeight="500"
                       pl={4}
                       mb={0}
-                      py={"1px"}
+                      py={"3px"}
                     >
                       Zip Code
                     </FormLabel>
                     <Input
                       type="text"
                       placeholder="110221"
-                      h="40px"
-                      fontSize="12px"
+                      h="48px"
+                      fontSize="13px"
                       borderRadius="10px"
                       border={"none"}
                       bg="#fff"
@@ -452,8 +452,6 @@ const CheckoutPage: React.FC = () => {
               </Box>
             )}
           </VStack>
-
-          {/* Shipping Options */}
 
           <Divider my={6} />
 
@@ -494,7 +492,7 @@ const CheckoutPage: React.FC = () => {
           </Box>
         </Box>
 
-        <Box flex="1" bg="white" p={6} borderRadius="lg" shadow="sm">
+        <Box flex="1" p={6} borderRadius="lg" shadow="sm">
           <Heading as="h2" size="md" mb={4}>
             Summary Order
           </Heading>
@@ -561,13 +559,13 @@ const CheckoutPage: React.FC = () => {
               <Text fontWeight="medium">₦{shippingCost}</Text>
             </HStack>
             <HStack justify="space-between" fontSize="lg">
-              <Text fontWeight="bold">Total</Text>
+              <Text>Total</Text>
               <Text fontWeight="bold"> ₦{FinalCost}</Text>
             </HStack>
           </VStack>
 
           <Button mt={5} colorScheme={"green"} size={"lg"} w={"full"}>
-            pay ₦{FinalCost}
+            Pay ₦{FinalCost}
           </Button>
         </Box>
       </Flex>

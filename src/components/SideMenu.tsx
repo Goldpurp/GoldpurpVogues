@@ -47,7 +47,7 @@ const SidebarMenu = () => {
     >
 
       <Box pt={5}>
-        <Link to={"/collection-page"}>ALL PRODUCTS</Link>
+        <Link to={"/collection"}>ALL PRODUCTS</Link>
       </Box>
 
       {/* Accessories Section */}

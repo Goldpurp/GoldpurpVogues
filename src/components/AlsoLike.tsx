@@ -157,17 +157,17 @@ export default function ProductGrid() {
 
   return (
     <Flex
-    flexDirection={"column"}
-    px={2}
-    pt={"20px"}
-    w="100%"
-    overflow="hidden"
-    letterSpacing="normal"
-    fontFamily="Nunito, sans-serif"
-  >
-    <Flex justifyContent={"center"} alignContent={"center"} pb={9}>
-      <Text fontSize={"18px"}>YOU MAY ALSO LIKE</Text>
-    </Flex>
+      flexDirection={"column"}
+      px={2}
+      pt={"20px"}
+      w="100%"
+      overflow="hidden"
+      letterSpacing="normal"
+      fontFamily="Nunito, sans-serif"
+    >
+      <Flex justifyContent={"center"} alignContent={"center"} pb={9}>
+        <Text fontSize={"18px"}>YOU MAY ALSO LIKE</Text>
+      </Flex>
 
       <SimpleGrid columns={columns} spacing={3}>
         {productsData.slice(0, visibleProducts).map((item) => (
@@ -410,16 +410,17 @@ export default function ProductGrid() {
           </Box>
         ))}
       </SimpleGrid>
-      <Button
-        mt={5}
-        colorScheme={"green"}
-        size={"lg"}
-        w={"full"}
-        cursor={"pointer"}
-        onClick={handleShowMore}
-      >
-        Show More
-      </Button>
+      {visibleProducts < productsData.length && (
+        <Button
+          mt={5}
+          colorScheme="green"
+          size="lg"
+          w="full"
+          onClick={handleShowMore}
+        >
+          Show More
+        </Button>
+      )}
     </Flex>
   );
 }

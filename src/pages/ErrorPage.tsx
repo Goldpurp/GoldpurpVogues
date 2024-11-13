@@ -14,14 +14,17 @@ export default function ErrorPage() {
 
 
   return (
-    <Container maxW="full" p={4} pt={"80px"} bg={"#f0fff11a"}>
-      <Flex direction="column" align="center">
+    <Container maxW="full" p={4} pt={"80px"} bg={"#f0fff11a"} position={"relative"}>
+      <Flex direction="column" align="center" justifyContent={"center"}>
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
-          w={{ base: "180px", md: "150px", lg: "180px" }}
+          w={{ base: "200px", md: "150px", lg: "180px" }}
           h={"100px"}
           mb={4}
+          position={"absolute"}
+          left={0}
+          top={5}
         >
           <Image
             src={Logo}
@@ -30,13 +33,13 @@ export default function ErrorPage() {
             w="100%"
             h="100%"
             objectFit="contain"
-            boxSize={"90%"}
+            boxSize={"100%"}
           onClick={()=> navigate(Routes.home)}
 
           />
         </Flex>
 
-        <Flex direction={{ base: "column", md: "row" }} align="center" justify="space-evenly" w="full">
+        <Flex pt={{base: "100px", md: "150px"}} direction={{ base: "column", md: "row" }} align="center" justify="space-evenly" w="full">
           <Box textAlign="center" p={4}>
             <Heading as="h1" fontSize={{ base: "2xl", md: "3xl" }} mb={4}>
               Ooops!
@@ -59,11 +62,11 @@ export default function ErrorPage() {
             </Text>
 
             <Flex mt={6} gap={4} justifyContent="center">
-              <Button leftIcon={<IoReturnUpBackOutline />} variant="outline" onClick={()=> navigate(Routes.home)}
+              <Button leftIcon={<IoReturnUpBackOutline />}  onClick={()=> navigate(Routes.home)}
 > 
                 Go back
               </Button>
-              <Button onClick={refreshPage} variant="outline">
+              <Button onClick={refreshPage} colorScheme="green">
                 Retry
               </Button>
             </Flex>

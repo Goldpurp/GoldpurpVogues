@@ -18,7 +18,7 @@ const NavTabs = () => {
 
   const links = [
     { name: "Home", route: "/" },
-    { name: "Collections", route: "/collection" },
+    { name: "Collections", route: "/collection-section" },
     { name: "Brands", route: "#" },
     { name: "Blog", route: "#" },
   ];

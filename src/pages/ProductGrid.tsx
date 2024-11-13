@@ -29,7 +29,7 @@ const sizes = ["S", "M", "L", "XL", "2XL"];
 export default function ProductGrid() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const cartItems = useSelector((state: any) => state.cart.items);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
   const toast = useToast();
@@ -179,7 +179,7 @@ export default function ProductGrid() {
                 fallbackSrc={fallbackImg}
                 objectFit="cover"
                 onClick={() =>
-                  navigate(Routes.ProductPage, { state: { product: item } })
+                  navigate(Routes.ProductPage, { state: { product: item, id: item.id } })
                 }
               />
             </Skeleton>
@@ -404,16 +404,17 @@ export default function ProductGrid() {
           </Box>
         ))}
       </SimpleGrid>
-      <Button
-        mt={5}
-        colorScheme={"green"}
-        size={"lg"}
-        w={"full"}
-        cursor={"pointer"}
-        onClick={handleShowMore}
-      >
-        Show More
-      </Button>
+      {visibleProducts < productsData.length && (
+        <Button
+          mt={5}
+          colorScheme="green"
+          size="lg"
+          w="full"
+          onClick={handleShowMore}
+        >
+          Show More
+        </Button>
+      )}
     </Box>
   );
 }
