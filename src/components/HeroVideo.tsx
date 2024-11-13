@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
         </Skeleton>
 
         <Skeleton isLoaded={!isLoading}>
-          <ShopNowBtn onclickBtn={()=>navigate(Routes.CollectionPage)} />
+          <ShopNowBtn onclickBtn={()=>navigate(Routes.Collection)} />
 
 
         </Skeleton>

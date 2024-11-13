@@ -26,7 +26,7 @@ const fadeIn = keyframes`
   `;
 
 const Hero: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const heroImgWidth = useBreakpointValue({ base: "300px", md: "520px" });
   const miniImgDisplay = useBreakpointValue({
@@ -38,7 +38,6 @@ const Hero: React.FC = () => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
-
 
   return (
     <Flex
@@ -86,7 +85,7 @@ const Hero: React.FC = () => {
 
         <Skeleton isLoaded={!isLoading}>
           <ChakraButton
-            onClick={()=>navigate(Routes.CollectionPage)}
+            onClick={() => navigate(Routes.Collection)}
             fontFamily={"DM Mono"}
             w={"fit-content"}
             p={2}

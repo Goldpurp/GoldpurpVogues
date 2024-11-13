@@ -124,13 +124,13 @@ export default function ShowCaseAds() {
         title="Accessories"
         description="Designed Caps for culture kings"
         imageSrc={capImage}
-        onClick={() => navigate(Routes.CollectionPage)}
+        onClick={() => navigate(Routes.Collection)}
       />
       <ShowcaseItem
         title="Jewelries"
         description="Unisex Moissanite Bracelets"
         imageSrc={braceletImage}
-        onClick={() => navigate(Routes.CollectionPage)}
+        onClick={() => navigate(Routes.Collection)}
       />
     </Flex>
   );

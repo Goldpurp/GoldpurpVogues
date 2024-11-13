@@ -64,7 +64,7 @@ export default function PromoAds() {
         </Skeleton>
 
         <Skeleton isLoaded={!loading}>
-          <ShopNowBtn onclickBtn={() => navigate(Routes.CollectionPage)} />
+          <ShopNowBtn onclickBtn={() => navigate(Routes.Collection)} />
         </Skeleton>
       </VStack>
     </Box>
