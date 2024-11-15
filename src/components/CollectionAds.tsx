@@ -57,7 +57,7 @@ export default function CollectionsAds() {
         <Text color="white" fontSize={{ base: "40px", sm: "45px", md: "55px", lg: "70px", xl: "80px" }} fontWeight="500" lineHeight={{ base: "60px", xl: "90px" }}>
           COLLECTIONS
         </Text>
-        <ShopNowBtn onclickBtn={()=> navigate(Routes.CollectionSection)}/>
+        <ShopNowBtn onclickBtn={()=> navigate(Routes.Collections)}/>
       </MotionBox>
 
       <Box

@@ -18,7 +18,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { FaCcVisa, FaCcMastercard, FaCcAmex } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
@@ -42,7 +42,7 @@ const CheckoutPage: React.FC = () => {
   const FinalCost = shippingCost + total;
 
   return (
-    <Box position={"relative"} minH="100vh" pt={{ base: "45px", md: "50px" }}>
+    <Box position={"relative"} minH="100vh" pt={{ base: "45px", md: "50px" }} px={{ md: "200px" }}>
       <Flex direction={["column", "row"]} gap={8}>
         <Box flex="1" bg="white" p={6} borderRadius="lg" shadow="sm">
 
@@ -484,7 +484,10 @@ const CheckoutPage: React.FC = () => {
                         Delivery: 1-5 working days
                       </Text>
                     </Box>
-                    <Text fontWeight="semibold">₦{shippingCost}</Text>
+                    <Text fontWeight="semibold">    ₦
+                      {Number(shippingCost.toFixed(2)).toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                      })}</Text>
                   </Flex>
                 </Radio>
               </VStack>
@@ -510,14 +513,19 @@ const CheckoutPage: React.FC = () => {
             {cartItems.map((item) => (
               <HStack key={item.id} spacing={4}>
                 <Box flex={"0.3"} display={"flex"} justifyContent={"center"}>
-                  <Image
-                    src={item.src}
-                    alt={item.label}
-                    // boxSize="100%"
-                    borderRadius="md"
-                    objectFit="cover"
-                    h={"130px"}
-                  />
+
+
+                  <Link to={`/products/${item.label}`}>
+                    <Image
+                      src={item.src[0]}
+                      alt={item.label}
+                      fallbackSrc="/icon/WebLogo.png"
+                      objectFit="cover"
+                      cursor={"pointer"}
+                      h={"130px"}
+
+                    />
+                  </Link>
                 </Box>
 
                 <Box flex="1">
@@ -525,21 +533,28 @@ const CheckoutPage: React.FC = () => {
                     {item.label}
                   </Text>
                   <Text fontSize="md" fontWeight="500" color={"#386648"}>
-                    ₦{item.price}
+                    ₦
+                    {Number(item.price.toFixed(2)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
                   </Text>
 
-                  <Flex
-                    flexDirection={{ base: "column", md: "column" }}
-                    gap={1}
-                  >
-                    <Text fontSize="sm" color="gray.500">
-                      color
-                    </Text>
-                    <Text fontSize="sm" color="gray.500">
-                      size
-                    </Text>
-                    <Text fontSize="sm" color="gray.500">
-                      quantity
+                  <Flex fontSize={"15px"} alignItems={"center"}>
+                    <Text fontWeight={"200"}>Color:</Text>
+                    <Box
+                      ml={2}
+                      borderRadius="5px"
+                      color="#100f0f"
+                      fontWeight={"500"}
+                    >
+                      {item.selectedColor}
+                    </Box>
+                  </Flex>
+
+                  <Flex fontSize={"15px"} alignItems={"center"}>
+                    <Text fontWeight={"200"}> Size:</Text>
+                    <Text ml={2} fontSize="15px" fontWeight={"600"}>
+                      {item.selectedSize}
                     </Text>
                   </Flex>
                 </Box>
@@ -552,20 +567,32 @@ const CheckoutPage: React.FC = () => {
           <VStack align="stretch">
             <HStack justify="space-between">
               <Text>Subtotal</Text>
-              <Text fontWeight="medium">₦{total}</Text>
+              <Text fontWeight="medium">    ₦
+                {Number(total.toFixed(2)).toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                })}</Text>
             </HStack>
             <HStack justify="space-between">
               <Text>Shipping</Text>
-              <Text fontWeight="medium">₦{shippingCost}</Text>
+              <Text fontWeight="medium">    ₦
+                {Number(shippingCost.toFixed(2)).toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                })}</Text>
             </HStack>
             <HStack justify="space-between" fontSize="lg">
               <Text>Total</Text>
-              <Text fontWeight="bold"> ₦{FinalCost}</Text>
+              <Text fontWeight="bold">     ₦
+                {Number(FinalCost.toFixed(2)).toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                })}</Text>
             </HStack>
           </VStack>
 
-          <Button mt={5} colorScheme={"green"} size={"lg"} w={"full"}>
-            Pay ₦{FinalCost}
+          <Button mt={5} colorScheme={"green"} size={"lg"} w={"full"} cursor={"pointer"}>
+            Pay     ₦
+            {Number(FinalCost.toFixed(2)).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+            })}
           </Button>
         </Box>
       </Flex>

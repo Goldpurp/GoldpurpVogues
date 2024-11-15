@@ -7,9 +7,8 @@ import {
   Flex,
   Image,
   HStack,
-  Divider,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import RelatedChoice from "../components/RelatedChoice";
@@ -24,7 +23,6 @@ import { Routes } from "../routes/baseRoutes";
 export default function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const handleIncrement = (id: number) => {
@@ -41,6 +39,11 @@ export default function Cart() {
 
   const hasItems = cartItems.length > 0;
   const totalAmount = cartItems.reduce((sum, item) => sum + item.total, 0);
+  const totalItemsCount = cartItems.reduce((count, item) => count + item.quantity, 0);
+  const discountRate = 0.05;
+  const discountAmount = totalItemsCount >= 5 ? totalAmount * discountRate : 0;
+  const discountedTotal = totalAmount - discountAmount;
+
 
   return (
     <Container
@@ -71,54 +74,84 @@ export default function Cart() {
             </Box>
           </Flex>
 
-          {cartItems.map((productList, index) => (
+          {cartItems.map((item, index) => (
             <Flex key={index} py={4} borderBottom={"1px solid #adadad48"}>
               <Box flex={"0.3"} display={"flex"} justifyContent={"center"}>
-                <Image
-                  src={productList.src}
-                  alt={productList.label}
-                  objectFit="cover"
-                  h={"130px"}
-                />
+                <Link to={`/products/${item.label}`}>
+                  <Image
+                    src={item.src[0]}
+                    alt={item.label}
+                    objectFit="cover"
+                    h={"130px"}
+                  />
+                </Link>
+
               </Box>
 
               <Flex flexDirection={"column"} pl={3} flex={"0.7"}>
                 <Text fontSize={{ base: "13px", lg: "18px" }} noOfLines={1}>
-                  {productList.label}
-                </Text>
-                <Text
-                  fontSize={{ base: "16px", lg: "18px" }}
-                  fontWeight={"600"}
-                  color={"#000"}
-                  noOfLines={1}
-                >
-                  ₦{productList.price}
+                  {item.label}
                 </Text>
 
-                <Text
-                  color="#9d2226"
-                  fontSize={{ base: "10px", lg: "14px" }}
+                <Heading
+                  as="h5"
+                  size="sm"
+                  color="#000"
                   mt={1}
-                  noOfLines={3}
+                  fontSize={{ base: "13px", md: "16px", lg: "18px" }}
                 >
-                  {productList.description}
-                </Text>
+                  ₦
+                  {Number(item.price.toFixed(2)).toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                  })}
+
+                  {item.oldPrice !== 0 && (<Text
+                    as="span"
+                    color="#780000"
+                    textDecoration="line-through"
+                    ml={2}
+                    fontWeight="400"
+                    fontSize={{ base: "10px", md: "13px", lg: "15px" }}
+                  >
+                    ₦
+                    {Number(item.oldPrice.toFixed(2)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </Text>)}
+                </Heading>
+
+                <Flex fontSize={"15px"} alignItems={"center"}>
+                  <Text fontWeight={"200"}>Color:</Text>
+                  <Box
+                    ml={2}
+                    borderRadius="5px"
+                    color="#100f0f"
+                    fontWeight={"500"}
+                  >
+                    {item.selectedColor}
+                  </Box>
+                </Flex>
+
+                <Flex fontSize={"15px"} alignItems={"center"}>
+                  <Text fontWeight={"200"}> Size:</Text>
+                  <Text ml={2} fontSize="15px" fontWeight={"600"}>
+                    {item.selectedSize}
+                  </Text>
+                </Flex>
+
                 <Flex mt={3} align="center" justify="space-between">
                   <Flex align="center">
                     <Button
-                      onClick={() => handleDecrement(productList.id)}
+                      onClick={() => handleDecrement(item.id)}
                       size="sm"
-                      isDisabled={productList.quantity === 1}
+                      isDisabled={item.quantity === 1}
                     >
                       -
                     </Button>
                     <Text mx={4} fontSize={"13px"}>
-                      {productList.quantity}
+                      {item.quantity}
                     </Text>
-                    <Button
-                      onClick={() => handleIncrement(productList.id)}
-                      size="sm"
-                    >
+                    <Button onClick={() => handleIncrement(item.id)} size="sm">
                       +
                     </Button>
                   </Flex>
@@ -129,29 +162,41 @@ export default function Cart() {
                     fontSize={{ base: "14px", lg: "15px" }}
                     fontWeight={"500"}
                   >
-                    ₦{productList.total}
+                    ₦
+                    {Number(item.total.toFixed(2)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
                   </Text>
                 </Flex>
               </Flex>
 
-              <Box
-                boxSize="20px"
-                onClick={() => handleRemove(productList.id)}
-                cursor="pointer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  color="red"
+              <Button
+                    bg="#fff"
+                    _hover={{ background: "none" }}
+                    _focus={{ boxShadow: "none" }}
+                    transition="none"
+                    variant={"ghost"}
+                    p={"1px"}
+                    borderRadius="full"
+                    onClick={() => handleRemove?.(item.id)}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Box>
+                    <Box boxSize="24px">
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            color="red"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </Box>
+
+                </Button>
             </Flex>
           ))}
         </Flex>
@@ -184,19 +229,27 @@ export default function Cart() {
         </Flex>
       )}
 
-      <RelatedChoice />
-
       {hasItems ? (
         <>
-          <Divider py={4} />
-          <Flex bg={"#fff"} flexDirection={"column"} p={"15px 15px 0px 15px"}>
+          <Flex flexDirection={"column"} p={"15px 15px 30px 15px"}>
             <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"}>Discount:</Text>
-              <Text fontWeight={"bold"}>5%</Text>
+              <Text fontWeight={"medium"} color={"#000"}>Total Item:</Text>
+              <Text fontWeight={"bold"} color={"#000"}>{totalItemsCount}</Text>
             </HStack>
             <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"}>Total:</Text>
-              <Text fontWeight={"bold"}>₦{totalAmount}</Text>
+              <Text fontWeight={"medium"} color={"#000"}>Discount:</Text>
+              <Text fontWeight={"bold"} color={"#000"}>  {Number(discountAmount.toFixed(2)).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}</Text>
+            </HStack>
+            <HStack justify="space-between" color={"green"} px={1}>
+              <Text fontWeight={"medium"} color={"#000"}>Total:</Text>
+              <Text fontWeight={"bold"}>
+                ₦
+                {Number(totalAmount.toFixed(2)).toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                })}
+              </Text>
             </HStack>
             <Button
               mt={5}
@@ -205,13 +258,20 @@ export default function Cart() {
               w={"full"}
               onClick={() => navigate(Routes.CheckoutBilling)}
             >
-              Checkout ₦{totalAmount}
+              Checkout ₦
+              {Number(discountedTotal.toFixed(2)).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}
             </Button>
           </Flex>
         </>
       ) : (
         <Text></Text>
       )}
+
+
+      <RelatedChoice />
+
     </Container>
   );
 }

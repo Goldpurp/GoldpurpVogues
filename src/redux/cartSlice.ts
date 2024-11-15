@@ -1,19 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface CartItem {
-  id: number;
-  src: string;
-  label: string;
-  price: number;
-  oldPrice: number;
-  bonus: string;
-  description: string;
-  quantity: number;
-  total: number;
-}
-
+import { ProductInterface } from "./productInterface";
 interface CartState {
-  items: CartItem[];
+  items: ProductInterface[];
   count: number;
 }
 
@@ -26,12 +14,16 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action: PayloadAction<CartItem>) {
-      const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
-      );
+    addToCart(state, action: PayloadAction<ProductInterface & { selectedColor?: string; selectedSize?: string }>) {
+      const existingItem = state.items.find(item => item.id === action.payload.id &&
+        item.selectedColor === action.payload.selectedColor && 
+        item.selectedSize === action.payload.selectedSize);
+        
       if (!existingItem) {
-        state.items.push({ ...action.payload });
+        state.items.push({ 
+          ...action.payload, 
+          total: action.payload.price * action.payload.quantity
+        });
       }
       state.count = state.items.reduce((sum, item) => sum + item.total, 0);
     },
@@ -45,6 +37,7 @@ const cartSlice = createSlice({
         state.items = state.items.filter((item) => item.id !== action.payload);
       }
     },
+
     updateQuantity(
       state,
       action: PayloadAction<{ id: number; quantity: number }>
@@ -55,6 +48,7 @@ const cartSlice = createSlice({
         item.total = item.price * item.quantity;
       }
     },
+
     incrementQuantity(state, action: PayloadAction<number>) {
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
@@ -62,6 +56,7 @@ const cartSlice = createSlice({
         item.total = item.price * item.quantity;
       }
     },
+
     decrementQuantity(state, action: PayloadAction<number>) {
       const item = state.items.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {
@@ -69,6 +64,7 @@ const cartSlice = createSlice({
         item.total = item.price * item.quantity;
       }
     },
+
     clearCart: (state) => {
       state.items = [];
       state.count = 0;

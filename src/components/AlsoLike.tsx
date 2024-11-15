@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, CartItem } from "../redux/cartSlice";
+import { addToCart } from "../redux/cartSlice";
 import {
   Box,
   Image,
@@ -16,20 +16,19 @@ import { useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 import { useState, useEffect } from "react";
 import fallbackImg from "/icon/WebLogo.png";
-import productsData from "../redux/data";
 import {
   removeWishlistItem,
   toggleWishlistItem,
-  WishlistItem,
+
 } from "../redux/wishlistSlice";
 import { RootState } from "../redux/store";
-
-const sizes = ["S", "M", "L", "XL", "2XL"];
+import { ProductInterface } from "../redux/productInterface";
+import { productsDatas } from "../redux/datas";
 
 export default function ProductGrid() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const cartItems = useSelector((state: any) => state.cart.items);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
   const toast = useToast();
@@ -46,7 +45,7 @@ export default function ProductGrid() {
 
   const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
 
-  const handleLikeToggle = (id: number, item: WishlistItem) => {
+  const handleLikeToggle = (id: number, item: ProductInterface) => {
     const itemInWishlist = wishlistItems.some(
       (wishlistItem: { id: number }) => wishlistItem.id === id
     );
@@ -98,24 +97,40 @@ export default function ProductGrid() {
     setExpandedProduct(expandedProduct === id ? null : id);
   };
 
-  const handleAddToCart = (item: CartItem) => {
-    const existingItem = cartItems.find(
-      (cartItem: CartItem) => cartItem.id === item.id
-    );
+  const handleAddToCart = (item: ProductInterface) => {
+    const color = activeColors[item.id];
+    const size = activeSizes[item.id];
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
-    if (!existingItem && activeSizes && activeColors) {
-      dispatch(addToCart({ ...item, quantity: 1, total: item.price }));
-      setExpandedProduct(null);
-      toast({
-        title: "Saved to Your Cart",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-        position: "top",
-        containerStyle: {
-          fontFamily: "Nunito, sans-serif",
-        },
-      });
+    if (!existingItem) {
+      if (color && size) {
+        dispatch(addToCart({
+          ...item,
+          quantity: 1,
+          total: item.price,
+          selectedColor: color,
+          selectedSize: size
+        }));
+        setExpandedProduct(null);
+        toast({
+          title: "Saved to Your Cart",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+          containerStyle: {
+            fontFamily: "Nunito, sans-serif",
+          },
+        });
+      } else {
+        toast({
+          title: "Please select a color and size",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     } else {
       toast({
         title: "Already in Cart",
@@ -123,19 +138,10 @@ export default function ProductGrid() {
         duration: 2000,
         isClosable: true,
         position: "top",
-        containerStyle: {
-          fontFamily: "Nunito, sans-serif",
-        },
       });
     }
   };
 
-  const colors = [
-    { name: "Black", value: "#000000" },
-    { name: "Red", value: "#c1121f" },
-    { name: "Green", value: "#588157" },
-    { name: "Gray", value: "#808080" },
-  ];
 
   const handleColorClick = (id: number, color: string) => {
     setActiveColors((prevColors) => ({
@@ -156,21 +162,20 @@ export default function ProductGrid() {
   };
 
   return (
-    <Flex
-      flexDirection={"column"}
+    <Box
       px={2}
-      pt={"20px"}
+      py={6}
       w="100%"
       overflow="hidden"
-      letterSpacing="normal"
       fontFamily="Nunito, sans-serif"
     >
-      <Flex justifyContent={"center"} alignContent={"center"} pb={9}>
+
+<Flex justifyContent={"center"} alignContent={"center"} py={12}>
         <Text fontSize={"18px"}>YOU MAY ALSO LIKE</Text>
       </Flex>
 
       <SimpleGrid columns={columns} spacing={3}>
-        {productsData.slice(0, visibleProducts).map((item) => (
+        {productsDatas.slice(0, visibleProducts).map((item) => (
           <Box
             key={item.id}
             bg="transparent"
@@ -180,12 +185,12 @@ export default function ProductGrid() {
           >
             <Skeleton isLoaded={!loading}>
               <Image
-                src={item.src}
+                src={item.src[0]}
                 alt="image"
                 fallbackSrc={fallbackImg}
                 objectFit="cover"
                 onClick={() =>
-                  navigate(Routes.ProductPage, { state: { product: item } })
+                  navigate(Routes.ProductPage, { state: { product: item, id: item.id } })
                 }
               />
             </Skeleton>
@@ -287,44 +292,44 @@ export default function ProductGrid() {
                 >
                   <Box w={"full"}>
                     <Flex gap={1} pb={3}>
-                      {sizes.map((size) => (
+                      {item.size.map((clothSize) => (
                         <Box
-                          key={size}
+                          key={clothSize}
                           fontSize={{ base: "13px", md: "15px" }}
                           py="2px"
                           px={2}
                           border={
-                            activeSizes[item.id] === size
+                            activeSizes[item.id] === clothSize
                               ? "2px solid #c4a163"
                               : "1px solid #adb5bd"
                           }
                           cursor="pointer"
                           _hover={{ border: "2px solid #c4a163" }}
-                          onClick={() => handleSizeClick(item.id, size)}
+                          onClick={() => handleSizeClick(item.id, clothSize)}
                           fontWeight={
-                            activeSizes[item.id] === size ? "bold" : "500"
+                            activeSizes[item.id] === clothSize ? "bold" : "500"
                           }
                         >
-                          {size}
+                          {clothSize}
                         </Box>
                       ))}
                     </Flex>
                     <Flex>
-                      {colors.map((color) => (
+                      {item.color.map((clothColor) => (
                         <Box
-                          key={color.value}
+                          key={clothColor.value}
                           w="21px"
                           h="21px"
-                          bg={color.value}
+                          bg={clothColor.value}
                           border={
-                            activeColors[item.id] === color.name
+                            activeColors[item.id] === clothColor.name
                               ? "2px solid #c4a163"
                               : "1px solid #adb5bd"
                           }
                           cursor="pointer"
                           mr={2}
                           _hover={{ border: "2px solid #c4a163" }}
-                          onClick={() => handleColorClick(item.id, color.name)}
+                          onClick={() => handleColorClick(item.id, clothColor.name)}
                         />
                       ))}
                     </Flex>
@@ -393,7 +398,10 @@ export default function ProductGrid() {
                   mt={1}
                   fontSize={{ base: "13px", md: "16px", lg: "18px" }}
                 >
-                  ₦{item.price}
+                  ₦
+                  {Number(item.price.toFixed(2)).toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                  })}
                   <Text
                     as="span"
                     color="#780000"
@@ -402,7 +410,10 @@ export default function ProductGrid() {
                     fontWeight="400"
                     fontSize={{ base: "10px", md: "13px", lg: "15px" }}
                   >
-                    ₦{item.oldPrice}
+                    ₦
+                    {Number(item.oldPrice.toFixed(2)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
                   </Text>
                 </Heading>
               </Skeleton>
@@ -410,7 +421,7 @@ export default function ProductGrid() {
           </Box>
         ))}
       </SimpleGrid>
-      {visibleProducts < productsData.length && (
+      {visibleProducts < productsDatas.length && (
         <Button
           mt={5}
           colorScheme="green"
@@ -421,6 +432,6 @@ export default function ProductGrid() {
           Show More
         </Button>
       )}
-    </Flex>
+    </Box>
   );
 }

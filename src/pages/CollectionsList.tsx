@@ -8,19 +8,19 @@ const collections = [
   {
     label: "Everyday Essentials",
     imageUrl:
-      "https://i.pinimg.com/736x/d5/e7/08/d5e708ddab50b7a8a0822c77902d64d9.jpg",
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-22-24_S7_83_4VND5A0558NV_Redcombo_CZ_MC_14-38-19_28709_SG.jpg?v=1729706635&width=600&height=900&crop=center",
     type: "image",
   },
   {
     label: "Hoodies & Sweats",
     imageUrl:
-      "https://i.pinimg.com/564x/17/eb/05/17eb05e0ff56936fe9deb1252d23dc3d.jpg",
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/09-25-24_S7_80_ZDF01S430020_Burgundy_P_KJ_DJ_15-03-28_12924_PXF.jpg?v=1727719847&width=600&height=900&crop=center",
     type: "image",
   },
   {
     label: "Jeans & Pants",
     imageUrl:
-      "https://i.pinimg.com/736x/b2/8a/e6/b28ae67200bfbc65d9d4c36a97fa9330.jpg",
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-10-24_S7_62_ZDF01O440016_Black_ZSR_CZ_DJ_13-32-14_22099_CM.jpg?v=1728944383&width=600&height=900&crop=center",
     type: "image",
   },
   {
@@ -33,14 +33,14 @@ const collections = [
 
 const MotionBox = motion(Flex);
 
-const CollectionSection = () => {
+const CollectionsList = () => {
   const [currentMedia, setCurrentMedia] = useState(collections[0]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); 
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -175,4 +175,4 @@ const CollectionSection = () => {
   );
 };
 
-export default CollectionSection;
+export default CollectionsList;

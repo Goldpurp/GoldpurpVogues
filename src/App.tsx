@@ -2,11 +2,12 @@ import { Flex } from "@chakra-ui/react";
 import Hero from "./components/Hero";
 import HeroVideo from "./components/HeroVideo";
 import ShowCaseAds from "./components/ShowCaseAds";
-import NewArrivalsCarousel from "./components/NewArrivalsCarousel";
 import PromoAds from "./components/PromoAds";
 import CollectionsAds from "./components/CollectionAds";
 import ProductGallery from "./components/CollectionGallery";
-import ProductGrid from "./pages/ProductGrid";
+import ProductList from "./components/ProductList";
+import ShowCaseCarousel from "./components/ShowCaseCarousel";
+
 
 function Home() {
   return (
@@ -14,11 +15,11 @@ function Home() {
       <Hero />
       <HeroVideo />
       <ShowCaseAds />
-      <NewArrivalsCarousel />
+      <ShowCaseCarousel />
       <PromoAds />
       <CollectionsAds />
       <ProductGallery />
-      <ProductGrid />
+      <ProductList />
     </Flex>
   );
 }
