@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Flex, Heading, Text, Skeleton } from "@chakra-ui/react";
 import ShopNowBtn from "./ShowNowBtn";
-import { Routes } from "../routes/baseRoutes";
 import { useNavigate } from "react-router-dom";
 import { filterByCollection } from "../redux/productSlice";
 import { useDispatch } from "react-redux";

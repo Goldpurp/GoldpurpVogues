@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import ShopNowBtn from "./ShowNowBtn";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../routes/baseRoutes";
 import { useDispatch } from "react-redux";
 import { filterByCollection } from "../redux/productSlice";
 
@@ -22,7 +21,7 @@ export default function PromoAds() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); 
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 

@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
-import { Box, Button, useToast, SimpleGrid, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  useToast,
+  SimpleGrid,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { RootState } from "../redux/store";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
@@ -12,8 +18,12 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
   const [visibleProducts, setVisibleProducts] = useState(4);
   const [expandedProduct, setExpandedProduct] = useState<number | null>(null);
-  const [activeSizes, setActiveSizes] = useState<Record<number, string | null>>({});
-  const [activeColors, setActiveColors] = useState<Record<number, string | null>>({});
+  const [activeSizes, setActiveSizes] = useState<Record<number, string | null>>(
+    {}
+  );
+  const [activeColors, setActiveColors] = useState<
+    Record<number, string | null>
+  >({});
 
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -22,7 +32,9 @@ export default function ProductList() {
   const toast = useToast();
 
   const handleLikeToggle = (id: number, item: ProductInterface) => {
-    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === id);
+    const isInWishlist = wishlistItems.some(
+      (wishlistItem) => wishlistItem.id === id
+    );
 
     // Dispatch the toggleWishlistItem action to add/remove item from the wishlist
     dispatch(isInWishlist ? removeWishlistItem(id) : toggleWishlistItem(item));
@@ -38,13 +50,13 @@ export default function ProductList() {
   };
 
   const handleAddToCartClick = (id: number) => {
-    setExpandedProduct(prev => (prev === id ? null : id));
+    setExpandedProduct((prev) => (prev === id ? null : id));
   };
 
   const handleAddToCart = (item: ProductInterface) => {
     const color = activeColors[item.id];
     const size = activeSizes[item.id];
-    const isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+    const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
 
     if (!color || !size) {
       return toast({
@@ -87,21 +99,21 @@ export default function ProductList() {
   };
 
   const handleColorClick = (id: number, color: string) => {
-    setActiveColors(prev => ({
+    setActiveColors((prev) => ({
       ...prev,
       [id]: prev[id] === color ? null : color,
     }));
   };
 
   const handleSizeClick = (id: number, size: string) => {
-    setActiveSizes(prev => ({
+    setActiveSizes((prev) => ({
       ...prev,
       [id]: prev[id] === size ? null : size,
     }));
   };
 
   const handleShowMore = () => {
-    setVisibleProducts(prev => prev + (columns || 2) * 2);
+    setVisibleProducts((prev) => prev + (columns || 2) * 2);
   };
 
   // Effects
@@ -118,12 +130,14 @@ export default function ProductList() {
   return (
     <Box px={2} py={6} w="100%" fontFamily="Nunito, sans-serif">
       <SimpleGrid columns={columns} spacing={3}>
-        {productsDatas.slice(0, visibleProducts).map(item => (
+        {productsDatas.slice(0, visibleProducts).map((item) => (
           <ProductCard
             key={item.id}
             item={item}
             loading={loading}
-            liked={wishlistItems.some(wishlistItem => wishlistItem.id === item.id)} // Check if item is in wishlist
+            liked={wishlistItems.some(
+              (wishlistItem) => wishlistItem.id === item.id
+            )} // Check if item is in wishlist
             expanded={expandedProduct === item.id}
             activeColor={activeColors[item.id]}
             activeSize={activeSizes[item.id]}
@@ -137,7 +151,13 @@ export default function ProductList() {
         ))}
       </SimpleGrid>
       {visibleProducts < productsDatas.length && (
-        <Button mt={5} colorScheme="green" size="lg" w="full" onClick={handleShowMore}>
+        <Button
+          mt={5}
+          colorScheme="green"
+          size="lg"
+          w="full"
+          onClick={handleShowMore}
+        >
           Show More
         </Button>
       )}

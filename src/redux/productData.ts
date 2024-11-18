@@ -33,7 +33,7 @@ export const productsDatas = [
     total: 105300,
     category: "Clothing",
     subCategory: "Jackets",
-    collection: "Winter Collections",
+    collection: "Best Sellers",
     rating: 4.8,
     reviews: 200,
   },
