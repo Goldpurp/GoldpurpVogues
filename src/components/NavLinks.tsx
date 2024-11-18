@@ -20,14 +20,14 @@ const NavTabs = () => {
     { name: "Home", route: "/" },
     { name: "Collections", route: "/collection" },
     { name: "Brands", route: "#" },
-    { name: "Blog", route: "#" },
+    { name: "Blog", route: "/blogs" },
   ];
 
   useEffect(() => {
     const currentTabIndex = links.findIndex(
       (link) => link.route === location.pathname
     );
-    setSelectedTab(currentTabIndex === -1 ? 0 : currentTabIndex); 
+    setSelectedTab(currentTabIndex === -1 ? 0 : currentTabIndex);
   }, [location.pathname, links]);
 
   const handleLinkClick = (linkIndex: number, route: string) => {

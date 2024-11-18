@@ -1,6 +1,5 @@
 import { Box, Image, Text, Skeleton, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-// import { ProductInterface } from "../redux/productInterface";
 import { useState } from "react";
 import { ProductInterface } from "../redux/productSlice";
 

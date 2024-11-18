@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/react";
 import ShowCaseProductCard from "./ShowCaseProductCard";
-// import { ProductInterface } from "../redux/productInterface";
-// import { productsDatas } from "../redux/datas";
 import { useDispatch, useSelector } from "react-redux";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { RootState } from "../redux/store";

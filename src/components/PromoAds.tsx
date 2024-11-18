@@ -13,7 +13,7 @@ const pulse = keyframes`
 `;
 
 export default function PromoAds() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -25,12 +25,10 @@ export default function PromoAds() {
     return () => clearTimeout(timer);
   }, []);
 
-
   const handleCollectionClick = (collection: string) => {
     dispatch(filterByCollection(collection));
     navigate(`/collection/${collection}`);
   };
-
 
   return (
     <Box
@@ -41,17 +39,20 @@ export default function PromoAds() {
       position="relative"
       alignItems="center"
       justifyContent="center"
-      bg="#292828a4"
       pb={2}
       mb={1}
       fontFamily="Arial, sans-serif"
+      backgroundImage="url('https://i.pinimg.com/736x/b3/db/8d/b3db8d7764a36ed55abec6dc796d5e5c.jpg')"
+      backgroundSize="cover"
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
     >
       <Skeleton isLoaded={!loading}>
         <Text
           position="absolute"
           top="7px"
           left="18px"
-          color="#660708"
+          color="#dcd4d4"
           fontSize={{ base: "17px", md: "24px", lg: "26px", xl: "30px" }}
           fontWeight="100"
           cursor={"pointer"}

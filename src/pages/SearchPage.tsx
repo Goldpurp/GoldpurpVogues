@@ -136,7 +136,7 @@ export default function SearchPage() {
   return (
     <Box px={4} py={8} pt={"70px"} w="100%" fontFamily="Nunito, sans-serif">
       <Box mb={5}>
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="md" fontWeight="bold">
           Results Matching "{searchQuery}"
         </Text>
       </Box>

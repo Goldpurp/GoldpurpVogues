@@ -2,28 +2,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 import {
   Box,
+  Text,
   Button,
   useToast,
   SimpleGrid,
   useBreakpointValue,
+  Flex,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { RootState } from "../redux/store";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "./ProductCard";
-import { productsDatas } from "../redux/productData";
-import { ProductInterface } from "../redux/productSlice";
+import { filterByCategory, filterByCollection, ProductInterface } from "../redux/productSlice";
 
-export default function ProductList() {
+interface TrendsTabsProps {
+  onTabChange: (filter: string) => void;
+}
+
+export default function ProductList({ onTabChange }: TrendsTabsProps) {
   const [loading, setLoading] = useState(true);
   const [visibleProducts, setVisibleProducts] = useState(4);
   const [expandedProduct, setExpandedProduct] = useState<number | null>(null);
+  const [activeButton, setActiveButton] = useState<string>("Best Sellers");
   const [activeSizes, setActiveSizes] = useState<Record<number, string | null>>(
     {}
   );
-  const [activeColors, setActiveColors] = useState<
-    Record<number, string | null>
-  >({});
+  const [activeColors, setActiveColors] = useState<Record<number, string | null>>(
+    {}
+  );
 
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -36,10 +42,8 @@ export default function ProductList() {
       (wishlistItem) => wishlistItem.id === id
     );
 
-    // Dispatch the toggleWishlistItem action to add/remove item from the wishlist
     dispatch(isInWishlist ? removeWishlistItem(id) : toggleWishlistItem(item));
 
-    // Show the toast notification based on the current action
     toast({
       title: isInWishlist ? "Removed from Wishlist" : "Added to Wishlist",
       status: isInWishlist ? "warning" : "success",
@@ -116,7 +120,32 @@ export default function ProductList() {
     setVisibleProducts((prev) => prev + (columns || 2) * 2);
   };
 
-  // Effects
+  const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
+
+  const handleBestSellersClick = () => {
+    setActiveButton("Best Sellers");
+    onTabChange("Best Sellers");
+    dispatch(filterByCollection("Best Sellers"));
+  };
+
+  const handleClothingClick = () => {
+    setActiveButton("Clothing");
+    onTabChange("Clothing");
+    dispatch(filterByCategory("Clothing"));
+  };
+
+  const handleBagClick = () => {
+    setActiveButton("Bags");
+    onTabChange("Bags");
+    dispatch(filterByCategory("Accessories"));
+  };
+
+  const handleFootwearsClick = () => {
+    setActiveButton("Footwears");
+    onTabChange("Footwears");
+    dispatch(filterByCategory("Footwears"));
+  };
+
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -124,33 +153,137 @@ export default function ProductList() {
   }, []);
 
   useEffect(() => {
+
+    dispatch(filterByCollection("Best Sellers"));
+
     setVisibleProducts((columns || 2) * 5);
   }, [columns]);
 
   return (
-    <Box px={2} py={6} w="100%" fontFamily="Nunito, sans-serif">
+    <Box px={2} py={2} w="100%" fontFamily="Nunito, sans-serif">
+      <Box>
+        <Flex direction="column" justify="flex-start">
+          <Text
+            fontSize={{ base: "35px", md: "45px", lg: "52px" }}
+            fontWeight="light"
+            fontFamily="Jomhuria, sans-serif"
+            ml={{ base: "20px", lg: "40px" }}
+          >
+            Latest Trends
+          </Text>
+
+          <Flex
+            gap={4}
+            direction="row"
+            wrap="nowrap"
+            justify="flex-start"
+            overflowX="auto"
+            mx={{ base: "20px", lg: "40px" }}
+            mb="30px"
+            css={{
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
+            <Button
+              variant="outline"
+              fontSize={{ base: "12px", sm: "13px" }}
+              fontWeight="500"
+              px={{ base: "10px", sm: "15px" }}
+              borderColor="#daddd8"
+              _hover={{
+                borderColor: "#353535",
+              }}
+              fontFamily="Montserrat, sans-serif"
+              onClick={handleBestSellersClick}
+              bg={activeButton === "Best Sellers" ? "#000" : "transparent"}
+              color={activeButton === "Best Sellers" ? "white" : "black"}
+            >
+              Best Sellers
+            </Button>
+
+            <Button
+              variant="outline"
+              fontSize={{ base: "12px", sm: "13px" }}
+              fontWeight="500"
+              px={{ base: "10px", sm: "15px" }}
+              borderColor="#daddd8"
+              _hover={{
+                borderColor: "#353535",
+              }}
+              fontFamily="Montserrat, sans-serif"
+              onClick={handleClothingClick}
+              bg={activeButton === "Clothing" ? "#000" : "transparent"}
+              color={activeButton === "Clothing" ? "white" : "black"}
+            >
+              Clothing
+            </Button>
+
+            <Button
+              variant="outline"
+              fontSize={{ base: "12px", sm: "13px" }}
+              fontWeight="500"
+              px={{ base: "10px", sm: "15px" }}
+              borderColor="#daddd8"
+              _hover={{
+                borderColor: "#353535",
+              }}
+              fontFamily="Montserrat, sans-serif"
+              onClick={handleFootwearsClick}
+              bg={activeButton === "Footwears" ? "#000" : "transparent"}
+              color={activeButton === "Footwears" ? "white" : "black"}
+            >
+              Footwears
+            </Button>
+
+            <Button
+              variant="outline"
+              fontSize={{ base: "12px", sm: "13px" }}
+              fontWeight="500"
+              px={{ base: "10px", sm: "15px" }}
+              borderColor="#daddd8"
+              _hover={{
+                borderColor: "#353535",
+              }}
+              fontFamily="Montserrat, sans-serif"
+              onClick={handleBagClick}
+              bg={activeButton === "Bags" ? "#000" : "transparent"}
+              color={activeButton === "Bags" ? "white" : "black"}
+            >
+              Bags
+            </Button>
+          </Flex>
+        </Flex>
+      </Box>
+
       <SimpleGrid columns={columns} spacing={3}>
-        {productsDatas.slice(0, visibleProducts).map((item) => (
-          <ProductCard
-            key={item.id}
-            item={item}
-            loading={loading}
-            liked={wishlistItems.some(
-              (wishlistItem) => wishlistItem.id === item.id
-            )} // Check if item is in wishlist
-            expanded={expandedProduct === item.id}
-            activeColor={activeColors[item.id]}
-            activeSize={activeSizes[item.id]}
-            onLikeToggle={handleLikeToggle}
-            onExpand={handleAddToCartClick}
-            onAddToCart={handleAddToCart}
-            onColorClick={handleColorClick}
-            onSizeClick={handleSizeClick}
-            showLikeIcon={true}
-          />
-        ))}
+        {filteredProducts.length > 0 ? (
+          filteredProducts.slice(0, visibleProducts).map((item) => (
+            <ProductCard
+              key={item.id}
+              item={item}
+              loading={loading}
+              liked={wishlistItems.some(
+                (wishlistItem) => wishlistItem.id === item.id
+              )}
+              expanded={expandedProduct === item.id}
+              activeColor={activeColors[item.id]}
+              activeSize={activeSizes[item.id]}
+              onLikeToggle={handleLikeToggle}
+              onExpand={handleAddToCartClick}
+              onAddToCart={handleAddToCart}
+              onColorClick={handleColorClick}
+              onSizeClick={handleSizeClick}
+              showLikeIcon={true}
+            />
+          ))
+        ) : (
+          <Text>No products available</Text>
+        )}
       </SimpleGrid>
-      {visibleProducts < productsDatas.length && (
+
+      {visibleProducts < filteredProducts.length && (
         <Button
           mt={5}
           colorScheme="green"

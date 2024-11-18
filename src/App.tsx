@@ -7,6 +7,8 @@ import CollectionsAds from "./components/CollectionAds";
 import ProductGallery from "./components/CollectionGallery";
 import ProductList from "./components/ProductList";
 import ShowCaseCarousel from "./components/ShowCaseCarousel";
+import ComingSoon from "./components/ComingSoon";
+import SingleBrandAds from "./components/SingleBrandAds";
 
 
 function Home() {
@@ -17,9 +19,15 @@ function Home() {
       <ShowCaseAds />
       <ShowCaseCarousel />
       <PromoAds />
+      <SingleBrandAds/>
       <CollectionsAds />
       <ProductGallery />
-      <ProductList />
+      <ProductList
+        onTabChange={(filter: string) => {
+          { filter };
+        }}
+      />
+      <ComingSoon/>
     </Flex>
   );
 }

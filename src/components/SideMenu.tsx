@@ -17,7 +17,7 @@ import { Routes } from "../routes/baseRoutes";
 const categories = [
   {
     name: "Clothing",
-    items: ["Shirts", "Hoodies", "Pants", "Tees", "Jacket", "Socks", "Joggers", "Shorts", "Denims", "Sweatpants", "Gym Wears", "Boxers"],
+    items: ["Shirts", "Hoodies", "Pants", "Tees", "Jacket", "Sweaters", "Joggers", "Shorts", "Denims", "Sweatpants", "Gym Wears"],
   },
   {
     name: "Footwears",
@@ -139,9 +139,9 @@ const SideDrawer = ({ onClose }: { onClose: () => void }) => {
           <Text fontSize="sm" fontWeight="500" color="gray.500">
             EXPLORE
           </Text>
-          <Link href="#" fontSize="md" fontWeight="500">
+          <Box onClick={() => handleExternalLinkClick(Routes.Blogs)}>
             Fashion Blogs
-          </Link>
+          </Box>
           <Link href="#" fontSize="md" fontWeight="500">
             See Our Shop
           </Link>

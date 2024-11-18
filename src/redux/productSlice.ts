@@ -56,7 +56,7 @@ const productSlice = createSlice({
     filterByCategory(state, action: PayloadAction<string>) {
       state.selectedCategory = action.payload;
       state.filteredProducts = state.products.filter((product) =>
-        product.category?.toLowerCase().includes(action.payload.toLowerCase())
+        product.category?.toLowerCase().includes(action.payload.toLowerCase().trim())
       );
     },
     filterBySubCategory: (
@@ -72,7 +72,7 @@ const productSlice = createSlice({
     filterByCollection(state, action: PayloadAction<string>) {
       state.selectedCollection = action.payload;
       state.filteredProducts = state.products.filter((product) =>
-        product.collection?.toLowerCase().includes(action.payload.toLowerCase())
+        product.collection?.toLowerCase().includes(action.payload.toLowerCase().trim())
       );
     },
     filterBySearch: (state, action: PayloadAction<string>) => {

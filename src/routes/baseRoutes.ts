@@ -20,4 +20,5 @@ export enum Routes {
   Collection = "/collection/:collection",
   Collections = "/collection",
   PaymentConfirmation = "/confirmation",
+  Blogs = "/blogs",
 }

@@ -22,7 +22,7 @@ export default function ProductGallery() {
           subCategory="Bags"
         />
         <ProductItem
-          src="https://i.pinimg.com/736x/23/50/65/23506567bef835e0019729320f9acdec.jpg"
+          src="https://i.pinimg.com/736x/7a/4a/47/7a4a47e57c5679bf87ef9aa6e89b4d75.jpg"
           alt="HatImg"
           label="SHOP JACKETS"
           category="Clothing"
