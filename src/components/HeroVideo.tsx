@@ -3,15 +3,24 @@ import { Box, Flex, Heading, Text, Skeleton } from "@chakra-ui/react";
 import ShopNowBtn from "./ShowNowBtn";
 import { Routes } from "../routes/baseRoutes";
 import { useNavigate } from "react-router-dom";
+import { filterByCollection } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
 
 const Hero: React.FC = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleCollectionClick = (collection: string) => {
+    dispatch(filterByCollection(collection));
+    navigate(`/collection/${collection}`);
+  };
 
   return (
     <Box
@@ -67,7 +76,7 @@ const Hero: React.FC = () => {
         </Skeleton>
 
         <Skeleton isLoaded={!isLoading}>
-          <ShopNowBtn onclickBtn={()=>navigate(Routes.Collection)} />
+          <ShopNowBtn onclickBtn={() => handleCollectionClick("Winter Collections")} />
 
 
         </Skeleton>

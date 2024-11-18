@@ -12,8 +12,9 @@ import { motion } from "framer-motion";
 import capImage from "/Images/cap.png";
 import braceletImage from "/Images/bracelet.png";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../routes/baseRoutes";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { filterBySubCategory } from "../redux/productSlice";
 
 const MotionFlex = motion(Flex);
 
@@ -28,12 +29,15 @@ const ShowcaseItem = ({
   imageSrc: string;
   onClick: () => void;
 }) => {
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
+
+
 
   return (
     <MotionFlex
@@ -108,6 +112,12 @@ const ShowcaseItem = ({
 
 export default function ShowCaseAds() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const handleSubCategoryClick = (category: string, subCategory: string) => {
+    dispatch(filterBySubCategory({ category, subCategory }));
+    navigate(`/category/${category}/${subCategory}`);
+  };
 
   return (
     <Flex
@@ -124,13 +134,14 @@ export default function ShowCaseAds() {
         title="Accessories"
         description="Designed Caps for culture kings"
         imageSrc={capImage}
-        onClick={() => navigate(Routes.Collection)}
+        onClick={() => handleSubCategoryClick("Accessories", "Hats")}
       />
       <ShowcaseItem
         title="Jewelries"
         description="Unisex Moissanite Bracelets"
         imageSrc={braceletImage}
-        onClick={() => navigate(Routes.Collection)}
+        onClick={() => handleSubCategoryClick("Accessories", "Jewelries")}
+
       />
     </Flex>
   );

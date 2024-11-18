@@ -1,41 +1,39 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import ShoeImg from "/Products/shoe.jpg";
-import BagImg from "/Products/backPack.jpg";
-import HatImg from "/Products/faceCap.jpg";
-import ShadeImg from "/Products/spec.jpg";
+import { filterBySubCategory } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
 
 export default function ProductGallery() {
   return (
     <Flex direction="column" overflow="hidden" fontFamily="'Nunito', sans-serif" w="100%">
       <Flex wrap="wrap" transition="transform 0.6s ease">
         <ProductItem
-          src={ShoeImg}
+          src="https://i.pinimg.com/736x/0c/b0/67/0cb06792ac1e79cee891ba67d4026b6f.jpg"
           alt="ShoeImg"
           label="SHOP SHOES"
-          category="shoes"
-          subCategory="shoe"
+          category="Footwears"
+          subCategory="Shoes"
         />
         <ProductItem
-          src={BagImg}
+          src="https://i.pinimg.com/736x/56/9c/f3/569cf39c568df71ed410d911ac172edb.jpg"
           alt="BagImg"
           label="SHOP BAGS"
-          category="bags"
-          subCategory="bag"
+          category="Accessories"
+          subCategory="Bags"
         />
         <ProductItem
-          src={HatImg}
+          src="https://i.pinimg.com/736x/23/50/65/23506567bef835e0019729320f9acdec.jpg"
           alt="HatImg"
-          label="SHOP HATS"
-          category="hats"
-          subCategory="hat"
+          label="SHOP JACKETS"
+          category="Clothing"
+          subCategory="Jackets"
         />
         <ProductItem
-          src={ShadeImg}
+          src="https://i.pinimg.com/736x/da/2a/f8/da2af8f9d93a7cea71165b5ee87a2bf9.jpg"
           alt="ShadeImg"
-          label="SHOP SHADES"
-          category="shades"
-          subCategory="shade"
+          label="SHOP EYEWEARS"
+          category="Accessories"
+          subCategory="Eyewears"
         />
       </Flex>
     </Flex>
@@ -56,8 +54,10 @@ function ProductItem({
   subCategory: string;
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubCategoryClick = (category: string, subCategory: string) => {
+    dispatch(filterBySubCategory({ category, subCategory }));
     navigate(`/category/${category}/${subCategory}`);
   };
 
@@ -75,7 +75,7 @@ function ProductItem({
       cursor="pointer"
       borderWidth="1px"
       borderColor="#e2e6e9"
-      bg="#e3e7eb"
+      bg="#e3e7eb82"
       onClick={() => handleSubCategoryClick(category, subCategory)}
     >
       <Box w="100%" h={{ base: "180px", md: "220px", lg: "250px", xl: "300px", "2xl": "350px" }} bg="#ddd">

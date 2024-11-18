@@ -1,7 +1,8 @@
 import { Box, Image, Text, Skeleton, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { ProductInterface } from "../redux/productInterface";
+// import { ProductInterface } from "../redux/productInterface";
 import { useState } from "react";
+import { ProductInterface } from "../redux/productSlice";
 
 interface ShowCaseProductCardProps {
     product: ProductInterface;
@@ -88,7 +89,7 @@ const ShowCaseProductCard: React.FC<ShowCaseProductCardProps> = ({
 
                 <Skeleton isLoaded={!loading}>
                     <Flex pt={1}>
-                        {product.color.map((color) => (
+                        {product.colors.map((color) => (
                             <Box
                                 key={color.name}
                                 w="19px"

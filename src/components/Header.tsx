@@ -26,9 +26,9 @@ import LOGO from "/icon/GoldpurpIcon.png";
 import NavLinks from "./NavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
-import SidebarMenu from "./SideMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import SideDrawer from "./SideMenu";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -133,7 +133,7 @@ const Header = () => {
             </Box>
           </ChakraLink>
           <Box onClick={() => navigate(Routes.Wishlist)}>
-            <WishlistBadge wishlistCount={wishlistCount}/>
+            <WishlistBadge wishlistCount={wishlistCount} />
           </Box>
           <Box onClick={() => navigate(Routes.Cart)}>
             <CartBadge cartCount={cartCount} />
@@ -171,7 +171,7 @@ const Header = () => {
             </Flex>
           </DrawerHeader>
           <DrawerBody px={4}>
-            <SidebarMenu />
+            <SideDrawer onClose={onClose} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -187,61 +187,74 @@ const SearchModal = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-}) => (
-  <Modal isOpen={isOpen} onClose={onClose} isCentered>
-    <ModalOverlay />
-    <ModalContent
-      maxW={{ base: "80%", lg: "50%" }}
-      top="-200px"
-      p={5}
-      onClick={onClose}
-      bg="transparent"
-      boxShadow="none"
-    >
-      <Box
-        as="form"
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-          e.stopPropagation()
-        }
-        w="full"
+}) => {
+
+  const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
+    if ((e as React.KeyboardEvent).key === "Enter" || e instanceof MouseEvent) {
+      navigate(`/search?query=${searchQuery}`);
+      setSearchQuery("");
+      onClose();
+    }
+  };
+
+
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay />
+      <ModalContent
+        maxW={{ base: "80%", lg: "50%" }}
+        top="-200px"
+        p={5}
+        onClick={onClose}
+        bg="transparent"
+        boxShadow="none"
       >
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <ChakraLink>
+        <Box
+          w="full"
+        >
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">
               <Box w={"22px"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
                   />
                 </svg>
               </Box>
-            </ChakraLink>
-          </InputLeftElement>
-          <Input
-            type="search"
-            placeholder="Enter search"
-            bg="#dee2e6"
-            outline={"none"}
-            borderColor="#000"
-            borderRadius="10px"
-            fontSize={{ base: "15px", lg: "17px" }}
-            py={{ base: "10px", lg: "15px" }}
-            pl="40px"
-            _placeholder={{ color: "#000" }}
-          />
-        </InputGroup>
-      </Box>
-    </ModalContent>
-  </Modal>
-);
+            </InputLeftElement>
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
+              placeholder="Enter search"
+              bg="#dee2e6"
+              outline={"none"}
+              borderColor="#000"
+              borderRadius="10px"
+              fontSize={{ base: "15px", lg: "17px" }}
+              py={{ base: "10px", lg: "15px" }}
+              pl="40px"
+              _placeholder={{ color: "#000" }}
+            />
+          </InputGroup>
+        </Box>
+      </ModalContent>
+    </Modal>
+  );
+};
+
 
 const CartBadge = ({ cartCount }: { cartCount: number }) => {
   return (

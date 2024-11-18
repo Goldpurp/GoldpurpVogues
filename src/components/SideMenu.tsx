@@ -1,255 +1,178 @@
 import { useState } from "react";
 import {
+  VStack,
   Box,
+  Icon,
+  Text,
+  Link,
   Collapse,
   Flex,
-  Text,
-  VStack,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { FaChevronRight, FaChevronDown } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { filterByCategory, filterBySubCategory, filterByCollection } from "../redux/productSlice";
 import { Routes } from "../routes/baseRoutes";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
-const SidebarMenu = () => {
-  const [isOpenItem, setIsOpenItem] = useState({
-    Accessories: false,
-    Clothing: false,
-    Footwear: false,
-    Activewear: false,
-    Swimwear: false,
-    Sleepwear: false,
-  });
+const categories = [
+  {
+    name: "Clothing",
+    items: ["Shirts", "Hoodies", "Pants", "Tees", "Jacket", "Socks", "Joggers", "Shorts", "Denims", "Sweatpants", "Gym Wears", "Boxers"],
+  },
+  {
+    name: "Footwears",
+    items: ["Sneakers", "Slides", "Boots", "Sandals", "Shoes"],
+  },
+  {
+    name: "Accessories",
+    items: ["Bags", "Hats", "Belts", "Jewelries", "Eyewears"],
+  },
+  {
+    name: "Formal Wears",
+    items: ["Suits", "Blazers", "Trousers"],
+  },
+];
 
-  const toggleItemSection = (section: keyof typeof isOpenItem) => {
-    setIsOpenItem((prevState) => ({
-      ...prevState,
-      [section]: !prevState[section],
-    }));
-  };
+const collections = ["Everyday Essentials", "New Arrivals", "Winter Collections", "Best Sellers"];
+
+const SideDrawer = ({ onClose }: { onClose: () => void }) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
+
+
+  const handleExternalLinkClick = (route: string) => {
+    navigate(route);
+    onClose();
+  };
+
+  const toggleCategory = (category: string) => {
+    setOpenCategory(openCategory === category ? null : category);
+  };
+
+  const handleCategoryClick = (category: string) => {
+    dispatch(filterByCategory(category));
+    navigate(`/category/${category}`);
+  };
 
   const handleSubCategoryClick = (category: string, subCategory: string) => {
+    dispatch(filterBySubCategory({ category, subCategory }));
     navigate(`/category/${category}/${subCategory}`);
+    onClose();
+  };
+
+  const handleCollectionClick = (collection: string) => {
+    dispatch(filterByCollection(collection));
+    navigate(`/collection/${collection}`);
+    onClose();
   };
 
   return (
-    <VStack
-      h="100%"
-      pb="100px"
-      textAlign="left"
-      overflowY="scroll"
-      spacing={2}
-      align="stretch"
-      fontFamily="Inter, sans-serif"
-      position="relative"
-      css={{ "&::-webkit-scrollbar": { display: "none" } }}
-    >
+    <Box w="100%" h="100vh" bg="white" py={6} px={2} overflowY="auto" position={"relative"}>
 
-      <Box pt={5}>
-        <Link to={"/collection"}>ALL PRODUCTS</Link>
-      </Box>
 
-      {/* Accessories Section */}
-      <Section
-        title="ACCESSORIES"
-        isOpen={isOpenItem.Accessories}
-        onToggle={() => toggleItemSection("Accessories")}
-      >
-        {[
-          "Watches",
-          "Sunglasses",
-          "Hats",
-          "Scarves",
-          "Belts",
-          "Ties",
-          "Wallets",
-          "Necklaces",
-          "Bracelets",
-          "Earrings",
-          "Rings",
-        ].map((item) => (
-          <MenuItem
-            key={item}
-            onClick={() => handleSubCategoryClick("accessories", item)}
-          >
-            {item}
-          </MenuItem>
-        ))}
-      </Section>
-
-      {/* Clothing Section */}
-      <Section
-        title="CLOTHING"
-        isOpen={isOpenItem.Clothing}
-        onToggle={() => toggleItemSection("Clothing")}
-      >
-        {[
-          "Shirts",
-          "T-shirts",
-          "Skirts",
-          "Jeans",
-          "Hoodies",
-          "Suits",
-          "Blazers",
-          "Shorts",
-          "Pants",
-        ].map((item) => (
-          <MenuItem
-            key={item}
-            onClick={() => handleSubCategoryClick("clothing", item)}
-          >
-            {item}
-          </MenuItem>
-        ))}
-      </Section>
-
-      {/* Footwear Section */}
-      <Section
-        title="FOOTWEAR"
-        isOpen={isOpenItem.Footwear}
-        onToggle={() => toggleItemSection("Footwear")}
-      >
-        {["Sneakers", "Boots", "Slippers", "Heels", "Sandals", "Loafers"].map(
-          (item) => (
-            <MenuItem
-              key={item}
-              onClick={() => handleSubCategoryClick("footwear", item)}
+      <VStack align="start" spacing={6}>
+        <VStack align="start" spacing={4} w="100%">
+          {collections.map((collection) => (
+            <Text
+              key={collection}
+              fontSize="md"
+              fontWeight="500"
+              cursor="pointer"
+              onClick={() => handleCollectionClick(collection)}
             >
-              {item}
-            </MenuItem>
-          )
-        )}
-      </Section>
+              {collection}
+            </Text>
+          ))}
+        </VStack>
 
-      <Section
-        title="ACTIVEWEAR"
-        isOpen={isOpenItem.Activewear}
-        onToggle={() => toggleItemSection("Activewear")}
-      >
-        {["Leggings", "Joggers", "Sweatshirts", "Tank Tops"].map((item) => (
-          <MenuItem
-            key={item}
-            onClick={() => handleSubCategoryClick("activewear", item)}
-          >
-            {item}
-          </MenuItem>
-        ))}
-      </Section>
+        <Box borderTop="1px solid #e2e8f0" w="100%" />
 
-      <Section
-        title="SWIMWEAR"
-        isOpen={isOpenItem.Swimwear}
-        onToggle={() => toggleItemSection("Swimwear")}
-      >
-        {["Bikinis", "Swim Shorts", "Cover-Ups"].map((item) => (
-          <MenuItem
-            key={item}
-            onClick={() => handleSubCategoryClick("swimwear", item)}
-          >
-            {item}
-          </MenuItem>
-        ))}
-      </Section>
+        <VStack align="start" spacing={6} w="100%">
+          <Text fontSize="sm" fontWeight="500" color="gray.500">
+            SHOP
+          </Text>
+          {categories.map((category) => (
+            <Box key={category.name} w="100%">
+              <Flex
+                justify="space-between"
+                align="center"
+                onClick={() => toggleCategory(category.name)}
+                cursor="pointer"
+              >
+                <Text
+                  fontSize="md"
+                  fontWeight="500"
+                  onClick={() => handleCategoryClick(category.name)}
+                >
+                  {category.name}
+                </Text>
+                <Icon
+                  as={openCategory === category.name ? FaChevronDown : FaChevronRight}
+                  fontSize="md"
+                />
+              </Flex>
+              <Collapse in={openCategory === category.name} animateOpacity>
+                <VStack align="start" pl={6} mt={2} spacing={2}>
+                  {category.items.map((item) => (
+                    <Text
+                      key={item}
+                      fontSize="md"
+                      color="gray.600"
+                      cursor="pointer"
+                      onClick={() => handleSubCategoryClick(category.name, item)}
+                    >
+                      {item}
+                    </Text>
+                  ))}
+                </VStack>
+              </Collapse>
+            </Box>
+          ))}
+        </VStack>
 
-      <Section
-        title="SLEEPWEAR"
-        isOpen={isOpenItem.Sleepwear}
-        onToggle={() => toggleItemSection("Sleepwear")}
-      >
-        {["Pajamas", "Nightgowns", "Robes"].map((item) => (
-          <MenuItem
-            key={item}
-            onClick={() => handleSubCategoryClick("sleepwear", item)}
-          >
-            {item}
-          </MenuItem>
-        ))}
-      </Section>
+        <Box borderTop="1px solid #e2e8f0" w="100%" />
 
-      <VStack align="start" spacing={5}>
-        <Box onClick={() => navigate(Routes.Wishlist)}>
-          <SpecialMenuItem>Wishlist</SpecialMenuItem>
-        </Box>
-        <SpecialMenuItem>Media</SpecialMenuItem>
-        <SpecialMenuItem>Blog</SpecialMenuItem>
-        <SpecialMenuItem>Store</SpecialMenuItem>
-        <Box onClick={() => navigate(Routes.Login)}>
-          <SpecialMenuItem>Login/SignUp</SpecialMenuItem>
-        </Box>
-        <Box onClick={() => navigate(Routes.ContactUs)}>
-          <SpecialMenuItem>Contact Us</SpecialMenuItem>
-        </Box>
-        <Box onClick={() => navigate(Routes.About)}>
-          <SpecialMenuItem>About</SpecialMenuItem>
-        </Box>
+        <VStack align="start" spacing={4} w="100%">
+          <Text fontSize="sm" fontWeight="500" color="gray.500">
+            EXPLORE
+          </Text>
+          <Link href="#" fontSize="md" fontWeight="500">
+            Fashion Blogs
+          </Link>
+          <Link href="#" fontSize="md" fontWeight="500">
+            See Our Shop
+          </Link>
+          <Box onClick={() => handleExternalLinkClick(Routes.About)}>
+            About Our Brand
+          </Box>
+          <Box onClick={() => handleExternalLinkClick(Routes.ContactUs)}>
+            Contact us
+          </Box>
+        </VStack>
+
+
+        <Flex
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          w={{ base: "92%", md: "83%" }}
+          position="fixed"
+          bottom={0}
+          zIndex={10}
+          bg="#fff"
+          py={3}
+          borderTop="1px solid #878484a9"
+        >
+          <Text>🌍 NG | 434,000.99</Text>
+          <Link href={"/"}>goldpurp</Link>
+
+        </Flex>
+
       </VStack>
-
-      <Flex
-      alignItems={"center"}
-        justifyContent={"space-between"}
-        w={{ base: "92%", md: "83%" }}
-        position="fixed"
-        bottom={0}
-        zIndex={10}
-        bg="#fff"
-        py={3}
-        borderTop="1px solid #878484a9"
-      >
-        <Text>NG | 434,000.99</Text>
-        <Link to={"/"}>goldpurp</Link>
-
-      </Flex>
-    </VStack>
+    </Box>
   );
 };
 
-const MenuItem = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
-  <Text fontSize="sm" cursor="pointer" _hover={{ color: "blue.500" }} onClick={onClick}>
-    {children}
-  </Text>
-);
-
-const SpecialMenuItem = ({ children }: { children: React.ReactNode }) => (
-  <Text fontWeight={600} fontSize="sm" cursor="pointer" _hover={{ color: "blue.500" }}>
-    {children}
-  </Text>
-);
-
-const Section = ({
-  title,
-  isOpen,
-  onToggle,
-  children,
-}: {
-  title: string;
-  isOpen: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}) => (
-  <VStack align="start" spacing={2} fontFamily={"Inter, sans-serif"}>
-    <Flex w="full" justify="space-between" align="center" py={"5px"}>
-      <Text
-        fontFamily={"Inter, sans-serif"}
-        fontWeight={"500"}
-        onClick={onToggle}
-        cursor="pointer"
-        _hover={{ color: "blue.500" }}
-      >
-        {title}
-      </Text>
-      {isOpen ? (
-        <ChevronUpIcon boxSize="24px" onClick={onToggle} />
-      ) : (
-        <ChevronDownIcon boxSize="24px" onClick={onToggle} />
-      )}
-    </Flex>
-    <Collapse in={isOpen}>
-      <VStack align="start" spacing={2} fontWeight={"400"} opacity={"0.8"}>
-        {children}
-      </VStack>
-    </Collapse>
-  </VStack>
-);
-
-export default SidebarMenu;
+export default SideDrawer;

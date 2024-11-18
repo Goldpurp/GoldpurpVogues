@@ -1,7 +1,8 @@
 import { Box, Button, Skeleton, Flex, Heading, Text } from "@chakra-ui/react";
-import { ProductInterface } from "../redux/productInterface";
+// import { ProductInterface } from "../redux/productInterface";
 import { Link } from "react-router-dom";
 import ProducImageCarousel from "./ProducImageCarousel";
+import { ProductInterface } from "../redux/productSlice";
 
 export function ProductCard({
     item,
@@ -237,7 +238,7 @@ export function ProductCard({
                                 fontSize={{ base: "10px", md: "13px", lg: "15px" }}
                             >
                                 ₦
-                                {Number(item.oldPrice.toFixed(2)).toLocaleString("en-US", {
+                                {Number(item.oldPrice?.toFixed(2)).toLocaleString("en-US", {
                                     minimumFractionDigits: 2,
                                 })}
                             </Text>
@@ -264,7 +265,7 @@ export function ProductCard({
                     >
                         <Box w={"full"}>
                             <Flex gap={1.5} pb={3} overflowX={"scroll"}>
-                                {item.size.map((size, idx) => (
+                                {item.sizes.map((size, idx) => (
                                     <Button
                                         borderRadius={0}
                                         alignItems={"center"}
@@ -284,7 +285,7 @@ export function ProductCard({
                                 ))}
                             </Flex>
                             <Flex gap={1.5}>
-                                {item.color.map((color, idx) => (
+                                {item.colors.map((color, idx) => (
                                     <Box
                                         key={idx}
                                         as="button"

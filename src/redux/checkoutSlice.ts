@@ -1,77 +1,75 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ProductInterface } from "./productSlice";
 
-interface BillingInfo {
-  email: string;
-  cardName: string;
-  cardNumber: string;
-  expirationDate: string;
-  cvv: string;
-}
-
-interface ShippingInfo {
-  fullName: string;
-  address: string;
-  phoneNumber: string;
-  city: string;
-  state: string;
-  zipCode: string;
+interface CheckoutItem extends ProductInterface {
+  checkoutQuantity: number;
 }
 
 interface CheckoutState {
-  billingInfo: BillingInfo;
-  shippingInfo: ShippingInfo;
-  useShippingAsBilling: boolean;
-  selectedShipping: "pickUp" | "delivery";
+  items: CheckoutItem[];
+  totalPrice: number;
 }
 
 const initialState: CheckoutState = {
-  billingInfo: {
-    email: "",
-    cardName: "",
-    cardNumber: "",
-    expirationDate: "",
-    cvv: "",
-  },
-  shippingInfo: {
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  useShippingAsBilling: true,
-  selectedShipping: "delivery",
+  items: [],
+  totalPrice: 0,
 };
 
 const checkoutSlice = createSlice({
   name: "checkout",
   initialState,
   reducers: {
-    setBillingInfo(state, action: PayloadAction<BillingInfo>) {
-      state.billingInfo = action.payload;
+    addItemToCheckout(state, action: PayloadAction<{ product: ProductInterface; quantity: number }>) {
+      const { product, quantity } = action.payload;
+      const existingItem = state.items.find((item) => item.id === product.id);
+
+      if (existingItem) {
+        existingItem.checkoutQuantity += quantity;
+      } else {
+        state.items.push({ ...product, checkoutQuantity: quantity });
+      }
+
+      state.totalPrice = state.items.reduce(
+        (total, item) => total + item.price * item.checkoutQuantity,
+        0
+      );
     },
-    setShippingInfo(state, action: PayloadAction<ShippingInfo>) {
-      state.shippingInfo = action.payload;
+    removeItemFromCheckout(state, action: PayloadAction<number>) {
+      const productId = action.payload;
+      state.items = state.items.filter((item) => item.id !== productId);
+      state.totalPrice = state.items.reduce(
+        (total, item) => total + item.price * item.checkoutQuantity,
+        0
+      );
     },
-    setUseShippingAsBilling(state, action: PayloadAction<boolean>) {
-      state.useShippingAsBilling = action.payload;
+    updateCheckoutQuantity(state, action: PayloadAction<{ productId: number; quantity: number }>) {
+      const { productId, quantity } = action.payload;
+      const item = state.items.find((item) => item.id === productId);
+
+      if (item) {
+        item.checkoutQuantity = quantity;
+        if (item.checkoutQuantity <= 0) {
+          state.items = state.items.filter((item) => item.id !== productId);
+        }
+      }
+
+      state.totalPrice = state.items.reduce(
+        (total, item) => total + item.price * item.checkoutQuantity,
+        0
+      );
     },
-    setSelectedShipping(state, action: PayloadAction<"pickUp" | "delivery">) {
-      state.selectedShipping = action.payload;
-    },
-    resetCheckout(state) {
-      Object.assign(state, initialState);
+    clearCheckout(state) {
+      state.items = [];
+      state.totalPrice = 0;
     },
   },
 });
 
 export const {
-  setBillingInfo,
-  setShippingInfo,
-  setUseShippingAsBilling,
-  setSelectedShipping,
-  resetCheckout,
+  addItemToCheckout,
+  removeItemFromCheckout,
+  updateCheckoutQuantity,
+  clearCheckout,
 } = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

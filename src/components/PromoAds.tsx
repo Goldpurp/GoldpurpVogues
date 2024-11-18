@@ -4,6 +4,8 @@ import ShopNowBtn from "./ShowNowBtn";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
+import { useDispatch } from "react-redux";
+import { filterByCollection } from "../redux/productSlice";
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -13,6 +15,8 @@ const pulse = keyframes`
 
 export default function PromoAds() {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,6 +25,13 @@ export default function PromoAds() {
     }, 1000); 
     return () => clearTimeout(timer);
   }, []);
+
+
+  const handleCollectionClick = (collection: string) => {
+    dispatch(filterByCollection(collection));
+    navigate(`/collection/${collection}`);
+  };
+
 
   return (
     <Box
@@ -64,7 +75,7 @@ export default function PromoAds() {
         </Skeleton>
 
         <Skeleton isLoaded={!loading}>
-          <ShopNowBtn onclickBtn={() => navigate(Routes.Collection)} />
+          <ShopNowBtn onclickBtn={() => handleCollectionClick("Everyday Essentials")} />
         </Skeleton>
       </VStack>
     </Box>

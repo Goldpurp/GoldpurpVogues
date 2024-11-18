@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -21,32 +21,47 @@ import { FaCcVisa, FaCcMastercard, FaCcAmex } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartSlice";
 
-const CheckoutPage: React.FC = () => {
+export default function Checkout() {
   const [selectedShipping, setSelectedShipping] = useState("delivery");
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
+  // Calculate the total price of the items
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  // Check if the number of items is 5 or more to apply the discount
+  // const discount = cartItems.length >= 5 ? totalPrice * 0.05 : 0;
+
+  // Calculate the final price after applying the discount
+  // const finalPrice = totalPrice - discount;
+
+  // const total = cartItems.reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // );
 
   const shippingCost = selectedShipping === "delivery" ? 1000 : 0;
 
-  const FinalCost = shippingCost + total;
+  const finalCost = totalPrice + shippingCost;
+
+  const handlePayment = () => {
+
+    dispatch(clearCart());
+
+    navigate("/confirmation");
+  };
 
   return (
     <Box position={"relative"} minH="100vh" pt={{ base: "45px", md: "50px" }} px={{ md: "200px" }}>
       <Flex direction={["column", "row"]} gap={8}>
         <Box flex="1" bg="white" p={6} borderRadius="lg" shadow="sm">
 
-          <Flex display={"flex"} w={"fit-content"} alignItems={"center"} justifyContent={"left"} mb={2} gap={1} cursor={"pointer"} onClick={handleBackClick}>
+          {/* <Flex display={"flex"} w={"fit-content"} alignItems={"center"} justifyContent={"left"} mb={2} gap={1} cursor={"pointer"} onClick={handleBackClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -64,7 +79,7 @@ const CheckoutPage: React.FC = () => {
             <Text>
               Back
             </Text>
-          </Flex>
+          </Flex> */}
           <Heading as="h2" size="md" mb={4}>
             Payment Details
           </Heading>
@@ -566,9 +581,9 @@ const CheckoutPage: React.FC = () => {
 
           <VStack align="stretch">
             <HStack justify="space-between">
-              <Text>Subtotal</Text>
+              <Text>Sub-total</Text>
               <Text fontWeight="medium">    ₦
-                {Number(total.toFixed(2)).toLocaleString("en-US", {
+                {Number(totalPrice.toFixed(2)).toLocaleString("en-US", {
                   minimumFractionDigits: 2,
                 })}</Text>
             </HStack>
@@ -582,15 +597,15 @@ const CheckoutPage: React.FC = () => {
             <HStack justify="space-between" fontSize="lg">
               <Text>Total</Text>
               <Text fontWeight="bold">     ₦
-                {Number(FinalCost.toFixed(2)).toLocaleString("en-US", {
+                {Number(finalCost.toFixed(2)).toLocaleString("en-US", {
                   minimumFractionDigits: 2,
                 })}</Text>
             </HStack>
           </VStack>
 
-          <Button mt={5} colorScheme={"green"} size={"lg"} w={"full"} cursor={"pointer"}>
+          <Button mt={5} colorScheme={"green"} size={"lg"} w={"full"} cursor={"pointer"} onClick={handlePayment}>
             Pay     ₦
-            {Number(FinalCost.toFixed(2)).toLocaleString("en-US", {
+            {Number(finalCost.toFixed(2)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
             })}
           </Button>
@@ -600,4 +615,3 @@ const CheckoutPage: React.FC = () => {
   );
 };
 
-export default CheckoutPage;

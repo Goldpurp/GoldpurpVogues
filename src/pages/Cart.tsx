@@ -11,7 +11,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import RelatedChoice from "../components/RelatedChoice";
+// import RelatedChoice from "../components/RelatedChoice";
 import { RootState } from "../redux/store";
 import {
   decrementQuantity,
@@ -38,12 +38,11 @@ export default function Cart() {
   };
 
   const hasItems = cartItems.length > 0;
-  const totalAmount = cartItems.reduce((sum, item) => sum + item.total, 0);
-  const totalItemsCount = cartItems.reduce((count, item) => count + item.quantity, 0);
-  const discountRate = 0.05;
-  const discountAmount = totalItemsCount >= 5 ? totalAmount * discountRate : 0;
-  const discountedTotal = totalAmount - discountAmount;
-
+  // const totalWithoutDiscount = useSelector(
+  //   (state: RootState) => state.cart.totalWithoutDiscount
+  // );
+  const finalTotal = useSelector((state: RootState) => state.cart.finalTotal);
+  const totalItemsCount = useSelector((state: RootState) => state.cart.count);
 
   return (
     <Container
@@ -85,7 +84,6 @@ export default function Cart() {
                     h={"130px"}
                   />
                 </Link>
-
               </Box>
 
               <Flex flexDirection={"column"} pl={3} flex={"0.7"}>
@@ -104,20 +102,24 @@ export default function Cart() {
                   {Number(item.price.toFixed(2)).toLocaleString("en-US", {
                     minimumFractionDigits: 2,
                   })}
-
-                  {item.oldPrice !== 0 && (<Text
-                    as="span"
-                    color="#780000"
-                    textDecoration="line-through"
-                    ml={2}
-                    fontWeight="400"
-                    fontSize={{ base: "10px", md: "13px", lg: "15px" }}
-                  >
-                    ₦
-                    {Number(item.oldPrice.toFixed(2)).toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                    })}
-                  </Text>)}
+                  {item.oldPrice !== 0 && (
+                    <Text
+                      as="span"
+                      color="#780000"
+                      textDecoration="line-through"
+                      ml={2}
+                      fontWeight="400"
+                      fontSize={{ base: "10px", md: "13px", lg: "15px" }}
+                    >
+                      ₦
+                      {Number(item.oldPrice?.toFixed(2)).toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 2,
+                        }
+                      )}
+                    </Text>
+                  )}
                 </Heading>
 
                 <Flex fontSize={"15px"} alignItems={"center"}>
@@ -171,32 +173,30 @@ export default function Cart() {
               </Flex>
 
               <Button
-                    bg="#fff"
-                    _hover={{ background: "none" }}
-                    _focus={{ boxShadow: "none" }}
-                    transition="none"
-                    variant={"ghost"}
-                    p={"1px"}
-                    borderRadius="full"
-                    onClick={() => handleRemove?.(item.id)}
-                >
-                    <Box boxSize="24px">
-
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            color="red"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </Box>
-
-                </Button>
+                bg="#fff"
+                _hover={{ background: "none" }}
+                _focus={{ boxShadow: "none" }}
+                transition="none"
+                variant={"ghost"}
+                p={"1px"}
+                borderRadius="full"
+                onClick={() => handleRemove?.(item.id)}
+              >
+                <Box boxSize="24px">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    color="red"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Box>
+              </Button>
             </Flex>
           ))}
         </Flex>
@@ -205,7 +205,7 @@ export default function Cart() {
           justifyContent={"center"}
           flexDirection="column"
           alignItems="center"
-          pt={"120px"}
+          py={"100px"}
           px={9}
         >
           <Heading as="h3" size="md" fontWeight="300" mb={4}>
@@ -231,35 +231,60 @@ export default function Cart() {
 
       {hasItems ? (
         <>
-          <Flex flexDirection={"column"} p={"15px 15px 30px 15px"}>
-            <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"} color={"#000"}>Total Item:</Text>
-              <Text fontWeight={"bold"} color={"#000"}>{totalItemsCount}</Text>
-            </HStack>
-            <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"} color={"#000"}>Discount:</Text>
-              <Text fontWeight={"bold"} color={"#000"}>  {Number(discountAmount.toFixed(2)).toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-              })}</Text>
-            </HStack>
-            <HStack justify="space-between" color={"green"} px={1}>
-              <Text fontWeight={"medium"} color={"#000"}>Total:</Text>
-              <Text fontWeight={"bold"}>
-                ₦
-                {Number(totalAmount.toFixed(2)).toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                })}
-              </Text>
-            </HStack>
+          <Flex flexDirection={"column"} p={"15px 15px 15px 15px"}>
+            <Flex direction={"column"} gap={1}>
+              <Flex
+                justify="space-between"
+                flexDirection="row"
+                // borderBottom="1px solid #c7c3c3"
+                // mb={5}
+              >
+                <HStack justify="space-between" color={"green"} px={1}>
+                  <Text fontWeight={"300"} color={"#000"}>
+                    Total Item(s):
+                  </Text>
+                  <Text fontWeight={"500"} color={"#000"}>
+                    {totalItemsCount}
+                  </Text>
+                </HStack>
+                {/* <HStack justify="space-between" color={"green"} px={1}>
+                  <Text fontWeight={"300"} color={"#000"}>
+                    Sub-total:
+                  </Text>
+                  <Text fontWeight={"500"} color={"#000"}>
+                    {" "}
+                    ₦
+                    {Number(totalWithoutDiscount.toFixed(2)).toLocaleString(
+                      "en-US",
+                      {
+                        minimumFractionDigits: 2,
+                      }
+                    )}
+                  </Text>
+                </HStack> */}
+              </Flex>
+              <HStack justify="space-between" color={"green"} px={1}>
+                <Text fontWeight={"medium"} color={"#000"}>
+                  Total:
+                </Text>
+                <Text fontWeight={"bold"}>
+                  ₦
+                  {Number(finalTotal.toFixed(2)).toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                  })}
+                </Text>
+              </HStack>
+            </Flex>
+
             <Button
               mt={5}
               colorScheme={"green"}
               size={"lg"}
               w={"full"}
-              onClick={() => navigate(Routes.CheckoutBilling)}
+              onClick={() => navigate(Routes.Checkout)}
             >
               Checkout ₦
-              {Number(discountedTotal.toFixed(2)).toLocaleString("en-US", {
+              {Number(finalTotal.toFixed(2)).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
               })}
             </Button>
@@ -269,9 +294,7 @@ export default function Cart() {
         <Text></Text>
       )}
 
-
-      <RelatedChoice />
-
+      {/* <RelatedChoice /> */}
     </Container>
   );
 }

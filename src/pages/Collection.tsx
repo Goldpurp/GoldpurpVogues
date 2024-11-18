@@ -8,13 +8,16 @@ import {
     useToast,
     SimpleGrid,
     useBreakpointValue,
+    Spinner,
+    Flex,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { RootState } from "../redux/store";
-import { productsDatas } from "../redux/datas";
-import { ProductInterface } from "../redux/productInterface";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "../components/ProductCard";
+import { ProductInterface } from "../redux/productSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { Routes } from "../routes/baseRoutes";
 
 export default function Collection() {
     const [loading, setLoading] = useState(true);
@@ -29,6 +32,7 @@ export default function Collection() {
     const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
     const dispatch = useDispatch();
     const toast = useToast();
+    const navigate = useNavigate();
 
     const handleLikeToggle = (id: number, item: ProductInterface) => {
         const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === id);
@@ -123,50 +127,94 @@ export default function Collection() {
         setVisibleProducts((columns || 2) * 5);
     }, [columns]);
 
+    const { collection } = useParams<{ collection: string }>();
+    const filteredProducts = useSelector(
+        (state: RootState) => state.products.filteredProducts
+    );
+
     return (
-        <Box px={2} py={9} w="100%" fontFamily="Nunito, sans-serif">
-              <Box as="section" my={8}>
-        <Image
-          src="https://i.pinimg.com/736x/55/6e/04/556e04c6c3da6f7c2f93cd18f477c3c9.jpg"
-          alt="LV Fall Collection"
-          borderRadius="lg"
-          objectFit="cover"
-          width="100%"
-          height="450px"
-        />
-        <Text fontSize="lg" fontWeight="bold" mt={4}>
-          GP Men's Fall
-        </Text>
-        <Text maxW="600px" mt={2}>
-          A transversal wardrobe perpetuates Pharrell Williams’ dandy aesthetic,
-          unveiling an array of versatile creations imbued with classic
-          elegance.
-        </Text>
-      </Box>
-            <SimpleGrid columns={columns} spacing={3}>
-                {productsDatas.slice(0, visibleProducts).map(item => (
-                    <ProductCard
-                        key={item.id}
-                        item={item}
-                        loading={loading}
-                        liked={likedItems[item.id]}
-                        expanded={expandedProduct === item.id}
-                        activeColor={activeColors[item.id]}
-                        activeSize={activeSizes[item.id]}
-                        onLikeToggle={handleLikeToggle}
-                        onExpand={handleAddToCartClick}
-                        onAddToCart={handleAddToCart}
-                        onColorClick={handleColorClick}
-                        onSizeClick={handleSizeClick}
-                        useCarousel={true}
-                        showLikeIcon={true}
-                    />
-                ))}
-            </SimpleGrid>
-            {visibleProducts < productsDatas.length && (
-                <Button mt={5} colorScheme="green" size="lg" w="full" onClick={handleShowMore}>
-                    Show More
-                </Button>
+        <Box px={{base: 3, md: 12}} py={{base:9, md: 12}} pt={{base:"45px", lg: "70px"}} w="100%" fontFamily="Nunito, sans-serif">
+            <Box as="section" my={8}>
+                <Image
+                    src="https://i.pinimg.com/736x/55/6e/04/556e04c6c3da6f7c2f93cd18f477c3c9.jpg"
+                    alt="LV Fall Collection"
+                    borderRadius={{base: "5px", md: "0px"}}
+                    objectFit="cover"
+                    width="100%"
+                    height="450px"
+                />
+                <Text fontSize="lg" fontWeight="bold" mt={4}>
+                    GP Men's Fall
+                </Text>
+                <Text maxW="600px" mt={2}>
+                    A transversal wardrobe perpetuates Pharrell Williams’ dandy aesthetic,
+                    unveiling an array of versatile creations imbued with classic
+                    elegance.
+                </Text>
+            </Box>
+
+            <Text fontSize="xl" fontWeight="bold">
+                Explore {collection}
+            </Text>
+
+            {loading ? (
+                <Box display="flex" justifyContent="center" alignItems="center" h="50vh">
+                    <Spinner size="xl" color="green.500" />
+                </Box>
+            ) : filteredProducts.length > 0 ? (
+                <>
+                    <SimpleGrid columns={columns} spacing={5} pt={6}>
+                        {filteredProducts.slice(0, visibleProducts).map((item: ProductInterface) => (
+                            <ProductCard
+                                key={item.id}
+                                item={item}
+                                loading={loading}
+                                liked={likedItems[item.id]}
+                                expanded={expandedProduct === item.id}
+                                activeColor={activeColors[item.id]}
+                                activeSize={activeSizes[item.id]}
+                                onLikeToggle={handleLikeToggle}
+                                onExpand={handleAddToCartClick}
+                                onAddToCart={handleAddToCart}
+                                onColorClick={handleColorClick}
+                                onSizeClick={handleSizeClick}
+                                useCarousel={false}
+                                showLikeIcon={true}
+                            />
+                        ))}
+                    </SimpleGrid>
+                    {visibleProducts < filteredProducts.length && (
+                        <Button mt={5} colorScheme="green" size="lg" w="full" onClick={handleShowMore}>
+                            Show More
+                        </Button>
+                    )}
+                </>
+            ) : (
+                <Flex direction={"column"} justifyContent={"center"} mt={"60px"} px={9} textAlign="center">
+                    <Text fontSize="lg" color="gray.600">
+                        No items are currently available in the {collection} collection. Please explore our other collections for more options.
+                    </Text>
+
+
+                    <Box mt={3}>
+                            <Button
+                                borderBottom={"1px solid #000"}
+                                color={"#000"}
+                                background={"transparent"}
+                                variant="unstyled"
+                                alignItems="center"
+                                justifyContent="center"
+                                fontSize={"12px"}
+                                cursor="pointer"
+                                transition="color 0.4s, border-color 0.4s"
+                                alignSelf="center"
+                                _hover={{ color: "#829399", borderBottomColor: "#829399" }}
+                                onClick={() => navigate(Routes.Collections)}
+                            >
+                                Discover More
+                            </Button>
+                    </Box>
+                </Flex>
             )}
         </Box>
     );

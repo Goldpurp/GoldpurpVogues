@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Text, Button, Flex, Box, Skeleton } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../routes/baseRoutes";
+import { filterByCollection } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
 
 const collections = [
   {
@@ -12,19 +13,19 @@ const collections = [
     type: "image",
   },
   {
-    label: "Hoodies & Sweats",
+    label: "New Arrivals",
     imageUrl:
       "https://cdn.shopify.com/s/files/1/0293/9277/files/09-25-24_S7_80_ZDF01S430020_Burgundy_P_KJ_DJ_15-03-28_12924_PXF.jpg?v=1727719847&width=600&height=900&crop=center",
     type: "image",
   },
   {
-    label: "Jeans & Pants",
+    label: "Winter Collections",
     imageUrl:
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-10-24_S7_62_ZDF01O440016_Black_ZSR_CZ_DJ_13-32-14_22099_CM.jpg?v=1728944383&width=600&height=900&crop=center",
     type: "image",
   },
   {
-    label: "Accessories",
+    label: "Best Sellers",
     videoUrl:
       "https://videos.pexels.com/video-files/7037493/7037493-sd_506_960_25fps.mp4",
     type: "video",
@@ -34,6 +35,10 @@ const collections = [
 const MotionBox = motion(Flex);
 
 const CollectionsList = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
   const [currentMedia, setCurrentMedia] = useState(collections[0]);
   const [loading, setLoading] = useState(true);
 
@@ -48,7 +53,11 @@ const CollectionsList = () => {
     setCurrentMedia(collections[index]);
   };
 
-  const navigate = useNavigate();
+
+  const handleCollectionClick = (collection: string) => {
+    dispatch(filterByCollection(collection));
+    navigate(`/collection/${collection}`);
+  };
 
   return (
     <Flex
@@ -154,7 +163,7 @@ const CollectionsList = () => {
               transition="color 0.4s, border-color 0.4s"
               alignSelf="center"
               _hover={{ color: "#dee2e6", borderBottomColor: "#dee2e6" }}
-              onClick={() => navigate(Routes.Collection)}
+              onClick={() => handleCollectionClick(currentMedia.label)}
             >
               Discover Now
             </Button>

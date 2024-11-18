@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/react";
 import ShowCaseProductCard from "./ShowCaseProductCard";
-import { ProductInterface } from "../redux/productInterface";
-import { productsDatas } from "../redux/datas";
+// import { ProductInterface } from "../redux/productInterface";
+// import { productsDatas } from "../redux/datas";
 import { useDispatch, useSelector } from "react-redux";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { RootState } from "../redux/store";
 import DecorativeText from "./DecorativeText";
+import { productsDatas } from "../redux/productData";
+import { ProductInterface } from "../redux/productSlice";
 
 const ShowCaseCarousel: React.FC = () => {
     const dispatch = useDispatch();
@@ -37,6 +39,10 @@ const ShowCaseCarousel: React.FC = () => {
         });
     };
 
+    const newArrivalProducts = productsDatas.filter(
+        (product) => product.collection === "New Arrivals"
+    );
+
     return (
         <Box
             pb={9}
@@ -50,7 +56,7 @@ const ShowCaseCarousel: React.FC = () => {
                     "::-webkit-scrollbar": { display: "none" },
                 }}
             >
-                {productsDatas.map((product) => (
+                {newArrivalProducts.map((product) => (
                     <ShowCaseProductCard
                         key={product.id}
                         product={product}

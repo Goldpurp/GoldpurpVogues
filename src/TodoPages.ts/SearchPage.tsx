@@ -8,17 +8,15 @@ import {
   SimpleGrid,
   useBreakpointValue,
   Spinner,
-  Flex,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { RootState } from "../redux/store";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "../components/ProductCard";
-import { ProductInterface } from "../redux/productSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { Routes } from "../routes/baseRoutes";
+import { filterBySearch, ProductInterface } from "../redux/productSlice";
+import { useLocation } from "react-router-dom";
 
-export default function CategoryItemsDisplay() {
+export default function SearchPage() {
   const [loading, setLoading] = useState(true);
   const [visibleProducts, setVisibleProducts] = useState(4);
   const [likedItems, setLikedItems] = useState<Record<number, boolean>>({});
@@ -29,15 +27,14 @@ export default function CategoryItemsDisplay() {
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const toast = useToast();
 
   const handleLikeToggle = (id: number, item: ProductInterface) => {
-    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === id);
+    const isInWishlist = wishlistItems.some((wishlistItem) => wishlistItem.id === id);
 
-    setLikedItems(prev => ({ ...prev, [id]: !prev[id] }));
-
+    setLikedItems((prev) => ({ ...prev, [id]: !prev[id] }));
     dispatch(isInWishlist ? removeWishlistItem(id) : toggleWishlistItem(item));
     toast({
       title: isInWishlist ? "Removed from Wishlist" : "Added to Wishlist",
@@ -49,13 +46,13 @@ export default function CategoryItemsDisplay() {
   };
 
   const handleAddToCartClick = (id: number) => {
-    setExpandedProduct(prev => (prev === id ? null : id));
+    setExpandedProduct((prev) => (prev === id ? null : id));
   };
 
   const handleAddToCart = (item: ProductInterface) => {
     const color = activeColors[item.id];
     const size = activeSizes[item.id];
-    const isInCart = cartItems.some(cartItem => cartItem.id === item.id);
+    const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
 
     if (!color || !size) {
       return toast({
@@ -89,7 +86,7 @@ export default function CategoryItemsDisplay() {
 
     setExpandedProduct(null);
     toast({
-      title: "Saved to Your Cart",
+      title: "Added to Your Cart",
       status: "success",
       duration: 2000,
       isClosable: true,
@@ -98,24 +95,23 @@ export default function CategoryItemsDisplay() {
   };
 
   const handleColorClick = (id: number, color: string) => {
-    setActiveColors(prev => ({
+    setActiveColors((prev) => ({
       ...prev,
       [id]: prev[id] === color ? null : color,
     }));
   };
 
   const handleSizeClick = (id: number, size: string) => {
-    setActiveSizes(prev => ({
+    setActiveSizes((prev) => ({
       ...prev,
       [id]: prev[id] === size ? null : size,
     }));
   };
 
   const handleShowMore = () => {
-    setVisibleProducts(prev => prev + (columns || 2) * 2);
+    setVisibleProducts((prev) => prev + (columns || 2) * 2);
   };
 
-  // Effects
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -126,18 +122,22 @@ export default function CategoryItemsDisplay() {
     setVisibleProducts((columns || 2) * 5);
   }, [columns]);
 
-  const { category } = useParams<{ category: string }>();
-  const filteredProducts = useSelector(
-    (state: RootState) => state.products.filteredProducts
-  );
+  const location = useLocation();
+  const searchQuery = new URLSearchParams(location.search).get("query") || "";
+
+  useEffect(() => {
+    if (searchQuery) {
+      dispatch(filterBySearch(searchQuery));
+    }
+  }, [searchQuery, dispatch]);
+
 
 
   return (
     <Box px={4} py={8} pt={"70px"} w="100%" fontFamily="Nunito, sans-serif">
-
       <Box mb={5}>
-        <Text fontSize="xl" fontWeight="bold">
-          Products in {category}
+        <Text fontSize="2xl" fontWeight="bold">
+          Results Matching "{searchQuery}"
         </Text>
       </Box>
 
@@ -174,31 +174,11 @@ export default function CategoryItemsDisplay() {
           )}
         </>
       ) : (
-        <Flex direction={"column"} justifyContent={"center"} mt={"60px"} px={9} textAlign="center">
+        <Box display={"flex"} justifyContent={"center"} my={"120px"} px={12} textAlign="center">
           <Text fontSize="lg" color="gray.600">
             No products match your search. Try refining your filters or explore our category options.
           </Text>
-
-
-          <Box mt={3}>
-            <Button
-              borderBottom={"1px solid #000"}
-              color={"#000"}
-              background={"transparent"}
-              variant="unstyled"
-              alignItems="center"
-              justifyContent="center"
-              fontSize={"12px"}
-              cursor="pointer"
-              transition="color 0.4s, border-color 0.4s"
-              alignSelf="center"
-              _hover={{ color: "#829399", borderBottomColor: "#829399" }}
-              onClick={() => navigate(Routes.Collections)}
-            >
-              Discover More
-            </Button>
-          </Box>
-        </Flex>
+        </Box>
       )}
 
     </Box>

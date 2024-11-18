@@ -18,7 +18,7 @@ import { ProductInterface } from "../redux/productSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
 
-export default function CategoryItemsDisplay() {
+export default function SubCategory() {
   const [loading, setLoading] = useState(true);
   const [visibleProducts, setVisibleProducts] = useState(4);
   const [likedItems, setLikedItems] = useState<Record<number, boolean>>({});
@@ -30,7 +30,7 @@ export default function CategoryItemsDisplay() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const toast = useToast();
 
   const handleLikeToggle = (id: number, item: ProductInterface) => {
@@ -126,18 +126,18 @@ export default function CategoryItemsDisplay() {
     setVisibleProducts((columns || 2) * 5);
   }, [columns]);
 
-  const { category } = useParams<{ category: string }>();
+  const { category, subCategory } = useParams<{ category: string; subCategory: string }>();
   const filteredProducts = useSelector(
     (state: RootState) => state.products.filteredProducts
   );
 
 
+
   return (
     <Box px={4} py={8} pt={"70px"} w="100%" fontFamily="Nunito, sans-serif">
-
       <Box mb={5}>
         <Text fontSize="xl" fontWeight="bold">
-          Products in {category}
+          {subCategory} in {category}
         </Text>
       </Box>
 
@@ -175,10 +175,10 @@ export default function CategoryItemsDisplay() {
         </>
       ) : (
         <Flex direction={"column"} justifyContent={"center"} mt={"60px"} px={9} textAlign="center">
+
           <Text fontSize="lg" color="gray.600">
             No products match your search. Try refining your filters or explore our category options.
           </Text>
-
 
           <Box mt={3}>
             <Button

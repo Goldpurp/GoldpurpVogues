@@ -14,7 +14,8 @@ import HeroImg from "/Images/heroImg5.png";
 import HeroImgMini from "/Images/heroImg5mini.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../routes/baseRoutes";
+import { useDispatch } from "react-redux";
+import { filterByCollection } from "../redux/productSlice";
 
 const fadeIn = keyframes`
     from {
@@ -26,6 +27,7 @@ const fadeIn = keyframes`
   `;
 
 const Hero: React.FC = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const heroImgWidth = useBreakpointValue({ base: "300px", md: "520px" });
@@ -38,6 +40,12 @@ const Hero: React.FC = () => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+
+  const handleCollectionClick = (collection: string) => {
+    dispatch(filterByCollection(collection));
+    navigate(`/collection/${collection}`);
+  };
 
   return (
     <Flex
@@ -59,8 +67,8 @@ const Hero: React.FC = () => {
         zIndex="1"
         opacity={"0.7"}
         css={css`
-          animation: ${fadeIn} 5s ease-out;
-        `}
+        animation: ${fadeIn} 5s ease-out;
+      `}
       >
         <Skeleton isLoaded={!isLoading}>
           <Text
@@ -85,7 +93,7 @@ const Hero: React.FC = () => {
 
         <Skeleton isLoaded={!isLoading}>
           <ChakraButton
-            onClick={() => navigate(Routes.Collection)}
+            onClick={() => handleCollectionClick("New Arrivals")}
             fontFamily={"DM Mono"}
             w={"fit-content"}
             p={2}

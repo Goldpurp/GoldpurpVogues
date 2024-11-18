@@ -13,13 +13,16 @@ import ReturnPolicy from "../TodoPages.ts/ReturnPolicy";
 import TrackOrder from "../pages/TrackOrder";
 import Wishlist from "../pages/Wishlist";
 import CategoryItemsDisplay from "../TodoPages.ts/CategoryItemsDisplay";
-import CheckoutBilling from "../TodoPages.ts/CheckoutBilling";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../App";
 import MainLayout from "../MainLayout";
 import ProductList from "../components/ProductList";
 import Collection from "../pages/Collection";
 import CollectionsList from "../pages/CollectionsList";
+import SubCategory from "../TodoPages.ts/SubCategory";
+import SearchPage from "../TodoPages.ts/SearchPage";
+import PaymentConfirmation from "../TodoPages.ts/PaymentConfirmation";
+import Checkout from "../TodoPages.ts/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -40,10 +43,13 @@ const router = createBrowserRouter([
       { path: Routes.ReturnPolicy, element: <ReturnPolicy /> },
       { path: Routes.TrackOrder, element: <TrackOrder /> },
       { path: Routes.Wishlist, element: <Wishlist /> },
-      { path: Routes.SubCategory, element: <CategoryItemsDisplay /> },
+      { path: Routes.Category, element: <CategoryItemsDisplay /> },
+      { path: Routes.SubCategory, element: <SubCategory /> },
+      { path: Routes.SearchPage, element: <SearchPage /> },
       { path: Routes.Collection, element: <Collection /> },
       { path: Routes.Collections, element: <CollectionsList /> },
-      { path: Routes.CheckoutBilling, element: <CheckoutBilling /> },
+      { path: Routes.Checkout, element: <Checkout /> },
+      { path: Routes.PaymentConfirmation, element: <PaymentConfirmation /> },
     ],
   },
 ]);

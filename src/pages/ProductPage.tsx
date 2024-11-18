@@ -28,11 +28,13 @@ import { RootState } from "../redux/store";
 import { addToCart } from "../redux/cartSlice";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import ColorSelectComponent from "../components/Color";
-import { ProductInterface } from "../redux/productInterface";
+// import { ProductInterface } from "../redux/productInterface";
 import ProducImageCarousel from "../components/ProducImageCarousel";
-import { fetchProductsSuccess } from "../redux/productSlice";
-import { productsDatas } from "../redux/datas";
-import ProductList from "../components/ProductList";
+import { ProductInterface, setProducts } from "../redux/productSlice";
+import { productsDatas } from "../redux/productData";
+import AlsoLike from "../components/AlsoLike";
+// import { productsDatas } from "../redux/datas";
+// import ProductList from "../components/ProductList";
 
 export default function ProductPage() {
   const toast = useToast();
@@ -50,11 +52,11 @@ export default function ProductPage() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   useEffect(() => {
-    dispatch(fetchProductsSuccess(productsDatas));
+    dispatch(setProducts(productsDatas));
   }, [dispatch]);
 
   const { label } = useParams<{ label: string }>();
-  const products = useSelector((state: RootState) => state.products.items);
+  const products = useSelector((state: RootState) => state.products.products);
 
   const product = products.find((item) => item.label === label);
 
@@ -104,13 +106,15 @@ export default function ProductPage() {
       oldPrice: product.oldPrice,
       quantity: 1,
       total: product.price,
-      color: product.color,
-      size: product.size,
+      colors: product.colors,
+      sizes: product.sizes,
       discount: product.discount,
       details: product.details,
       src: product.src,
       selectedColor: selectedColor,
       selectedSize: selectedSize,
+      rating: 0,
+      reviews: 0
     };
 
     dispatch(addToCart(cartItem));
@@ -240,7 +244,7 @@ export default function ProductPage() {
                         fontSize={{ base: "10px", md: "13px", lg: "15px" }}
                       >
                         ₦
-                        {Number(product.oldPrice.toFixed(2)).toLocaleString("en-US", {
+                        {Number(product.oldPrice?.toFixed(2)).toLocaleString("en-US", {
                           minimumFractionDigits: 2,
                         })}
                       </Text>
@@ -250,12 +254,12 @@ export default function ProductPage() {
 
                 <ColorSelectComponent
                   selectedColor={selectedColor}
-                  colors={product.color}
+                  colors={product.colors}
                   onColorSelect={handleColorSelect}
                 />
                 <SizeSelectComponent
                   selectedSize={selectedSize}
-                  sizes={product.size}
+                  sizes={product.sizes}
                   onSizeSelect={handleSizeSelect}
                 />
 
@@ -373,7 +377,7 @@ export default function ProductPage() {
           <Text fontSize={"18px"}>YOU MAY ALSO LIKE</Text>
         </Flex>
 
-        <ProductList />
+        <AlsoLike />
 
       </Box>
     </Flex>
