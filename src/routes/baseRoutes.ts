@@ -3,7 +3,6 @@ export enum Routes {
   ErrorPage = "/error-page",
   Login = "/login",
   SignUp = "/sign-up",
-  ProductList = "products-items",
   About = "about",
   Cart = "cart",
   ProductPage = "/products/:label",
