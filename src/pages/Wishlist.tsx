@@ -14,16 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { RootState } from "../redux/store";
-// import { ProductInterface } from "../redux/productInterface";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "../components/ProductCard";
-// import RelatedChoice from "../components/RelatedChoice";
 import { ProductInterface } from "../redux/productSlice";
 import ShowCaseProductCard from "../components/ShowCaseProductCard";
 import { productsDatas } from "../redux/productData";
-
-const randomSort = () => 0.5 - Math.random();
-
 
 export default function Wishlist() {
   const [loading, setLoading] = useState(true);
@@ -32,7 +27,6 @@ export default function Wishlist() {
   const [expandedProduct, setExpandedProduct] = useState<number | null>(null);
   const [activeSizes, setActiveSizes] = useState<Record<number, string | null>>({});
   const [activeColors, setActiveColors] = useState<Record<number, string | null>>({});
-  const [shuffledBestSellers, setShuffledBestSellers] = useState<ProductInterface[]>([]);
 
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -125,10 +119,9 @@ export default function Wishlist() {
     setVisibleProducts(prev => prev + (columns || 2) * 2);
   };
 
-
-  useEffect(() => {
-    setShuffledBestSellers([...productsDatas].filter(product => product.collection === "Best Sellers").sort(randomSort));
-  }, [productsDatas]);
+  const bestSellersProducts = productsDatas.filter(
+    (product) => product.collection === "Best Sellers"
+  );
 
 
   useEffect(() => {
@@ -191,7 +184,7 @@ export default function Wishlist() {
               "::-webkit-scrollbar": { display: "none" },
             }}
             >
-              {shuffledBestSellers.map((product) => (
+              {bestSellersProducts.map((product) => (
                 <ShowCaseProductCard
                   key={product.id}
                   product={product}

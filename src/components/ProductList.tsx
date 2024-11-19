@@ -15,7 +15,6 @@ import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "./ProductCard";
 import { filterByCategory, filterByCollection, ProductInterface } from "../redux/productSlice";
 
-const randomSort = () => 0.5 - Math.random();
 interface TrendsTabsProps {
   onTabChange: (filter: string) => void;
 }
@@ -31,7 +30,6 @@ export default function ProductList({ onTabChange }: TrendsTabsProps) {
   const [activeColors, setActiveColors] = useState<Record<number, string | null>>(
     {}
   );
-  const [shuffledProducts, setShuffledProducts] = useState<ProductInterface[]>([]);
 
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -161,11 +159,6 @@ export default function ProductList({ onTabChange }: TrendsTabsProps) {
     setVisibleProducts((columns || 2) * 5);
   }, [columns]);
 
-  useEffect(() => {
-    if (filteredProducts.length) {
-      setShuffledProducts([...filteredProducts].sort(randomSort));
-    }
-  }, [filteredProducts]);
 
   return (
     <Box px={2} py={2} w="100%" fontFamily="Nunito, sans-serif">
@@ -267,7 +260,7 @@ export default function ProductList({ onTabChange }: TrendsTabsProps) {
 
       <SimpleGrid columns={columns} spacing={3}>
         {filteredProducts.length > 0 ? (
-          shuffledProducts.slice(0, visibleProducts).map((item) => (
+          filteredProducts.slice(0, visibleProducts).map((item) => (
             <ProductCard
               key={item.id}
               item={item}

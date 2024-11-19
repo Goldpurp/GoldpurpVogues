@@ -20,12 +20,9 @@ import {
 import { Routes } from "../routes/baseRoutes";
 import { productsDatas } from "../redux/productData";
 import ShowCaseProductCard from "../components/ShowCaseProductCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProductInterface } from "../redux/productSlice";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
-
-const randomSort = () => 0.5 - Math.random();
-
 
 export default function Cart() {
   const toast = useToast();
@@ -34,7 +31,6 @@ export default function Cart() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const [likedItems, setLikedItems] = useState<Record<number, boolean>>({});
-  const [shuffledBestSellers, setShuffledBestSellers] = useState<ProductInterface[]>([]);
 
 
   const handleLikeToggle = (id: number, item: ProductInterface) => {
@@ -76,9 +72,9 @@ export default function Cart() {
   const finalTotal = useSelector((state: RootState) => state.cart.finalTotal);
   const totalItemsCount = useSelector((state: RootState) => state.cart.count);
 
-  useEffect(() => {
-    setShuffledBestSellers([...productsDatas].filter(product => product.collection === "New Arrivals").sort(randomSort));
-  }, [productsDatas]);
+  const newArrivalProducts = productsDatas.filter(
+    (product) => product.collection === "New Arrivals"
+  );
 
   return (
     <Container
@@ -278,11 +274,11 @@ export default function Cart() {
 
             <Flex
               overflowX="scroll"
-            css={{
-              "::-webkit-scrollbar": { display: "none" },
-            }}
+              css={{
+                "::-webkit-scrollbar": { display: "none" },
+              }}
             >
-              {shuffledBestSellers.map((product) => (
+              {newArrivalProducts.map((product) => (
                 <ShowCaseProductCard
                   key={product.id}
                   product={product}
