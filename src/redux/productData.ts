@@ -227,7 +227,7 @@ export const productsDatas = [
   },
   {
     id: 7,
-    label: "Tyson Hoodie - Charcoal",
+    label: "Tees Long Sleve - Charcoal",
     price: 33800,
     oldPrice: 0,
     quantity: 1,
@@ -593,9 +593,7 @@ export const productsDatas = [
     price: 52400,
     oldPrice: 0,
     quantity: 1,
-    colors: [
-      { name: "Chocolate", value: "#D2691E" },
-    ],
+    colors: [{ name: "Chocolate", value: "#D2691E" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 0,
     details: [
@@ -613,7 +611,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/01-30-24_S10_145_FNBG1D_Chocolate_CXB_14-18-06_1921_ES.jpg?v=1708020519&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/02-02-24_S8_1_FNBG1D_Chocolate_KT_DJ_13-01-06_42795_CM.jpg?v=1707232051&width=600&height=900&crop=center"
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/02-02-24_S8_1_FNBG1D_Chocolate_KT_DJ_13-01-06_42795_CM.jpg?v=1707232051&width=600&height=900&crop=center",
     ],
     total: 52400,
     category: "Accessories",
@@ -628,9 +626,7 @@ export const productsDatas = [
     price: 44500,
     oldPrice: 98899,
     quantity: 1,
-    colors: [
-      { name: "Black", value: "#000000" },
-    ],
+    colors: [{ name: "Black", value: "#000000" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 40,
     details: [
@@ -648,8 +644,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/09-05-24_S10_6_PS51275_Blackcombo_CXB_09-28-33_2834_ES.jpg?v=1726088169&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/09-05-24_S7_33_PS51275_Blackcombo_CZ_DJ_10-29-27_8692_SL.jpg?v=1725644939&width=600&height=900&crop=center"
-      
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/09-05-24_S7_33_PS51275_Blackcombo_CZ_DJ_10-29-27_8692_SL.jpg?v=1725644939&width=600&height=900&crop=center",
     ],
     total: 44500,
     category: "Accessories",
@@ -664,9 +659,7 @@ export const productsDatas = [
     price: 22500,
     oldPrice: 38899,
     quantity: 1,
-    colors: [
-      { name: "Taupe", value: "#483C32" },
-    ],
+    colors: [{ name: "Taupe", value: "#483C32" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 40,
     details: [
@@ -684,8 +677,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/05-03-24_S15_1_XRW3076_Taupe_CZ_08-12-190825_SG_ES.jpg?v=1715895744&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/05-15-24_S7_54_XRW3076_Taupe_CZ_DJ_13-41-12_93874_PXF.jpg?v=1715966381&width=600&height=900&crop=center"
-      
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/05-15-24_S7_54_XRW3076_Taupe_CZ_DJ_13-41-12_93874_PXF.jpg?v=1715966381&width=600&height=900&crop=center",
     ],
     total: 22500,
     category: "Footwears",
@@ -700,9 +692,7 @@ export const productsDatas = [
     price: 22500,
     oldPrice: 38899,
     quantity: 1,
-    colors: [
-      { name: "Black", value: "#000" },
-    ],
+    colors: [{ name: "Black", value: "#000" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 40,
     details: [
@@ -720,8 +710,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/08-27-24_S15_1_MB12811FN_Black_CZ_08-26-223894_ES.jpg?v=1724952442&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-19-24-S7_2_MB12811FN_Black_CZ_DJ_08-46-37_0194_PXF.jpg?v=1724173084&width=600&height=900&crop=center"
-      
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-19-24-S7_2_MB12811FN_Black_CZ_DJ_08-46-37_0194_PXF.jpg?v=1724173084&width=600&height=900&crop=center",
     ],
     total: 22500,
     category: "Footwears",
@@ -736,9 +725,7 @@ export const productsDatas = [
     price: 32500,
     oldPrice: 0,
     quantity: 1,
-    colors: [
-      { name: "Stone", value: "#78786B" },
-    ],
+    colors: [{ name: "Stone", value: "#78786B" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 0,
     details: [
@@ -756,8 +743,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/07-22-24_S10_22_MM12733_Stone_CXB_10-56-51_0886_SG_ES.jpg?v=1721929786&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-01-24_S7_46_MM12733_Stone_CZ_DJ_11-33-24_129705_PXF.jpg?v=1722884666&width=600&height=900&crop=center"
-      
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-01-24_S7_46_MM12733_Stone_CZ_DJ_11-33-24_129705_PXF.jpg?v=1722884666&width=600&height=900&crop=center",
     ],
     total: 32500,
     category: "Footwears",
@@ -772,9 +758,7 @@ export const productsDatas = [
     price: 17600,
     oldPrice: 0,
     quantity: 1,
-    colors: [
-      { name: "Stone", value: "#78786B" },
-    ],
+    colors: [{ name: "Stone", value: "#78786B" }],
     sizes: ["S", "M", "L", "XXL"],
     discount: 0,
     details: [
@@ -792,8 +776,7 @@ export const productsDatas = [
     ],
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/05-26-24STUDIO10_CXB_11-06-06_6_HS27_Red_1894_SG.jpg?v=1686076020&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/05-17-23Studio7_CB_DJ_3-13PM_88_HS27_Red_10047_DG.jpg?v=1684958535&width=600&height=900&crop=center"
-      
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/05-17-23Studio7_CB_DJ_3-13PM_88_HS27_Red_10047_DG.jpg?v=1684958535&width=600&height=900&crop=center",
     ],
     total: 17600,
     category: "Footwears",
@@ -808,9 +791,7 @@ export const productsDatas = [
     price: 28500,
     oldPrice: 71200,
     quantity: 1,
-    colors: [
-      { name: "Green", value: "#008000" },
-    ],
+    colors: [{ name: "Green", value: "#008000" }],
     sizes: ["S", "L", "XXL"],
     discount: 40,
     details: [
@@ -830,7 +811,7 @@ export const productsDatas = [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-18-23Studio7_KJ_DJ_09-15-49_11_ZDF01V340001_Green_P_54589_MR.jpg?v=1697819365&width=600&height=900&crop=center",
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-18-23Studio7_KJ_DJ_09-15-35_11_ZDF01V340001_Green_P_54583_MR.jpg?v=1697819365&width=600&height=900&crop=center",
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-18-23Studio7_KJ_DJ_09-15-53_11_ZDF01V340001_Green_P_54590_MR.jpg?v=1697819366&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-18-23Studio7_KJ_DJ_09-15-59_11_ZDF01V340001_Green_P_54591_MR.jpg?v=1697819366&width=600&height=900&crop=center"
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-18-23Studio7_KJ_DJ_09-15-59_11_ZDF01V340001_Green_P_54591_MR.jpg?v=1697819366&width=600&height=900&crop=center",
     ],
     total: 28500,
     category: "Clothing",
@@ -845,9 +826,7 @@ export const productsDatas = [
     price: 55200,
     oldPrice: 81200,
     quantity: 1,
-    colors: [
-      { name: "Red", value: "#FF0000" },
-    ],
+    colors: [{ name: "Red", value: "#FF0000" }],
     sizes: ["S", "M", "L", "XL", "XXL"],
     discount: 40,
     details: [
@@ -866,7 +845,7 @@ export const productsDatas = [
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-21-23Studio7_KJ_DJ_13-26-54_54_EDR10230102_Red_21365_DG.jpg?v=1698950701&width=600&height=900&crop=center",
       "https://cdn.shopify.com/s/files/1/0293/9277/files/10-21-23Studio7_KJ_DJ_13-26-54_54_EDR10230102_Red_21364_DG.jpg?v=1698950701&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-21-23Studio7_KJ_DJ_13-26-54_54_EDR10230102_Red_21377_DG.jpg?v=1698950699&width=600&height=900&crop=center"
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-21-23Studio7_KJ_DJ_13-26-54_54_EDR10230102_Red_21377_DG.jpg?v=1698950699&width=600&height=900&crop=center",
     ],
     total: 55200,
     category: "Clothing",
@@ -881,9 +860,7 @@ export const productsDatas = [
     price: 24999,
     oldPrice: 0,
     quantity: 1,
-    colors: [
-      { name: "Camouflage", value: "#78866B" },
-    ],
+    colors: [{ name: "Camouflage", value: "#78866B" }],
     sizes: ["S", "M", "L", "XL", "XXL"],
     discount: 0,
     details: [
@@ -902,7 +879,7 @@ export const productsDatas = [
     src: [
       "https://cdn.shopify.com/s/files/1/0293/9277/files/08-09-24_S8_51_SS24B1417TR_Camouflage_KT_MC_13-24-25_PLUS_7263_EH.jpg?v=1723580829&width=600&height=900&crop=center",
       "https://cdn.shopify.com/s/files/1/0293/9277/files/08-09-24_S8_51_SS24B1417TR_Camouflage_KT_MC_13-23-36_PLUS_7256_EH.jpg?v=1723580829&width=600&height=900&crop=center",
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-09-24_S8_51_SS24B1417TR_Camouflage_KT_MC_13-24-49_PLUS_7270_EH.jpg?v=1723580828&width=600&height=900&crop=center"
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/08-09-24_S8_51_SS24B1417TR_Camouflage_KT_MC_13-24-49_PLUS_7270_EH.jpg?v=1723580828&width=600&height=900&crop=center",
     ],
     total: 24999,
     category: "Clothing",
