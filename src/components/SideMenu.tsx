@@ -17,15 +17,15 @@ import { Routes } from "../routes/baseRoutes";
 const categories = [
   {
     name: "Clothing",
-    items: ["Shirts", "Hoodies", "Pants", "Tees", "Jacket", "Sweaters", "Joggers", "Shorts", "Denims", "Sweatpants", "Gym Wears"],
+    items: ["Shirts", "Hoodies", "Pants", "Tees", "Jacket", "Sweaters", "Joggers", "Shorts", "Denims", "Sweatpants"],
   },
   {
     name: "Footwears",
-    items: ["Sneakers", "Slides", "Boots", "Sandals", "Shoes"],
+    items: ["Sneakers", "Slides", "Boots", "Shoes"],
   },
   {
     name: "Accessories",
-    items: ["Bags", "Hats", "Belts", "Jewelries", "Eyewears"],
+    items: ["Bags", "Hats", "Belts", "Jewelries", "Glasses"],
   },
   {
     name: "Formal Wears",

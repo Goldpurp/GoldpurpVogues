@@ -19,6 +19,11 @@ import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { ProductCard } from "../components/ProductCard";
 // import RelatedChoice from "../components/RelatedChoice";
 import { ProductInterface } from "../redux/productSlice";
+import ShowCaseProductCard from "../components/ShowCaseProductCard";
+import { productsDatas } from "../redux/productData";
+
+const randomSort = () => 0.5 - Math.random();
+
 
 export default function Wishlist() {
   const [loading, setLoading] = useState(true);
@@ -27,6 +32,7 @@ export default function Wishlist() {
   const [expandedProduct, setExpandedProduct] = useState<number | null>(null);
   const [activeSizes, setActiveSizes] = useState<Record<number, string | null>>({});
   const [activeColors, setActiveColors] = useState<Record<number, string | null>>({});
+  const [shuffledBestSellers, setShuffledBestSellers] = useState<ProductInterface[]>([]);
 
   const columns = useBreakpointValue({ base: 2, md: 3, lg: 4 });
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -119,7 +125,12 @@ export default function Wishlist() {
     setVisibleProducts(prev => prev + (columns || 2) * 2);
   };
 
-  // Effects
+
+  useEffect(() => {
+    setShuffledBestSellers([...productsDatas].filter(product => product.collection === "Best Sellers").sort(randomSort));
+  }, [productsDatas]);
+
+
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -165,9 +176,33 @@ export default function Wishlist() {
               </Text>
             </Box>
 
-            {/* <Box w="100%" mb="10px" overflow="hidden" py="5">
-              <RelatedChoice />
-            </Box> */}
+            <Box
+            pt={9}
+            px={2}
+            w={"100%"}
+
+          >
+            <Text pb={4} fontSize={"20px"}>Explore Our Best Sellers</Text>
+
+
+            <Flex
+              overflowX="scroll"
+            css={{
+              "::-webkit-scrollbar": { display: "none" },
+            }}
+            >
+              {shuffledBestSellers.map((product) => (
+                <ShowCaseProductCard
+                  key={product.id}
+                  product={product}
+                  likedItems={likedItems}
+                  onLikeToggle={handleLikeToggle}
+                  loading={false}
+                />
+              ))}
+            </Flex>
+          </Box>
+
           </VStack>
         </>
       ) : (

@@ -7,11 +7,10 @@ import {
   Flex,
   Image,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-// import RelatedChoice from "../components/RelatedChoice";
 import { RootState } from "../redux/store";
 import {
   decrementQuantity,
@@ -19,11 +18,44 @@ import {
   removeFromCart,
 } from "../redux/cartSlice";
 import { Routes } from "../routes/baseRoutes";
+import { productsDatas } from "../redux/productData";
+import ShowCaseProductCard from "../components/ShowCaseProductCard";
+import { useEffect, useState } from "react";
+import { ProductInterface } from "../redux/productSlice";
+import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
+
+const randomSort = () => 0.5 - Math.random();
+
 
 export default function Cart() {
+  const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+  const [likedItems, setLikedItems] = useState<Record<number, boolean>>({});
+  const [shuffledBestSellers, setShuffledBestSellers] = useState<ProductInterface[]>([]);
+
+
+  const handleLikeToggle = (id: number, item: ProductInterface) => {
+    const isInWishlist = wishlistItems.some(wishlistItem => wishlistItem.id === id);
+
+
+    setLikedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+
+
+    dispatch(isInWishlist ? removeWishlistItem(id) : toggleWishlistItem(item));
+    toast({
+      title: isInWishlist ? "Removed from Wishlist" : "Added to Wishlist",
+      status: isInWishlist ? "warning" : "success",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+  };
 
   const handleIncrement = (id: number) => {
     dispatch(incrementQuantity(id));
@@ -43,6 +75,10 @@ export default function Cart() {
   // );
   const finalTotal = useSelector((state: RootState) => state.cart.finalTotal);
   const totalItemsCount = useSelector((state: RootState) => state.cart.count);
+
+  useEffect(() => {
+    setShuffledBestSellers([...productsDatas].filter(product => product.collection === "New Arrivals").sort(randomSort));
+  }, [productsDatas]);
 
   return (
     <Container
@@ -206,7 +242,8 @@ export default function Cart() {
           flexDirection="column"
           alignItems="center"
           py={"100px"}
-          px={9}
+          px={2}
+          overflow={"hidden"}
         >
           <Heading as="h3" size="md" fontWeight="300" mb={4}>
             Your cart has no items.
@@ -216,16 +253,46 @@ export default function Cart() {
             Already have an account? Sign in to check your cart items!
           </Text>
 
-          <Button
-            colorScheme={"green"}
-            size={"lg"}
-            w={"full"}
-            cursor={"pointer"}
-            boxShadow="1px 1px 5px 1px #a5a5a5"
-            mt={6}
+          <Box flex={1}>
+            <Button
+              mt={2}
+              colorScheme="green"
+              size="lg"
+              px={4}
+              w={"full"}
+              onClick={() => navigate(Routes.Login)}
+            >
+              Sign in
+            </Button>
+          </Box>
+
+
+          <Box
+            pt={9}
+            px={2}
+            w={"100%"}
+
           >
-            Sign in
-          </Button>
+            <Text pb={4} fontSize={"20px"}>Explore Our New Arrivals</Text>
+
+
+            <Flex
+              overflowX="scroll"
+            css={{
+              "::-webkit-scrollbar": { display: "none" },
+            }}
+            >
+              {shuffledBestSellers.map((product) => (
+                <ShowCaseProductCard
+                  key={product.id}
+                  product={product}
+                  likedItems={likedItems}
+                  onLikeToggle={handleLikeToggle}
+                  loading={false}
+                />
+              ))}
+            </Flex>
+          </Box>
         </Flex>
       )}
 
@@ -236,8 +303,8 @@ export default function Cart() {
               <Flex
                 justify="space-between"
                 flexDirection="row"
-                // borderBottom="1px solid #c7c3c3"
-                // mb={5}
+              // borderBottom="1px solid #c7c3c3"
+              // mb={5}
               >
                 <HStack justify="space-between" color={"green"} px={1}>
                   <Text fontWeight={"300"} color={"#000"}>

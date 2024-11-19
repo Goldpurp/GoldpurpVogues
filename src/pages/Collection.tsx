@@ -18,6 +18,7 @@ import { ProductCard } from "../components/ProductCard";
 import { ProductInterface } from "../redux/productSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Routes } from "../routes/baseRoutes";
+import { AppBreadcrumb } from "../TodoPages.ts/BreadCrumbs";
 
 export default function Collection() {
     const [loading, setLoading] = useState(true);
@@ -134,7 +135,9 @@ export default function Collection() {
 
     return (
         <Box px={{base: 3, md: 12}} py={{base:9, md: 12}} pt={{base:"45px", lg: "70px"}} w="100%" fontFamily="Nunito, sans-serif">
+            
             <Box as="section" my={8}>
+            <AppBreadcrumb/>
                 <Image
                     src="https://i.pinimg.com/736x/55/6e/04/556e04c6c3da6f7c2f93cd18f477c3c9.jpg"
                     alt="LV Fall Collection"

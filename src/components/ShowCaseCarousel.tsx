@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Flex, useToast } from "@chakra-ui/react";
 import ShowCaseProductCard from "./ShowCaseProductCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,10 +8,14 @@ import DecorativeText from "./DecorativeText";
 import { productsDatas } from "../redux/productData";
 import { ProductInterface } from "../redux/productSlice";
 
+const randomSort = () => 0.5 - Math.random();
+
 const ShowCaseCarousel: React.FC = () => {
     const dispatch = useDispatch();
     const toast = useToast();
     const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
+    const [shuffledNewArrivals, setshuffledNewArrivals] = useState<ProductInterface[]>([]);
+
 
 
     const [likedItems, setLikedItems] = useState<Record<number, boolean>>({});
@@ -37,9 +41,9 @@ const ShowCaseCarousel: React.FC = () => {
         });
     };
 
-    const newArrivalProducts = productsDatas.filter(
-        (product) => product.collection === "New Arrivals"
-    );
+    useEffect(() => {
+        setshuffledNewArrivals([...productsDatas].filter(product => product.collection === "New Arrivals").sort(randomSort));
+    }, [productsDatas]);
 
     return (
         <Box
@@ -54,7 +58,7 @@ const ShowCaseCarousel: React.FC = () => {
                     "::-webkit-scrollbar": { display: "none" },
                 }}
             >
-                {newArrivalProducts.map((product) => (
+                {shuffledNewArrivals.map((product) => (
                     <ShowCaseProductCard
                         key={product.id}
                         product={product}

@@ -1,4 +1,3 @@
-// index.tsx (Routes configuration)
 import { Routes } from "./baseRoutes";
 import { createBrowserRouter } from "react-router-dom";
 

@@ -14,7 +14,7 @@ export default function CollectionsAds() {
   return (
     <MotionBox
       width="100%"
-      height={{base: "100%", lg: "800px"}}
+      height={{ base: "100%", lg: "800px" }}
       display="flex"
       position="relative"
       alignItems="center"
@@ -28,7 +28,7 @@ export default function CollectionsAds() {
         width="100%"
         height="100%"
         spacing={4}
-      fontFamily={"DM Mono"}
+        fontFamily={"DM Mono"}
         marginY={{ base: 1, lg: 2.5 }}
         alignItems="center"
         justifyContent="center"
@@ -57,7 +57,7 @@ export default function CollectionsAds() {
         <Text color="white" fontSize={{ base: "40px", sm: "45px", md: "55px", lg: "70px", xl: "80px" }} fontWeight="500" lineHeight={{ base: "60px", xl: "90px" }}>
           COLLECTIONS
         </Text>
-        <ShopNowBtn onclickBtn={()=> navigate(Routes.Collections)}/>
+        <ShopNowBtn onclickBtn={() => navigate(Routes.Collections)} />
       </MotionBox>
 
       <Box

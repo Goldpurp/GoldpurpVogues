@@ -31,36 +31,49 @@ import { RootState } from "../redux/store";
 import SideDrawer from "./SideMenu";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [visible, setVisible] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartCount = cartItems.length;
   const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const wishlistCount = wishlistItems.length;
 
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const isHomePage = location.pathname === Routes.home ||
     location.pathname === Routes.Login ||
     location.pathname === Routes.SignUp;
+
+
+
+  useEffect(() => {
+    const scrollMe = () => {
+      window.scrollY > 150 ? setIsActive(true) : setIsActive(false);
+    };
+
+    window.addEventListener("scroll", scrollMe);
+  }, [isActive]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 60);
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
 
   return (
@@ -71,9 +84,10 @@ const Header = () => {
         px={{ base: "10px", lg: "35px", "2xl": "40px" }}
         alignItems={"center"}
         justify="space-between"
-        bg="transparent"
+        bg={isActive ? "rgba(255, 255, 255, 0.494)" : "transparent"}
+
         position={"fixed"}
-        top={isScrolled ? "-200px" : "0"}
+        top={!visible ? "-140px" : "0"}
         left={0}
         right={0}
         zIndex={1000}

@@ -11,30 +11,25 @@ import {
   ListItem,
   IconButton,
   useToast,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
 } from "@chakra-ui/react";
 import SizeSelectComponent from "../components/Size";
 import StarRating from "../components/StarRating";
 import RelatedChoice from "../components/RelatedChoice";
 import ShareButton from "../components/ShareButton";
 import SizeChartDrawer from "../components/SizeChart";
-import { useLocation, Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeWishlistItem, toggleWishlistItem } from "../redux/wishlistSlice";
 import { useEffect, useState } from "react";
 import { RootState } from "../redux/store";
 import { addToCart } from "../redux/cartSlice";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import ColorSelectComponent from "../components/Color";
-// import { ProductInterface } from "../redux/productInterface";
 import ProducImageCarousel from "../components/ProducImageCarousel";
 import { ProductInterface, setProducts } from "../redux/productSlice";
 import { productsDatas } from "../redux/productData";
 import AlsoLike from "../components/AlsoLike";
-// import { productsDatas } from "../redux/datas";
-// import ProductList from "../components/ProductList";
+import { AppBreadcrumb } from "../TodoPages.ts/BreadCrumbs";
+
 
 export default function ProductPage() {
   const toast = useToast();
@@ -57,7 +52,6 @@ export default function ProductPage() {
 
   const { label } = useParams<{ label: string }>();
   const products = useSelector((state: RootState) => state.products.products);
-
   const product = products.find((item) => item.label === label);
 
   useEffect(() => {
@@ -121,10 +115,6 @@ export default function ProductPage() {
     showToast("Added to Cart", "success");
   };
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
-
   const showToast = (title: string, status: "success" | "warning") => {
     toast({
       title,
@@ -153,31 +143,8 @@ export default function ProductPage() {
       pb="50px"
       px={{ base: "", md: 9, lg: "100px" }}
     >
-      <Breadcrumb
-        spacing="8px"
-        separator={<ChevronRightIcon color="gray.500" />}
-        mb={4}
-        pl={{ base: 4, lg: 12 }}
-        fontSize={"12px"}
-      >
-        <BreadcrumbItem>
-          <BreadcrumbLink as={RouterLink} to="/">
-            Home
-          </BreadcrumbLink>
-        </BreadcrumbItem>
 
-        <BreadcrumbItem>
-          <BreadcrumbLink onClick={handleBackClick}>Go back</BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink>
-            <Text isTruncated maxW="170px">
-              {product?.label || "Product"}
-            </Text>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
+      <AppBreadcrumb />
 
       {product && (
         <Flex

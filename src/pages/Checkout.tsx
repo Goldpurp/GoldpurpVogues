@@ -30,24 +30,76 @@ export default function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
-  // Calculate the total price of the items
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  // Check if the number of items is 5 or more to apply the discount
-  // const discount = cartItems.length >= 5 ? totalPrice * 0.05 : 0;
-
-  // Calculate the final price after applying the discount
-  // const finalPrice = totalPrice - discount;
-
-  // const total = cartItems.reduce(
-  //   (acc, item) => acc + item.price * item.quantity,
-  //   0
-  // );
-
   const shippingCost = selectedShipping === "delivery" ? 1000 : 0;
-
   const finalCost = totalPrice + shippingCost;
+
+
+  // const [formValues, setFormValues] = useState({
+  //   email: "",
+  //   cardName: "",
+  //   cardNumber: "",
+  //   expirationDate: "",
+  //   cvv: "",
+  //   fullName: "",
+  //   address: "",
+  //   phoneNumber: "",
+  //   city: "",
+  //   state: "",
+  // });
+
+  // const [formErrors, setFormErrors] = useState({
+  //   email: "",
+  //   cardName: "",
+  //   cardNumber: "",
+  //   expirationDate: "",
+  //   cvv: "",
+  //   fullName: "",
+  //   address: "",
+  //   phoneNumber: "",
+  //   city: "",
+  //   state: "",
+  // });
+
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormValues((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
+
+  // const validateForm = () => {
+  //   const errors: any = {};
+
+  //   // Example validation rules
+  //   if (!formValues.email) errors.email = "Email is required.";
+  //   else if (!/\S+@\S+\.\S+/.test(formValues.email)) errors.email = "Invalid email address.";
+
+  //   if (!formValues.cardName) errors.cardName = "Card name is required.";
+
+  //   if (!formValues.cardNumber) errors.cardNumber = "Card number is required.";
+  //   else if (!/^\d{16}$/.test(formValues.cardNumber)) errors.cardNumber = "Invalid card number.";
+
+  //   if (!formValues.expirationDate) errors.expirationDate = "Expiration date is required.";
+  //   else if (!/^\d{2}\/\d{2}$/.test(formValues.expirationDate)) errors.expirationDate = "Invalid expiration date.";
+
+  //   if (!formValues.cvv) errors.cvv = "CVV is required.";
+  //   else if (!/^\d{3}$/.test(formValues.cvv)) errors.cvv = "Invalid CVV.";
+
+  //   if (!formValues.fullName) errors.fullName = "Full name is required.";
+  //   if (!formValues.address) errors.address = "Address is required.";
+  //   if (!formValues.phoneNumber) errors.phoneNumber = "Phone number is required.";
+  //   else if (!/^\d{10,15}$/.test(formValues.phoneNumber)) errors.phoneNumber = "Invalid phone number.";
+
+  //   if (!formValues.city) errors.city = "City is required.";
+  //   if (!formValues.state) errors.state = "State is required.";
+
+  //   setFormErrors(errors);
+  //   return Object.keys(errors).length === 0;
+  // };
+
 
   const handlePayment = () => {
 
@@ -60,26 +112,6 @@ export default function Checkout() {
     <Box position={"relative"} minH="100vh" pt={{ base: "45px", md: "50px" }} px={{ md: "200px" }}>
       <Flex direction={["column", "row"]} gap={8}>
         <Box flex="1" bg="white" p={6} borderRadius="lg" shadow="sm">
-
-          {/* <Flex display={"flex"} w={"fit-content"} alignItems={"center"} justifyContent={"left"} mb={2} gap={1} cursor={"pointer"} onClick={handleBackClick}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              width={"20px"}
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
-              />
-            </svg>
-            <Text>
-              Back
-            </Text>
-          </Flex> */}
           <Heading as="h2" size="md" mb={4}>
             Payment Details
           </Heading>

@@ -9,26 +9,26 @@ const collections = [
   {
     label: "Everyday Essentials",
     imageUrl:
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-22-24_S7_83_4VND5A0558NV_Redcombo_CZ_MC_14-38-19_28709_SG.jpg?v=1729706635&width=600&height=900&crop=center",
+      "https://i.pinimg.com/736x/57/4a/41/574a41f83974bd10473bbfc9c8f35bc8.jpg",
     type: "image",
   },
   {
     label: "New Arrivals",
     imageUrl:
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/09-25-24_S7_80_ZDF01S430020_Burgundy_P_KJ_DJ_15-03-28_12924_PXF.jpg?v=1727719847&width=600&height=900&crop=center",
+      "https://i.pinimg.com/736x/c2/70/6d/c2706de2dfbe95f458ffc160bfb5939f.jpg",
     type: "image",
   },
   {
-    label: "Winter Collections",
-    imageUrl:
-      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-10-24_S7_62_ZDF01O440016_Black_ZSR_CZ_DJ_13-32-14_22099_CM.jpg?v=1728944383&width=600&height=900&crop=center",
-    type: "image",
-  },
-  {
-    label: "Best Sellers",
+    label: "Winter Collections ",
     videoUrl:
       "https://videos.pexels.com/video-files/7037493/7037493-sd_506_960_25fps.mp4",
     type: "video",
+  },
+  {
+    label: "Best Sellers",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0293/9277/files/10-10-24_S7_62_ZDF01O440016_Black_ZSR_CZ_DJ_13-32-14_22099_CM.jpg?v=1728944383&width=600&height=900&crop=center",
+    type: "image",
   },
 ];
 
